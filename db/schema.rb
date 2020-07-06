@@ -10,10 +10,76 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_102138) do
+ActiveRecord::Schema.define(version: 2020_07_06_103827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.bigint "topic_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["topic_id"], name: "index_chatrooms_on_topic_id"
+  end
+
+  create_table "completion_messages", force: :cascade do |t|
+    t.bigint "milestone_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["milestone_id"], name: "index_completion_messages_on_milestone_id"
+  end
+
+  create_table "connections", force: :cascade do |t|
+    t.bigint "owner_id"
+    t.bigint "buddy_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buddy_id"], name: "index_connections_on_buddy_id"
+    t.index ["owner_id"], name: "index_connections_on_owner_id"
+  end
+
+  create_table "goal_connections", force: :cascade do |t|
+    t.bigint "connection_id", null: false
+    t.bigint "goal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["connection_id"], name: "index_goal_connections_on_connection_id"
+    t.index ["goal_id"], name: "index_goal_connections_on_goal_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.string "description"
+    t.date "deadline"
+    t.float "progress"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chatroom_id", null: false
+    t.bigint "user_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "milestones", force: :cascade do |t|
+    t.bigint "goal_id", null: false
+    t.string "name"
+    t.date "deadline"
+    t.boolean "is_completed"
+    t.integer "weightage"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["goal_id"], name: "index_milestones_on_goal_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +89,16 @@ ActiveRecord::Schema.define(version: 2020_07_06_102138) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "completion_messages", "milestones"
+  add_foreign_key "goal_connections", "connections"
+  add_foreign_key "goal_connections", "goals"
+  add_foreign_key "goals", "users"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "milestones", "goals"
 end
