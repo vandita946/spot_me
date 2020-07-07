@@ -1,0 +1,11 @@
+<h1>THIS IS THE GOALS PAGE FOR THE USER</h1>
+<% @goals.each do |goal| %>
+<ul>
+  <li><%= @user.id %></li>
+  <li><%= goal.title %></li>
+  <li><%= goal.description %></li>
+  <li><%= goal.deadline %></li>
+  <li><%= goal.progress * 100 %>%</li>
+</ul>
+<% end %>
+
