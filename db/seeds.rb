@@ -18,5 +18,5 @@ goal_1 = Goal.create(title: "Eat food", description: "Eat nasi lemak", status: "
 
 goal_2 = Goal.create(title: "Dieting", description: "Not eating nasi lemak", status: "pending", deadline: Date.today + 8, progress: 0.0, user_id: buddy.id)
 
-puts "created assigned goals"
+puts "created assigned goals" 
 

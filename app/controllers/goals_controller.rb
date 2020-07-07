@@ -2,7 +2,6 @@ class GoalsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:show, :new, :create]
 
-
   def index
     @user = current_user
     @goals = Goal.where(params[@user_id])
