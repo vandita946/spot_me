@@ -1,0 +1,6 @@
+<% if @goals.empty? %>
+<%= "nothing" %>
+<% else %>
+<% @goals.each do |goal| %>
+<%= goal.title %>
+<% end %>
