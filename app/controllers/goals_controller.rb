@@ -4,7 +4,7 @@ class GoalsController < ApplicationController
 
   def index
     @user = current_user
-    @goals = Goal.where(params[@user_id])
+    @goals = @user.goals
   end
 
   def new

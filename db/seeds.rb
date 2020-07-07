@@ -14,14 +14,23 @@ buddy = User.new(name: "Buddy", email: "buddy@spotme.com", password: "123456")
 buddy.save
 puts "created buddy"
 
-goal_1 = Goal.create(title: "Write a book", description: "I want to finally write the novel idea I've had for years!", deadline: Date.today + 100, user_id: owner.id)
+goal_1 = Goal.new(title: "Write a book", description: "I want to finally write the novel idea I've had for years!", deadline: Date.today + 100, user_id: owner.id, status: "In Progress")
+goal_1.save
+puts "#{owner.name} is going to #{goal_1.title}"
 
-milestone_1 = Milestone.create(name: "Buy a notebook", deadline: Date.today - 1, goal_id: goal_1.id, is_completed: true)
-completion_message = CompletionMessage.create(content: "Got a cute notebook!", milestone_id: milestone_1.id)
+milestone_1 = Milestone.new(name: "Buy a notebook", deadline: Date.today - 1, goal_id: goal_1.id, is_completed: true)
+milestone_1.save
 
-milestone_2 = Milestone.create(name: "Decide on title", deadline: Date.today + 20, goal_id: goal_1.id)
+completion_message = CompletionMessage.new(content: "Got a cute notebook!", milestone_id: milestone_1.id)
+completion_message.save
 
-goal_2 = Goal.create(title: "Lose 10 kg", description: "I wanna get to size 0!!!", start_date: Date.new(2021,1,1), deadline: Date.new(2021,1,1) + 90, user_id: owner.id)
+milestone_2 = Milestone.new(name: "Decide on title", deadline: Date.today + 20, goal_id: goal_1.id)
+milestone_2.save
+
+goal_2 = Goal.new(title: "Lose 10 kg", description: "I wanna get to size 0!!!", start_date: Date.new(2021,1,1), deadline: Date.new(2021,1,1) + 90, user_id: owner.id, status: "Not Started")
+puts "#{owner.name} is going to #{goal_2.title}"
+goal_2.save
+
 
 puts "created assigned goals" 
 
