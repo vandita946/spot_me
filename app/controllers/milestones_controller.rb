@@ -40,4 +40,18 @@ class MilestonesController < ApplicationController
         params.require(:milestone).permit(:name, :deadline, :weightage, :is_completed)
     end
 
+    def update_progress(goal)
+        # milestone weightage is 1-5.
+        # progress is supposed to be a percentage / 100
+        total = 0
+        completed = 0
+        goal.milestones.each do |milestone|
+          total += milestone.weightage
+          if milestone.is_completed == true
+            completed += milestone.weightage
+          end
+        end
+        goal.progress = completed/total * 100 
+    end
+
 end

@@ -18,11 +18,11 @@ goal_1 = Goal.new(title: "Write a book", description: "I want to finally write t
 goal_1.save
 puts "#{owner.name} is going to #{goal_1.title}"
 
-milestone_1 = Milestone.new(name: "Buy a notebook", deadline: Date.today - 1, goal_id: goal_1.id, is_completed: true)
+milestone_1 = Milestone.new(name: "Buy a notebook", deadline: Date.today - 1, goal_id: goal_1.id)
 milestone_1.save
 
-completion_message = CompletionMessage.new(content: "Got a cute notebook!", milestone_id: milestone_1.id)
-completion_message.save
+# completion_message = CompletionMessage.new(content: "Got a cute notebook!", milestone_id: milestone_1.id)
+# completion_message.save
 
 milestone_2 = Milestone.new(name: "Decide on title", deadline: Date.today + 20, goal_id: goal_1.id)
 milestone_2.save

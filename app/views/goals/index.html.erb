@@ -1,16 +1,70 @@
+<% 
+def get_latest(goal)
+  incomplete = goal.milestones.where(is_completed: false)
+  sorted = incomplete.sort_by &:deadline
+  return sorted.first
+end
 
-<h1>THIS IS THE GOALS PAGE FOR THE USER</h1>
+def add_to_progress(milestone)
+  # milestone weightage is 1-5. 1 1
+  # progress is supposed to be a percentage / 100
+  progress = milestone.goal.progress
+
+
+  
+  goal.milestones.each do |milestone|
+    total += milestone.weightage
+  end
+  raise
+  return ((completed + milestone.weightage)/total * 100)
+end
+
+# i have a calculated progress already
+# i want to add the new weightage of (1) and get a new calculated progress
+
+
+def update_progress(goal)
+  # milestone weightage is 1-5.
+  # progress is supposed to be a percentage / 100
+  total = 0
+  completed = 0
+  goal.milestones.each do |milestone|
+    total += milestone.weightage
+    if milestone.is_completed == true
+      completed += milestone.weightage
+    end
+  end
+  raise
+  return (completed/total * 100)
+end
+ %>
+<h1>Here are all your goals, <%= current_user.name %></h1>
   <% if @goals.empty? %>
-  <%= "nothing" %>
+  <%= "No goals yet...!" %>
+  <%= link_to new_goal_path, "Let's get goaling!" %>
   <% else %>
   <% @goals.each do |goal| %>
   <ul>
-    <li><%= @user.id %></li>
-    <li><%= goal.title %></li>
-    <li><%= goal.description %></li>
-    <li><%= goal.deadline %></li>
-    <li><%= goal.progress * 100 %>%</li>
+    <li>Title: <%= goal.title %></li>
+    <li>Buddy: </li>
+    <li>Description: <%= goal.description %></li>
+    <li>Deadline: <%= goal.deadline %></li>
+    <li>Progress: <%= goal.progress %>%</li>
+    <li>Status: <%= goal.status %></li>
+    <% if goal.status == "In Progress" || goal.status == "Not Started" %>
+      <% if get_latest(goal) %>
+        <% milestone = get_latest(goal) %>
+        <li>Upcoming milestone: <%= milestone.name %></li>
+        <%= form_for milestone, remote: true do |f| %>
+          <%= f.hidden_field :is_completed, value: true %>
+          <%= f.hidden_field milestone.goal[:progress], value: update_progress(milestone)  %>
+          <%= f.submit "Mark as complete", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
+        <% end %>
+      <% end %>
+    <% end %>
+    
   </ul>
+  <%= link_to "View my goal", goal_path(goal)%>
   <% end %>
 <% end %>
 
