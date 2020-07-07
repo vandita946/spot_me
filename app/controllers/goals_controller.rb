@@ -13,7 +13,7 @@ class GoalsController < ApplicationController
   end
 
   def create
-    @goal = Goal.new(params[:goal])
+    @goal = Goal.new(goal_params)
     @goal.user = current_user
     if @goal.save
     redirect_to goals_path, notice: "Your goal has been added"
