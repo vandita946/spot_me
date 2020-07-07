@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :milestones
   end
 
+  resources :milestones do
+    resources :completion_message
+  end
+
   resources :chatrooms, only: :show do
     resources :messages, only: :create
   end
