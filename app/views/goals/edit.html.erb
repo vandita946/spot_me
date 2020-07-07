@@ -1,0 +1,14 @@
+<h1>THIS IS THE FORM TO EDIT A GOAL</h1>
+
+<%= form_for(@goal) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :deadline %>
+  <%= f.date_field :deadline %>
+  <%= f.label :status %>
+  <%= select_tag(:progress, options_for_select([['Created, need a buddy', :created], ['In progress', :accepted], ['Completed', :completed], ['Archive', :archived]])) %>
+  <%= f.submit %>
+<% end %>
+
