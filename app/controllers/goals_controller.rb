@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
     skip_before_action :authenticate_user!, only: [:show, :new, :create]
 
     def index
-        @goals = Goal.all
+        @goals = Goal.all 
     end
 
     def new
