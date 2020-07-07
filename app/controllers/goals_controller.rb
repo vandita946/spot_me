@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  
+
   skip_before_action :authenticate_user!, only: [:show, :new, :create]
 
   def index
@@ -9,10 +9,11 @@ class GoalsController < ApplicationController
 
   def new
     @goal = Goal.new
+    @goal.user = current_user
   end
 
   def create
-    @goal = Goal.new(params[:goal])
+    @goal = Goal.new(goal_params)
     @goal.user = current_user
     if @goal.save
     redirect_to goals_path, notice: "Your goal has been added"
@@ -47,6 +48,4 @@ class GoalsController < ApplicationController
   def goal_params
     params.require(:goal).permit(:title, :description, :deadline, :progress, :status)
   end
-
-
 end
