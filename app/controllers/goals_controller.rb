@@ -1,5 +1,4 @@
 class GoalsController < ApplicationController
-
   def index
     @user = current_user
     @goals = Goal.where(params[@user_id])
@@ -7,6 +6,7 @@ class GoalsController < ApplicationController
 
   def new
     @goal = Goal.new
+    @goal.user = current_user
   end
 
   def create
@@ -44,5 +44,4 @@ class GoalsController < ApplicationController
   def goal_params
     params.require(:goal).permit(:title, :description, :deadline, :progress, :status)
   end
-
 end
