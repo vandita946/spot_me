@@ -1,4 +1,7 @@
 class GoalsController < ApplicationController
+  
+  skip_before_action :authenticate_user!, only: [:show, :new, :create]
+
 
   def index
     @user = current_user
@@ -21,6 +24,7 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+    authorize @goal
   end
 
   def edit
@@ -30,7 +34,7 @@ class GoalsController < ApplicationController
   def update
     @goal = Goal.find(params[:id])
     @goal.update(goal_params)
-    redirect_to goal_path(@goal)
+    redirect_to goal_path(@goal), notice: "Your goal has been updated"
   end
 
   def destroy
@@ -44,5 +48,6 @@ class GoalsController < ApplicationController
   def goal_params
     params.require(:goal).permit(:title, :description, :deadline, :progress, :status)
   end
+
 
 end
