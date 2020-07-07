@@ -20,3 +20,6 @@ goal_2 = Goal.create(title: "Dieting", description: "Not eating nasi lemak", sta
 
 puts "created assigned goals" 
 
+chatroom_goal = Chatroom.create(topic_id: goal_1.id)
+
+puts "created chatroom for goals"
