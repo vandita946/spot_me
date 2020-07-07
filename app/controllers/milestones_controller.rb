@@ -54,4 +54,17 @@ class MilestonesController < ApplicationController
         goal.progress = completed/total * 100 
     end
 
+    def add_to_progress(milestone)
+        # milestone weightage is 1-5.
+        # progress is supposed to be a percentage / 100
+        total = 0
+        milestone.goal.milestones.each do |milestone|
+          total += milestone.weightage
+        end
+        progress = milestone.goal.progress
+        new_progress = ((progress/100) + (1/total))*100
+        milestone.goal.progress = new_progress
+        raise
+    end
+
 end

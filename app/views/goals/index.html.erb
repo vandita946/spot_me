@@ -6,22 +6,16 @@ def get_latest(goal)
 end
 
 def add_to_progress(milestone)
-  # milestone weightage is 1-5. 1 1
-  # progress is supposed to be a percentage / 100
-  progress = milestone.goal.progress
-
-
-  
-  goal.milestones.each do |milestone|
-    total += milestone.weightage
-  end
-  raise
-  return ((completed + milestone.weightage)/total * 100)
+    # milestone weightage is 1-5.
+    # progress is supposed to be a percentage / 100
+    total = 0
+    milestone.goal.milestones.each do |milestone|
+      total += milestone.weightage
+    end
+    progress = milestone.goal.progress
+    new_progress = ((progress.fdiv(100)) + (milestone.weightage.fdiv(total)))*100
+    return new_progress
 end
-
-# i have a calculated progress already
-# i want to add the new weightage of (1) and get a new calculated progress
-
 
 def update_progress(goal)
   # milestone weightage is 1-5.
@@ -34,7 +28,6 @@ def update_progress(goal)
       completed += milestone.weightage
     end
   end
-  raise
   return (completed/total * 100)
 end
  %>
@@ -55,11 +48,20 @@ end
       <% if get_latest(goal) %>
         <% milestone = get_latest(goal) %>
         <li>Upcoming milestone: <%= milestone.name %></li>
-        <%= form_for milestone, remote: true do |f| %>
+        <%= form_for milestone do |f| %>
           <%= f.hidden_field :is_completed, value: true %>
-          <%= f.hidden_field milestone.goal[:progress], value: update_progress(milestone)  %>
+
           <%= f.submit "Mark as complete", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
         <% end %>
+        <br>
+        <%= form_for goal do |f| %>
+           
+          <%= f.hidden_field :progress, value: add_to_progress(milestone) %>
+
+          <%= f.submit "Update progress", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
+        <% end %>
+
+
       <% end %>
     <% end %>
     
