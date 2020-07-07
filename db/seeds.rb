@@ -9,6 +9,7 @@
 owner = User.new(name: "joel", email: "joelchenjg@gmail.com", password: "123456")
 owner.save
 puts "created owner"
+
 buddy = User.new(name: "julien", email: "julien@gmail.com", password: "123456")
 buddy.save
 puts "created buddy"
