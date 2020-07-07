@@ -1,35 +1,52 @@
 class GoalsController < ApplicationController
-    skip_before_action :authenticate_user!, only: [:show, :new, :create]
+  
+  skip_before_action :authenticate_user!, only: [:show, :new, :create]
 
-    def index
-        @goals = Goal.all 
+  def index
+    @user = current_user
+    @goals = Goal.where(params[@user_id])
+  end
+
+  def new
+    @goal = Goal.new
+  end
+
+  def create
+    @goal = Goal.new(params[:goal])
+    @goal.user = current_user
+    if @goal.save
+    redirect_to goals_path, notice: "Your goal has been added"
+    else
+      render "new", alert: "Your goal is missing something "
     end
+  end
 
-    def new
-        @goal = Goal.new
-    end
+  def show
+    @goal = Goal.find(params[:id])
+    authorize @goal
+  end
 
-    def create
-        @goal = Goal.new(goal_params)
-        # Optional since you can create a goal without signing up
-        # @goal.user_id = current_user
-        if @goal.save
-            # please review this path at a later date/time because the route to the dashboard is not created yet
-            redirect_to goals_path, notice: "Your Goal has been added"
-        else
-            render "new", alert: "Your goal could not be saved"
-        end
+  def edit
+    @goal = Goal.find(params[:id])
+  end
 
-    end
+  def update
+    @goal = Goal.find(params[:id])
+    @goal.update(goal_params)
+    redirect_to goal_path(@goal), notice: "Your goal has been updated"
+  end
 
-    def update
-        @goal = Goal.find(params[:id])
-        @goal.update(goal_params)
-        redirect_to goals_path, notice: "Your goal has been updated"
-      end
+  def destroy
+    @goal = Goal.find(params[:id])
+    @goal.destroy
+    redirect_to goals_path
+  end
 
-    def show
-        @goal = Goal.find(params[:id])
-        authorize @goal
-    end
+  private
+
+  def goal_params
+    params.require(:goal).permit(:title, :description, :deadline, :progress, :status)
+  end
+
+
 end
