@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 owner = User.new(name: "joel", email: "joelchenjg@gmail.com", password: "123456")
 owner.save
 puts "created owner"
@@ -19,3 +18,4 @@ goal_1 = Goal.create(title: "Eat food", description: "Eat nasi lemak", status: "
 goal_2 = Goal.create(title: "Dieting", description: "Not eating nasi lemak", status: "pending", deadline: Date.today + 8, progress: 0.0, user_id: buddy.id)
 
 puts "created assigned goals"
+
