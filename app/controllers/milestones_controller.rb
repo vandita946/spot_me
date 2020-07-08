@@ -29,7 +29,7 @@ class MilestonesController < ApplicationController
         @milestone = Milestone.find(params[:id])
         if @milestone.update(milestone_params)
             update_goal_progress(@milestone)
-            redirect_to request.referrer, notice: "Milestone updated! "
+            # redirect_to request.referrer, notice: "Milestone updated! "
         else
             render :edit, alert: "Your milestone couldn't be updated. "
         end

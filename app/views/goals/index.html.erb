@@ -25,11 +25,10 @@ end
     <% if goal.status == "In Progress" || goal.status == "Not Started" %>
       <% if get_latest(goal) %>
         <% milestone = get_latest(goal) %>
-        <%= render partial:'shared/completion_message', locals: {milestone: milestone, completion_message: CompletionMessage.new} %>
         <li>Upcoming milestone: <%= milestone.name %> by <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></li>
         <%= form_for milestone, remote: true do |f| %>
           <%= f.hidden_field :is_completed, value: true %>
-          <%= f.submit "Mark as complete", class: "btn btn-primary", "data-toggle": "modal", "data-target": "#completion" %>
+          <%= f.submit "Mark as complete", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
         <% end %>
       <% end %>
     <% end %>
