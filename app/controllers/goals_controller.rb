@@ -1,10 +1,9 @@
 class GoalsController < ApplicationController
-
   skip_before_action :authenticate_user!, only: [:show, :new, :create]
 
   def index
     @user = current_user
-    @goals = Goal.where(params[@user_id])
+    @goals = @user.goals
   end
 
   def new
@@ -33,8 +32,12 @@ class GoalsController < ApplicationController
 
   def update
     @goal = Goal.find(params[:id])
-    @goal.update(goal_params)
-    redirect_to goal_path(@goal), notice: "Your goal has been updated"
+    
+    if @goal.update(goal_params)
+      redirect_to request.referrer, notice: "Goal updated! "
+    else
+        render :edit, alert: "Your goal couldn't be updated. "
+    end
   end
 
   def destroy
@@ -47,5 +50,11 @@ class GoalsController < ApplicationController
 
   def goal_params
     params.require(:goal).permit(:title, :description, :deadline, :progress, :status)
+  end
+
+  def get_latest(goal)
+    incomplete = goal.milestones.where(is_completed: false)
+    sorted = incomplete.sort_by &:deadline
+    return sorted.first
   end
 end

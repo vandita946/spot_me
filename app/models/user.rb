@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :owner_connections, :class_name => 'Connection', :foreign_key => 'owner_id'
   has_many :buddy_connections, :class_name => 'Connection', :foreign_key => 'buddy_id'
-
+  has_many :goals
   has_many :messages
 end
