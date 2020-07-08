@@ -23,6 +23,9 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+
+    # @chatroom = Chatroom.where(@goal)
+    # @message = Message.new
     authorize @goal
   end
 
