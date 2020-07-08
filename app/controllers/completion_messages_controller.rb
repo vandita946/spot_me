@@ -7,12 +7,12 @@ class CompletionMessagesController < ApplicationController
 
     def create
         @milestone = Milestone.find(params[:milestone_id])
-        @completion_message = CompletionMessage.new(milestone_params)
+        @completion_message = CompletionMessage.new(completion_message_params)
     end
 
     private
 
-    def milestone_params
-        
+    def completion_message_params
+        params.require(:completion_message).permit(:content)
     end
 end
