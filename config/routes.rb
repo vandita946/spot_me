@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'connections/index'
   get 'connections/new'
   get 'connections/create'
-  get 'connections/show'
+  get 'connections/:id', to: 'connections#show', as: :connection
   get 'connections/search'
   get 'connections/buddies'
   get 'connections/destroy'

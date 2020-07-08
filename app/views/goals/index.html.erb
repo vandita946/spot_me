@@ -7,7 +7,7 @@ def get_latest(goal)
 end
  %>
 <div class="container">
-<h1>Here are all your goals, <%= current_user.name %></h1>
+<h1>Here are all your goals, <%= current_user.firstname %></h1>
   <% if @goals.empty? %>
   <%= "No goals yet...!" %>
   <%= link_to new_goal_path, "Let's get goaling!" %>

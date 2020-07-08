@@ -45,13 +45,13 @@ puts "created connection between owner and buddy"
 
 puts "created assigned goals"
 
-# chatroom_goal = Chatroom.create(topic: goal_1)
+chatroom_goal = Chatroom.create(topic: goal_1)
 
-# puts "created chatroom for goals"
+puts "created chatroom for goals"
 
-# chatroom_connections = Chatroom.create(topic: connection)
+chatroom_connections = Chatroom.create(topic: connection)
 
-# puts "created chatroom for connection"
+puts "created chatroom for connection"
 
 owner_connections = Connection.new(owner_id: owner.id, buddy_id: buddy.id)
 
