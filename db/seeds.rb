@@ -31,6 +31,15 @@ goal_2 = Goal.new(title: "Lose 10 kg", description: "I wanna get to size 0!!!", 
 puts "#{owner.name} is going to #{goal_2.title}"
 goal_2.save
 
+connection = Connection.create(owner: owner, buddy: buddy)
+puts "created connection between owner and buddy"
 
 puts "created assigned goals" 
 
+chatroom_goal = Chatroom.create(topic: goal_1)
+
+puts "created chatroom for goals"
+
+chatroom_connections = Chatroom.create(topic: connection)
+
+puts "created chatroom for connection"

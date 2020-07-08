@@ -16,10 +16,11 @@ ActiveRecord::Schema.define(version: 2020_07_07_095826) do
   enable_extension "plpgsql"
 
   create_table "chatrooms", force: :cascade do |t|
+    t.string "topic_type"
     t.bigint "topic_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["topic_id"], name: "index_chatrooms_on_topic_id"
+    t.index ["topic_type", "topic_id"], name: "index_chatrooms_on_topic_type_and_topic_id"
   end
 
   create_table "completion_messages", force: :cascade do |t|
@@ -57,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_095826) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "start_date", default: "2020-07-07"
+    t.date "start_date", default: "2020-07-08"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
