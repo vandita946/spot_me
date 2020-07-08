@@ -7,6 +7,10 @@ class MessagesController < ApplicationController
         @message.user = current_user
         if @message.save
           redirect_to chatroom_path(@chatroom, anchor: "message-#{@message.id}")
+          ChatroomChannel.broadcast_to(
+            @chatroom,
+            render_to_string(partial: "message", locals: { message: @message })
+          )
         else
           render "chatrooms/show"
         end
@@ -15,6 +19,7 @@ class MessagesController < ApplicationController
     private
 
     def message_params
+        # PROBABLY REQUIRES SOME CHANGES TO THE PERMIT
         params.require(:message).permit(:chatroom_id, :user_id, :content)
     end
 
