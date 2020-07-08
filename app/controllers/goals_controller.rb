@@ -60,4 +60,5 @@ class GoalsController < ApplicationController
     sorted = incomplete.sort_by &:deadline
     return sorted.first
   end
+
 end
