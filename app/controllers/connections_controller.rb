@@ -1,5 +1,7 @@
 class ConnectionsController < ApplicationController
   def index
+    # As a user, you can see all your connections on your connections page
+
     @user = current_user
     @connections = Connection.where(params[@user_id])
   end
