@@ -1,9 +1,9 @@
 class ConnectionsController < ApplicationController
   def index
     # As a user, you can see all your connections on your connections page
-
     @user = current_user
-    @connections = Connection.where(params[@user_id])
+    #@connections = Connection.where(:owner_id, params[:owner_id])
+    @connections = current_user.owner_connections
   end
 
   def search
@@ -35,6 +35,6 @@ class ConnectionsController < ApplicationController
   private
 
   def connection_params
-    params.require(:connection).permit(:user_id, :buddy_id)
+    params.require(:connection).permit(:owner_id, :buddy_id)
   end
 end

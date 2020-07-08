@@ -6,6 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'pry-byebug'
+
+
+Milestone.destroy_all
+Connection.destroy_all
+Goal.destroy_all
+User.destroy_all
+
+
 owner = User.new(firstname: "Goal", lastname: "Owner", email: "owner@spotme.com", password: "123456")
 owner.save
 puts "created owner"
@@ -51,3 +60,13 @@ puts "connected owner to buddy"
 buddy_connections = Connection.new(owner_id: buddy.id, buddy_id: owner.id)
 
 puts "connected buddy to owner"
+
+julien = User.new(firstname: "Julien", lastname: "Conda", email: "julien@spotme.com", password: "123456")
+julien.save
+puts "created test user"
+
+Connection.new(owner: julien, buddy: buddy).save
+Connection.new(owner: julien, buddy: owner).save
+
+
+puts "created connections for julien"

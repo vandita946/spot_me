@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :user do
+  resources :users do
     resources :connections
   end
 

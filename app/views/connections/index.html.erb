@@ -1,2 +1,9 @@
 <h1>Connections#index</h1>
-<p>Find me in app/views/connections/index.html.erb</p>
+
+
+<% @connections.each do |connection| %>
+  <ul>
+    <li><%= connection.owner_id %> <%= connection.buddy_id %></li>
+  </ul>
+  <% end %>
+
