@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>THIS IS THE FORM TO CREATE A MILESTONE</h1>
+
+<%= form_for(@goal) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :deadline %>
+  <%= f.date_field :deadline %>
+  <%= f.hidden_field :progress, value: 0.0 %>
+  <%= f.hidden_field :status, value: :created %>
+  <%= f.submit %>
+<% end %>
+
+</div>
