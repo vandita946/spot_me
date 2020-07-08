@@ -32,6 +32,8 @@ gem 'devise'
 
 gem 'pundit'
 
+gem 'cloudinary', '~> 1.12.0'
+
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
@@ -50,6 +52,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'dotenv-rails', groups: [:development, :test]
+
 end
 
 group :test do

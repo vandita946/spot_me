@@ -1,0 +1,59 @@
+.blue-button {
+/* Button/Color/Primary */
+
+position: absolute;
+left: 8.43%;
+right: 29.61%;
+top: 29.43%;
+bottom: 55.17%;
+
+mix-blend-mode: normal;
+backdrop-filter: blur(4px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 8px;
+
+
+/* Button/Colors/Secondary */
+
+position: absolute;
+left: 4.75%;
+right: 4.75%;
+top: 52.24%;
+bottom: 0%;
+
+mix-blend-mode: normal;
+border-radius: 6px;
+
+
+/* Rectangle */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: $blue;
+box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+border-radius: 4px;
+
+
+/* Design your goal */
+
+position: absolute;
+height: 24px;
+left: 0%;
+right: 0%;
+top: calc(50% - 24px/2);
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 28px;
+/* or 140% */
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #FFFFFF;
+ }
