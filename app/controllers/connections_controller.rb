@@ -2,8 +2,13 @@ class ConnectionsController < ApplicationController
   def index
     # As a user, you can see all your connections on your connections page
     @user = current_user
-    #@connections = Connection.where(:owner_id, params[:owner_id])
-    @connections = current_user.owner_connections
+    @connections = @user.owner_connections
+    @connections.each do |connection|
+      @connection = User.find(:id, params[:buddy_id])
+            raise
+
+    end
+
   end
 
   def search
@@ -26,6 +31,11 @@ class ConnectionsController < ApplicationController
 
   def buddyof
     # you can filter your list of connections to see who has requested you as a buddy
+  end
+
+  def connectionof
+    @user = current_user
+    @connections = @user.buddy_connections
   end
 
   def destroy

@@ -3,7 +3,9 @@
 
 <% @connections.each do |connection| %>
   <ul>
-    <li><%= connection.owner_id %> <%= connection.buddy_id %></li>
+    <li><%= connection.buddy_id %></li>
+    <li><%= @connection.firstname %></li>
   </ul>
   <% end %>
+  <% raise %>
 
