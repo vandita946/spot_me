@@ -1,3 +1,10 @@
-<% if policy(Goal).show? %>
-  <%= link_to "Independent Goal", new_goal_path %>
-<% end %>
+
+<%# <% if policy(Goal).show? %>
+  <%# <%= link_to "Independent Goal", new_goal_path %>
+<%# <% end %>
+
+<h1><%= @goal.title %></h1>
+<h6><%= @goal.description %></h6>
+<p>Deadline: <%= @goal.deadline %></p>
+<p>Progress: <%= @goal.progress %></p>
+<p>Status: <%= @goal.status %></p>
