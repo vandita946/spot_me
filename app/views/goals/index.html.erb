@@ -7,7 +7,7 @@ def get_latest(goal)
 end
  %>
 <div class="container">
-<h1>Here are all your goals, <%= current_user.name %></h1>
+<h1>Here are all your goals, <%= current_user.firstname %></h1>
   <% if @goals.empty? %>
   <%= "No goals yet...!" %>
   <%= link_to new_goal_path, "Let's get goaling!" %>
@@ -17,14 +17,16 @@ end
     <li>Title: <%= goal.title %></li>
     <li>Buddy: </li>
     <li>Description: <%= goal.description %></li>
-    <li>Deadline: <%= goal.deadline %></li>
-    <li>Progress: <%= goal.progress.round() %>%</li>
+    <% if goal.status != "Completed" %>
+      <li><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</li>
+      <li>Progress: <%= goal.progress.round() %>%</li>
+    <% end %>
     <li>Status: <%= goal.status %></li>
     <% if goal.status == "In Progress" || goal.status == "Not Started" %>
       <% if get_latest(goal) %>
         <% milestone = get_latest(goal) %>
-        <li>Upcoming milestone: <%= milestone.name %></li>
-        <%= form_for milestone do |f| %>
+        <li>Upcoming milestone: <%= milestone.name %> by <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></li>
+        <%= form_for milestone, remote: true do |f| %>
           <%= f.hidden_field :is_completed, value: true %>
           <%= f.submit "Mark as complete", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
         <% end %>

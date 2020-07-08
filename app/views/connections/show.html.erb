@@ -1,9 +1,8 @@
+<h1>Connections#show</h1>
+<p>Find me in app/views/connections/show.html.erb</p>
 
-<%# <% if policy(Goal).show? %>
-  <%# <%= link_to "Independent Goal", new_goal_path %>
-<%# <% end %>
 
-<%# Chatroom for the goal %>
+<div class="container">
 <h1>#<%= @chatroom.topic_id %></h1>
 <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
   <% @chatroom.messages.each do |message| %>
@@ -20,3 +19,4 @@
 <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
   <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.id}" %>
 <% end %>
+</div>
