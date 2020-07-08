@@ -54,5 +54,6 @@ class MilestonesController < ApplicationController
         end
         progress = completed.fdiv(total) * 100
         milestone.goal.update(progress: progress)
+        milestone.goal.update(status: "Completed") if progress == 100.0
     end
 end
