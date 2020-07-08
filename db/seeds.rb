@@ -43,3 +43,5 @@ puts "created chatroom for goals"
 chatroom_connections = Chatroom.create(topic: connection)
 
 puts "created chatroom for connection"
+
+message_chatroom_goal = Message.create()
