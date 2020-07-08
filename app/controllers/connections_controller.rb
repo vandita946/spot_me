@@ -3,12 +3,6 @@ class ConnectionsController < ApplicationController
     # As a user, you can see all your connections on your connections page
     @user = current_user
     @connections = @user.owner_connections
-    @connections.each do |connection|
-      @connection = User.find(:id, params[:buddy_id])
-            raise
-
-    end
-
   end
 
   def search

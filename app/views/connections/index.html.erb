@@ -1,11 +1,10 @@
-<h1>Connections#index</h1>
+<h1>My Connections</h1>
 
+ <ul>
+<% current_user.buddies.each do |buddy| %>
 
-<% @connections.each do |connection| %>
-  <ul>
-    <li><%= connection.buddy_id %></li>
-    <li><%= @connection.firstname %></li>
-  </ul>
+    <li><%= buddy.firstname %> <%= buddy.lastname %></li>
+
   <% end %>
-  <% raise %>
 
+  </ul>
