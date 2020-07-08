@@ -26,9 +26,9 @@ class ConnectionsController < ApplicationController
 
     # INCLUDE WHEN YOUR MVC IS READY. CHEERS. -JOEL
     ###########################################
-    # @connection = Connection.find(params[:id])
-    # @chatroom = Chatroom.where(@connection)
-    # @message = Message.new
+    @connection = Connection.find(params[:id])
+    @chatroom = Chatroom.where(topic: @connection)[0]
+    @message = Message.new
     ###########################################
   end
 
