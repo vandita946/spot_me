@@ -1,36 +1,12 @@
-<% 
+<%
+# this is a function needed below that we're not sure where to put yet... 
 def get_latest(goal)
   incomplete = goal.milestones.where(is_completed: false)
   sorted = incomplete.sort_by &:deadline
   return sorted.first
 end
-
-def add_to_progress(milestone)
-    # milestone weightage is 1-5.
-    # progress is supposed to be a percentage / 100
-    total = 0
-    milestone.goal.milestones.each do |milestone|
-      total += milestone.weightage
-    end
-    progress = milestone.goal.progress
-    new_progress = ((progress.fdiv(100)) + (milestone.weightage.fdiv(total)))*100
-    return new_progress
-end
-
-def update_progress(goal)
-  # milestone weightage is 1-5.
-  # progress is supposed to be a percentage / 100
-  total = 0
-  completed = 0
-  goal.milestones.each do |milestone|
-    total += milestone.weightage
-    if milestone.is_completed == true
-      completed += milestone.weightage
-    end
-  end
-  return (completed/total * 100)
-end
  %>
+<div class="container">
 <h1>Here are all your goals, <%= current_user.name %></h1>
   <% if @goals.empty? %>
   <%= "No goals yet...!" %>
@@ -42,7 +18,7 @@ end
     <li>Buddy: </li>
     <li>Description: <%= goal.description %></li>
     <li>Deadline: <%= goal.deadline %></li>
-    <li>Progress: <%= goal.progress %>%</li>
+    <li>Progress: <%= goal.progress.round() %>%</li>
     <li>Status: <%= goal.status %></li>
     <% if goal.status == "In Progress" || goal.status == "Not Started" %>
       <% if get_latest(goal) %>
@@ -50,23 +26,13 @@ end
         <li>Upcoming milestone: <%= milestone.name %></li>
         <%= form_for milestone do |f| %>
           <%= f.hidden_field :is_completed, value: true %>
-
           <%= f.submit "Mark as complete", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
         <% end %>
-        <br>
-        <%= form_for goal do |f| %>
-           
-          <%= f.hidden_field :progress, value: add_to_progress(milestone) %>
-
-          <%= f.submit "Update progress", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
-        <% end %>
-
-
       <% end %>
     <% end %>
-    
   </ul>
-  <%= link_to "View my goal", goal_path(goal)%>
+  <%= link_to "View my goal", goal_path(goal), class: "btn btn-primary mb-5"%>
   <% end %>
 <% end %>
 
+</div>
