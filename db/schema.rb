@@ -10,17 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_095826) do
+ActiveRecord::Schema.define(version: 2020_07_08_023020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "chatrooms", force: :cascade do |t|
-    t.string "topic_type"
     t.bigint "topic_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["topic_type", "topic_id"], name: "index_chatrooms_on_topic_type_and_topic_id"
+    t.index ["topic_id"], name: "index_chatrooms_on_topic_id"
   end
 
   create_table "completion_messages", force: :cascade do |t|
@@ -58,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_095826) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "start_date", default: "2020-07-08"
+    t.date "start_date", default: "2020-07-07"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
@@ -91,7 +90,8 @@ ActiveRecord::Schema.define(version: 2020_07_07_095826) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
+    t.string "firstname"
+    t.string "lastname"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
