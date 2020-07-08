@@ -23,6 +23,13 @@ class ConnectionsController < ApplicationController
 
   def show
     # you can click on a connection to see the buddy's profile (= user view)
+
+    # INCLUDE WHEN YOUR MVC IS READY. CHEERS. -JOEL
+    ###########################################
+    # @connection = Connection.find(params[:id])
+    # @chatroom = Chatroom.where(@connection)
+    # @message = Message.new
+    ###########################################
   end
 
   def buddies
