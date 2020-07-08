@@ -1,6 +1,9 @@
 class ConnectionsController < ApplicationController
   def index
     # As a user, you can see all your connections on your connections page
+    # buddies: you can see who are your current active buddies (= they keep you accountable on a goal)
+    # buddyof: you can see who has requested you as a buddy
+    # connectionof: you can see who added you as a connection
     @user = current_user
     @connections = @user.owner_connections
   end
@@ -13,10 +16,17 @@ class ConnectionsController < ApplicationController
 
   def create
     # creates a connection between a user and a buddy, without a goal (no view)
+    @connection = Connection.new(connection_params)
+    @connection.owner_id = current_user.id
+      if @connection.save
+        redirect_to connections_path, notice: "You have added #{buddy.firstname} to your connections"
+      else
+        render "new", alert: "Something went wrong"
+      end
   end
 
   def show
-    # you can click on a connection to see the buddy's profile (= user view)
+    # there won't be a connection show view, clicking on a buddy's profile will lead to user view
 
     # INCLUDE WHEN YOUR MVC IS READY. CHEERS. -JOEL
     ###########################################
@@ -24,19 +34,6 @@ class ConnectionsController < ApplicationController
     @chatroom = Chatroom.where(topic: @connection)[0]
     @message = Message.new
     ###########################################
-  end
-
-  def buddies
-    # you can filter your list of connection to see who are your current active buddies (= they keep you accountable on a goal)
-  end
-
-  def buddyof
-    # you can filter your list of connections to see who has requested you as a buddy
-  end
-
-  def connectionof
-    @user = current_user
-    @connections = @user.buddy_connections
   end
 
   def destroy
@@ -49,3 +46,5 @@ class ConnectionsController < ApplicationController
     params.require(:connection).permit(:owner_id, :buddy_id)
   end
 end
+
+

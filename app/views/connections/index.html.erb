@@ -1,10 +1,60 @@
-<h1>My Connections</h1>
+<ul class="list-inline tabs-underlined">
+  <li>
+    <a href="Connections" class="tab-underlined">My Connections</a>
+  </li>
+  <li>
+    <a href="buddies" class="tab-underlined">My Buddies</a>
+  </li>
+  <li>
+    <a href="buddyof" class="tab-underlined">Buddy of ...</a>
+  </li>
+</ul>
 
- <ul>
-<% current_user.buddies.each do |buddy| %>
 
-    <li><%= buddy.firstname %> <%= buddy.lastname %></li>
+ <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#connections" data-toggle="tab" role="tab" class="nav-link active">Connections</a>
+  </li>
+  <li class="nav-item">
+    <a href="#buddies" data-toggle="tab" role="tab" class="nav-link">Buddies</a>
+  </li>
+  <li class="nav-item">
+    <a href="#buddyof" data-toggle="tab" role="tab" class="nav-link">Buddy of..</a>
+  </li>
+  <li class="nav-item">
+    <a href="#connectionof" data-toggle="tab" role="tab" class="nav-link">Connection of...</a>
+  </li>
 
-  <% end %>
+<div class="tab-content">
+  <div role="tab-panel" class="tab-pane active" id="Connections">
+    <div class="cards">
+    <% @connections.each do |user| %>
+      <%= render partial: "shared/usercards", locals: {user: user} %>
+    <% end %>
+    </div>
+  </div>
+  <div role="tab-panel" class="tab-pane" id="buddies">
+    <div class="cards">
+    <% @connections.each do |user| %>
+      <%= render partial: "shared/usercards", locals: {user: user} %>
+    <% end %>
+    </div>
+  </div>
 
-  </ul>
+  <div role="tab-panel" class="tab-pane" id="buddyof">
+    <div class="cards">
+      <% @connections.each do |user| %>
+              <%= render partial: "shared/usercards", locals: {user: user} %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div role="tab-panel" class="tab-pane" id="connectionof">
+     <div class="cards">
+      <% @connections.each do |user| %>
+              <%= render partial: "shared/usercards", locals: {user: user} %>
+      <% end %>
+
+    </div>
+  </div>
