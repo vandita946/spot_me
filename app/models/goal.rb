@@ -8,5 +8,10 @@ class Goal < ApplicationRecord
   validates :description, presence: true
   validates :deadline, presence: true
   validates :status, inclusion: { in: ["Not Started", "In Progress", "Completed", "Archived"] }
-end
 
+  def get_latest
+    incomplete = self.milestones.where(is_completed: false)
+    sorted = incomplete.sort_by(&:deadline).first
+  end
+
+end
