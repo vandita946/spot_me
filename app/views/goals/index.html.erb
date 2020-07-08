@@ -24,7 +24,7 @@ end
       <% if get_latest(goal) %>
         <% milestone = get_latest(goal) %>
         <li>Upcoming milestone: <%= milestone.name %></li>
-        <%= form_for milestone do |f| %>
+        <%= form_for milestone, remote: true do |f| %>
           <%= f.hidden_field :is_completed, value: true %>
           <%= f.submit "Mark as complete", data: { confirm: "Congrats #{milestone.goal.user.name}!" }, class: "btn btn-primary"%>
         <% end %>
