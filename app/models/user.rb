@@ -12,5 +12,13 @@ class User < ApplicationRecord
   # has_many :goal_connections, through: :goals, source: :goal
   # has_many :buddies, through: :goals_connection, source: :buddy
 
-
+  def buddies
+    buddies = []
+    self.goals.each do |goal|
+      goal.connections.each do |connection|
+        buddies << connection.buddy
+      end
+    end
+    buddies
+  end
 end
