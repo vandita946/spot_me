@@ -6,13 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+GoalConnection.destroy_all
+Connection.destroy_all
 CompletionMessage.destroy_all
 Milestone.destroy_all
-Connection.destroy_all
 Goal.destroy_all
 User.destroy_all
-GoalConnection.destroy_all
 
 
 owner = User.new(firstname: "Goal", lastname: "Owner", email: "owner@spotme.com", password: "123456")

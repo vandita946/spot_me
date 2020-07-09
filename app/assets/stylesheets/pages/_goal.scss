@@ -1,0 +1,66 @@
+.stars {
+    i {
+        color: $white;
+    }
+}
+
+#done {
+    color: $white;
+}
+.progress-bar-vertical {
+    width: 20px;
+    min-height: 120px;
+    margin-right: 20px;
+    float: left;
+    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+    align-items: flex-end;
+    -webkit-align-items: flex-end; /* Safari 7.0+ */
+}
+  
+.progress-bar-vertical .progress-bar {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+    background-color: $pink;
+}
+
+.goal-head {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    margin: 5px;
+    text-align: center;
+    background-color: $blue;
+    color: $white;
+}
+
+#edit {
+    color: $white;
+}
+
+#goal-edit {
+    font-size: 20px;
+}
+
+#add-milestone {
+    color: $white;
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 5px;
+    border: solid 2px;
+    border-radius: 50%;
+    background-color: $pink;
+}

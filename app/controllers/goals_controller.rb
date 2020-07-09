@@ -3,7 +3,7 @@ class GoalsController < ApplicationController
 
   def index
     @user = current_user
-    @goals = @user.goals
+    @goals = @user.goals.sort_by(&:deadline)
     @completion_message = CompletionMessage.new
   end
 
