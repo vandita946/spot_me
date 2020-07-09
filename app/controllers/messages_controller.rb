@@ -10,11 +10,19 @@ class MessagesController < ApplicationController
                 @chatroom,
                 render_to_string(partial: "message", locals: { message: @message })
             )
-            # redirect_to chatroom_path(@chatroom, anchor: "message-#{@message.id}")
-            redirect_to request.referrer(@chatroom, anchor: "message-#{@message.id}")
+            if @chatroom.topic.class == Goal
+                # render URI(request.referrer).path, alert: "#{request.referrer}"
+                redirect_to goal_path(@chatroom.topic, anchor: "message-#{@message.id}")
+            elsif @chatroom.topic.class == Connection
+                redirect_to connection_path(@chatroom.topic, anchor: "message-#{@message.id}")
+            else
+                redirect_to chatroom_path(@chatroom.topic, anchor: "message-#{@message.id}")
+            end
+            # redirect_to URI(request.referrer).path(anchor: "message-#{@message.id}"), notice: "works"
         else
-            redirect_to request.referrer(@chatroom, anchor: "message-#{@message.id}")
-        #   render :new # "chatrooms/show"
+            # redirect_to chatroom_path(@chatroom, anchor: "message-#{@message.id}")
+            # redirect_to request.referrer, alert: "There was an error in message"
+          render URI(request.referrer).path, alert: "There was an error in message" # "chatrooms/show"
         end
     end
 
