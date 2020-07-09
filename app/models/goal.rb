@@ -19,7 +19,7 @@ class Goal < ApplicationRecord
   end
 
   def ensure_one_goal_connection
-    false if self.goal_connections > 1
+    false if self.goal_connections.length > 1
   end
 
 end
