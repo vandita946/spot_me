@@ -8,7 +8,9 @@
   <% @goals.each do |goal| %>
   <ul>
     <li>Title: <%= goal.title %></li>
-    <li>Buddy: </li>
+
+   <!-- if no buddy => no buddy yet otherwise print buddy's name -->
+
     <li>Description: <%= goal.description %></li>
     <% if goal.status != "Completed" %>
       <li><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</li>
@@ -26,7 +28,17 @@
     <% end %>
   </ul>
   <%= link_to "View my goal", goal_path(goal), class: "btn btn-primary mb-5"%>
+
+  <%= link_to "Delete", {:controller => :goals,
+      :action => 'destroy', :id => goal.id }, :method => :delete,
+      data: { confirm: "Are you sure?" }, class: "btn btn-danger mb-5" %>
+
   <% end %>
+
+</br>
+
+    <%= link_to "Add a goal", new_goal_path, class: "btn btn-primary mb-5" %>
+
 <% end %>
 
 
