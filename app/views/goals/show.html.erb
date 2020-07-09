@@ -1,37 +1,73 @@
-
 <%# <% if policy(Goal).show? %>
   <%# <%= link_to "Independent Goal", new_goal_path %>
 <%# <% end %>
-<div class="container">
-  <h1> <%= @goal.title %> </h1>
-  <p> <%= @goal.status %> </p>
-  <p> <%= @goal.description %> </p>
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped" style="width: <%= @goal.progress %>%" role="progressbar" aria-valuenow=" <%= @goal.progress %>" aria-valuemin="0" aria-valuemax="100"></div>
+<%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
+
+<div class="container justify-content-center">
+  <div class="goal-head">
+    <div class="goal-details">
+    <h1>
+      <%= @goal.title %>
+        <a id="goal-edit" href="blank" data-toggle="modal" data-target="#goal-edit" >
+          <i class="far fa-edit"></i>
+        </a>
+    </h1>
+    <p> <%= @goal.status %> </p>
+    <p> <%= @goal.description %> </p>
+
+    </div>
   </div>
 
-  <br>
-  <div class="container">
-    <% @milestones.each do |milestone| %>
-      <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
-      <h2> <%= milestone.name %></h2>
-      <p> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
-        <% if milestone.is_completed %>
-          <i class="fa fa-check" aria-hidden="true"></i>
-        <% end %>
-      <br>
-        <% milestone.weightage.times do %>
-          <i class="fas fa-star"></i>
-        <% end %>
-        <% (5 - milestone.weightage).times do %>
-          <i class="far fa-star"></i>
-        <% end %>
-      <a href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
-          <i class="far fa-edit"></i>
-      </a>
-    <% end %>
-  </div>
+    <div class="container  d-flex flex-grow-1 justify-content-center">
+          <div class="row">
+              <div class="col-2">
+                <div class="progress progress-bar-vertical">
+                <div class="progress-bar" role="progressbar" style="height: <%= @goal.progress %>%" role="progressbar" aria-valuenow="<%= @goal.progress %>" aria-valuemin="0" aria-valuemax="100">
+                </div>
+                </div>
+              </div>
+
+              <div class="col">
+              <div class="cards-container">
+                      <% @milestones.each do |milestone| %>
+                      <%# <%= render partial: 'shared/completion_message', locals: { milestone: milestone } %>
+                        <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
+                        <div class="card" style="width: 30rem;">
+                                    <div class="card-body">
+                                        <h2 class="card-title"> <%= milestone.name %>
+                                        <% if milestone.is_completed %>
+                                          <i id="done" class="fa fa-check" aria-hidden="true"></i>
+                                        <% end %>
+                                        </h2>
+                                        <p class='card-subtitle'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
+                                              <div class="stars">
+                                              <% milestone.weightage.times do %>
+                                                  <i class="fas fa-star"></i>
+                                                <% end %>
+                                                <% (5 - milestone.weightage).times do %>
+                                                  <i class="far fa-star"></i>
+                                                <% end %>
+                                              </div>
+                                        <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
+                                        <i class="far fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completion" data-whatever="@mdo">Mark as complete</button>
+                                    </div>
+                          </div>
+                      <% end %>
+              </div>
+              </div>
+          </div>
+
+    </div>
+
+<div class="container">
+  <%= render partial: "shared/new_milestone", locals: {goal: @goal, milestone: Milestone.new} %>
+  <a id="milestone-add" href="blank" data-toggle="modal" data-target="#milestone-add" >
+    <i id="add-milestone" class="fas fa-plus justify-content-center"></i>
+  </a>
 </div>
+
 
 </br>
 
@@ -49,9 +85,9 @@
     </div>
   <% end %>
 </div>
-
 <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
   <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.id}" %>
-  <%= f.button :submit %>
+  <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
+
 </div>

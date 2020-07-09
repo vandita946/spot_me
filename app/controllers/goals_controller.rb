@@ -3,7 +3,7 @@ class GoalsController < ApplicationController
 
   def index
     @user = current_user
-    @goals = @user.goals
+    @goals = @user.goals.sort_by(&:deadline)
     @completion_message = CompletionMessage.new
   end
 
@@ -36,7 +36,7 @@ class GoalsController < ApplicationController
     @milestones = @goal.milestones.sort_by(&:deadline)
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
-    authorize @goal
+    # authorize @goal
   end
 
   def edit
