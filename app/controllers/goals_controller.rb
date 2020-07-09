@@ -15,7 +15,8 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.new(goal_params)
     @goal.user = current_user
-    if @goal.save
+    @chatroom = Chatroom.new(topic: @goal)
+    if @goal.save && @chatroom.save
     redirect_to goals_path, notice: "Your goal has been added"
     else
       render "new", alert: "Your goal is missing something "
@@ -24,7 +25,7 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
-
+    @milestones = @goal.milestones.sort_by(&:deadline)
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
     authorize @goal
