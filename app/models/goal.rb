@@ -11,15 +11,15 @@ class Goal < ApplicationRecord
   validates :deadline, presence: true
   validates :status, inclusion: { in: ["Not Started", "In Progress", "Completed", "Archived"] }
 
-  before_save :ensure_one_goal_connection
+  # before_save :ensure_one_goal_connection
 
   def get_latest
     incomplete = self.milestones.where(is_completed: false)
     sorted = incomplete.sort_by(&:deadline).first
   end
 
-  def ensure_one_goal_connection
-    false if self.goal_connections > 1
-  end
+  # def ensure_one_goal_connection
+  #   false if self.goal_connections > 1
+  # end
 
 end
