@@ -10,16 +10,30 @@ class GoalsController < ApplicationController
   def new
     @goal = Goal.new
     @goal.user = current_user
+    @goal_connection = GoalConnection.new
   end
 
   def create
     @goal = Goal.new(goal_params)
     @goal.user = current_user
+
+    @goal_connection = GoalConnection.new
+    @goal_connection.connection_id =
+    @goal_connection.goal_id =
+
+
+    if @goal.start_date > Date.today
+      @goas.status = "Not started"
+    else @goal.status = "In Progress"
+    end
+
     if @goal.save
-    redirect_to goals_path, notice: "Your goal has been added"
+      redirect_to goals_path, notice: "Your goal has been added"
     else
+
       render "new", alert: "Your goal is missing something "
     end
+
   end
 
   def show
@@ -36,7 +50,7 @@ class GoalsController < ApplicationController
 
   def update
     @goal = Goal.find(params[:id])
-    
+
     if @goal.update(goal_params)
       redirect_to request.referrer, notice: "Goal updated! "
     else
@@ -53,7 +67,7 @@ class GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permit(:title, :description, :deadline, :progress, :status)
+    params.require(:goal).permit(:title, :description, :deadline, :progress, :status, :start_date)
   end
 
   def get_latest(goal)

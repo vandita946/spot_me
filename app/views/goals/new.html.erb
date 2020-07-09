@@ -1,16 +1,19 @@
 <div class="container">
-  <h1>THIS IS THE FORM TO CREATE A GOAL</h1>
+  <h1>CREATE A GOAL</h1>
 
-<%= form_for(@goal) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.label :deadline %>
-  <%= f.date_field :deadline %>
+<%= simple_form_for @goal do |f| %>
+  <%= f.input :title, label: 'Give it a name', error: 'Name is mandatory, please specify one' %>
+  <%= f.input :description, label: 'Describe what you want to achieve', hint: '250 char. max' %>
+
+  <%= f.input :start_date, as: :date, html5: true %>
+  <%= f.input :deadline, as: :date, html5: true %>
+
   <%= f.hidden_field :progress, value: 0.0 %>
-  <%= f.hidden_field :status, value: :created %>
-  <%= f.submit %>
-<% end %>
+
+  <!-- get the ids & info of existing buddy connections -->
+  <!-- data of our buddy : current_user.connections.first.id / name -->
+  <!-- current_user.connections.first is a user / name -->
+  <%= f.button :submit %>
+ <% end %>
 
 </div>
