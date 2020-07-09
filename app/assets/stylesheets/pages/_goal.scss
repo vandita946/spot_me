@@ -8,7 +8,8 @@
     color: $white;
 }
 .progress-bar-vertical {
-    width: 20px;
+    width: 50%;
+    height: 100%;
     min-height: 120px;
     margin-right: 20px;
     float: left;
@@ -19,7 +20,7 @@
     align-items: flex-end;
     -webkit-align-items: flex-end; /* Safari 7.0+ */
 }
-  
+
 .progress-bar-vertical .progress-bar {
     width: 100%;
     height: 0;
