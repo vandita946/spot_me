@@ -6,7 +6,9 @@ class ConnectionsController < ApplicationController
     # connectionof: you can see who added you as a connection
     @user = current_user
     @connections = @user.owner_connections
+    @fans = @user.buddy_connections
     @buddies = @user.buddies
+    @buddyofs = @user.buddyofs
     # @user.goals.each do |goal|
     #   goal.connections.each do |connection|
     #     @buddies << connection.buddy

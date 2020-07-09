@@ -1,11 +1,12 @@
-<%= @connections %>
-
-
-
-julien's connections = joel, vandita
-julien's buddies = ""
-julien's buddy of = ""
-julien's followers = claire, vandita
+<h4>CHECKLIST
+<ul>
+  <li># Users: julien, joel, vandita, claire</li>
+  <li># Goals: Goal 1 - julien (joel), Goal 2 - julien(claire), Goal 3 - claire(julien)</li>
+  <li># Connections: joel, claire, vandita</li>
+  <li># Buddy: joel, vandita</li>
+  <li># Buddyof: claire</li>
+  <li># Fans: claire, vandita</li>
+</ul>
 
 <!-- Connection.new(owner: julien, buddy: joel).save
 Connection.new(owner: julien, buddy: vandita).save
@@ -23,10 +24,10 @@ Connection.new(owner: joel, buddy: claire).save
     <a href="#buddies" data-toggle="tab" role="tab" class="nav-link">Buddies</a>
   </li>
   <li class="nav-item">
-    <a href="#buddyof" data-toggle="tab" role="tab" class="nav-link">Buddy of..</a>
+    <a href="#buddyof" data-toggle="tab" role="tab" class="nav-link">Supporting</a>
   </li>
   <li class="nav-item">
-    <a href="#connectionof" data-toggle="tab" role="tab" class="nav-link">Connection of...</a>
+    <a href="#connectionof" data-toggle="tab" role="tab" class="nav-link">Fans</a>
   </li>
 
 <div class="tab-content">
@@ -40,7 +41,7 @@ Connection.new(owner: joel, buddy: claire).save
 
   <div role="tab-panel" class="tab-pane" id="buddies">
     <div class="cards">
-      <% @buddies.each do |buddy| %>
+     <% @buddies.each do |buddy| %>
         <li><%= buddy.firstname %> <%= buddy.lastname %></li>
       <% end %>
     </div>
@@ -48,17 +49,14 @@ Connection.new(owner: joel, buddy: claire).save
 
   <div role="tab-panel" class="tab-pane" id="buddyof">
     <div class="cards">
-      <% @connections.each do |user| %>
-        <li><%= "tbd" %></li>
-      <% end %>
 
     </div>
   </div>
 
-  <div role="tab-panel" class="tab-pane" id="connectionof">
+  <div role="tab-panel" class="tab-pane" id="fans">
      <div class="cards">
-      <% @connections.each do |user| %>
-        <li><%= "tbd" %></li>
+      <% @fans.each do |fan| %>
+        <li><%= fan.owner.firstname %> <%= fan.owner.lastname %></li>
       <% end %>
 
     </div>
