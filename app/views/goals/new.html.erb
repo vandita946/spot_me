@@ -9,7 +9,7 @@
   <%= f.label :deadline %>
   <%= f.date_field :deadline %>
   <%= f.hidden_field :progress, value: 0.0 %>
-  <%= f.hidden_field :status, value: :created %>
+  <%= f.hidden_field :status, value: "Not Started" %>
   <%= f.submit %>
 <% end %>
 

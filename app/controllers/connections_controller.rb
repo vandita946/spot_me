@@ -29,7 +29,8 @@ class ConnectionsController < ApplicationController
     # creates a connection between a user and a buddy, without a goal (no view)
     @connection = Connection.new(connection_params)
     @connection.owner_id = current_user.id
-      if @connection.save
+    @chatroom = Chatroom.new(topic: @connection)
+      if @connection.save && @connection.save
         redirect_to connections_path, notice: "You have added #{buddy.firstname} to your connections"
       else
         render "new", alert: "Something went wrong"
