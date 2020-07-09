@@ -6,6 +6,14 @@ class ConnectionsController < ApplicationController
     # connectionof: you can see who added you as a connection
     @user = current_user
     @connections = @user.owner_connections
+    @fans = @user.buddy_connections
+    @buddies = @user.buddies
+    @buddyofs = @user.buddyofs
+    # @user.goals.each do |goal|
+    #   goal.connections.each do |connection|
+    #     @buddies << connection.buddy
+    #   end
+    # end
     # @followers = @user.buddy_connections
     # @buddyof
     # @connectionof
@@ -23,7 +31,8 @@ class ConnectionsController < ApplicationController
     # creates a connection between a user and a buddy, without a goal (no view)
     @connection = Connection.new(connection_params)
     @connection.owner_id = current_user.id
-      if @connection.save
+    @chatroom = Chatroom.new(topic: @connection)
+      if @connection.save && @connection.save
         redirect_to connections_path, notice: "You have added #{buddy.firstname} to your connections"
       else
         render "new", alert: "Something went wrong"
@@ -52,9 +61,4 @@ class ConnectionsController < ApplicationController
   end
 end
 
-def filter_by(connections)
-    # @connections = connections.select { |connection| connection.status == "Connections" }
-    # @buddies = connections.select { |connection| connection.status == "Buddies" }
-    # @buddyof = connections.select { |connection| connection.status == "Buddy Of" }
-    # @connectionof = connections.select { |connection| connection.status == "Connection of" }
-  end
+

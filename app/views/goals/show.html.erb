@@ -3,37 +3,33 @@
   <%# <%= link_to "Independent Goal", new_goal_path %>
 <%# <% end %>
 <div class="container">
-<h1> <%= @goal.title %> </h1>
-<p> <%= @goal.status %> </p>
-<p> <%= @goal.description %> </p>
-<div class="progress">
-  <div class="progress-bar progress-bar-striped" style="width: <%= @goal.progress %>%" role="progressbar" aria-valuenow=" <%= @goal.progress %>" aria-valuemin="0" aria-valuemax="100">
+  <h1> <%= @goal.title %> </h1>
+  <p> <%= @goal.status %> </p>
+  <p> <%= @goal.description %> </p>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped" style="width: <%= @goal.progress %>%" role="progressbar" aria-valuenow=" <%= @goal.progress %>" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
-</div>
 
-</br>
-
-<div class="container">
-  <% @goal.milestones.each do |milestone| %>
-    <h2> <%= milestone.name %></h2>
-    <p> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
-      <% if milestone.is_completed %>
-        <i class="fa fa-check" aria-hidden="true"></i>
-      <% end %>
-
-      <% milestone.weightage.times do %>
-      <i class="fas fa-star"></i>
+  <br>
+  <div class="container">
+    <% @milestones.each do |milestone| %>
+      <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
+      <h2> <%= milestone.name %></h2>
+      <p> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
+        <% if milestone.is_completed %>
+          <i class="fa fa-check" aria-hidden="true"></i>
+        <% end %>
+      <br>
+        <% milestone.weightage.times do %>
+          <i class="fas fa-star"></i>
+        <% end %>
+        <% (5 - milestone.weightage).times do %>
+          <i class="far fa-star"></i>
+        <% end %>
+      <a href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
+          <i class="far fa-edit"></i>
+      </a>
     <% end %>
-    <% (5 - milestone.weightage).times do %>
-      <i class="far fa-star"></i>
-    <% end %>
-
-  <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
-
-<a href="#edit" data-toggle="modal" >
-    <i class="far fa-edit"></i>
-</a>
-  <% end %>
   </div>
 </div>
 
@@ -56,5 +52,6 @@
 
 <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
   <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.id}" %>
+  <%= f.button :submit %>
 <% end %>
 </div>

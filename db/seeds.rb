@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-
+CompletionMessage.destroy_all
 Milestone.destroy_all
 Connection.destroy_all
 Goal.destroy_all
@@ -28,8 +28,10 @@ julien.save
 
 joel = User.new(firstname: "Joel", lastname: "Chen", email: "joel@spotme.com", password: "123456")
 joel.save
+
 vandita = User.new(firstname: "Van", lastname: "Dita", email: "vandita@spotme.com", password: "123456")
 vandita.save
+
 claire = User.new(firstname: "Claire", lastname: "March", email: "claire@spotme.com", password: "123456")
 claire.save
 
@@ -49,21 +51,23 @@ milestone_2 = Milestone.new(name: "Decide on title", deadline: Date.today + 20, 
 milestone_2.save
 
 goal_2 = Goal.new(title: "Lose 10 kg", description: "I wanna get to size 0!!!", start_date: Date.new(2021,1,1), deadline: Date.new(2021,1,1) + 90, user_id: julien.id, status: "Not Started")
-puts "#{owner.firstname} #{owner.lastname} is going to #{goal_2.title}"
 goal_2.save
+puts "#{owner.firstname} #{owner.lastname} is going to #{goal_2.title}"
 
 connection = Connection.create(owner: owner, buddy: buddy)
 puts "created connection between owner and buddy"
 
-puts "created assigned goals"
+# CREATE CHATROOMS - do not remove
 
-# chatroom_goal = Chatroom.create(topic: goal_1)
+chatroom_goal = Chatroom.create(topic: goal_1)
 
-# # puts "created chatroom for goals"
+puts "created chatroom for goals"
 
-# chatroom_connections = Chatroom.create(topic: connection)
+chatroom_connections = Chatroom.create(topic: connection)
 
-# puts "created chatroom for connection"
+puts "created chatroom for connection"
+
+# END
 
 owner_connections = Connection.new(owner_id: owner.id, buddy_id: buddy.id).save
 
@@ -80,7 +84,7 @@ connect_1 = Connection.new(owner: julien, buddy: joel)
 connect_1.save
 puts "created 1 connection for julien"
 
-connect_2 = Connection.new(owner: julien, buddy: vandita)
+connect_2 = Connection.new(owner: julien, buddy: claire)
 connect_2.save
 puts "created 2 connections for julien"
 
@@ -90,6 +94,8 @@ connect_4 = Connection.new(owner: vandita, buddy: julien)
 connect_4.save
 connect_5 = Connection.new(owner: joel, buddy: claire)
 connect_5.save
+connect_6 = Connection.new(owner: julien, buddy: vandita)
+connect_6.save
 puts "created followers for julien"
 
 goal_3 = Goal.new(title: "Grow 20cm", description: "I wanna be very tall!!!", start_date: Date.new(2021,2,3), deadline: Date.new(2021,3,5) + 40, user_id: claire.id, status: "Not Started")
@@ -97,8 +103,15 @@ goal_3.save
 
 puts "created goal 3"
 
-GoalConnection.new(connection_id: connect_1.id, goal_id: goal_1.id).save
-GoalConnection.new(connection_id: connect_2.id, goal_id: goal_2.id).save
-GoalConnection.new(connection_id: connect_3.id, goal_id: goal_3.id).save
+GoalConnection.new(connection_id: connect_1.id, goal_id: goal_1.id).save #julien, joel
+GoalConnection.new(connection_id: connect_6.id, goal_id: goal_2.id).save #julien, vandita
+GoalConnection.new(connection_id: connect_3.id, goal_id: goal_3.id).save #claire, julien
 
 puts "created 3 goal connections"
+
+# Users: julien, joel, vandita, claire
+# Goals: Goal 1 - julien (joel), Goal 2 - julien(claire), Goal 3 - claire(julien)
+# Connections: Julien [joel, claire, vandita]
+# Buddy: Julien [joel, vandita]
+# Buddyof: Julien [claire]
+# Fans: (claire, vandita)
