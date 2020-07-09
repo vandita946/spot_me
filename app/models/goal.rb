@@ -27,5 +27,6 @@ class Goal < ApplicationRecord
   #   false if self.goal_connections > 1
   # end
 
-
 end
+
+
