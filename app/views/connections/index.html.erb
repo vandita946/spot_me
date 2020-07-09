@@ -1,17 +1,21 @@
-<ul class="list-inline tabs-underlined">
-  <li>
-    <a href="Connections" class="tab-underlined">My Connections</a>
-  </li>
-  <li>
-    <a href="buddies" class="tab-underlined">My Buddies</a>
-  </li>
-  <li>
-    <a href="buddyof" class="tab-underlined">Buddy of ...</a>
-  </li>
-</ul>
+<%= @connections %>
 
 
- <ul class="nav nav-tabs">
+
+julien's connections = joel, vandita
+julien's buddies = ""
+julien's buddy of = ""
+julien's followers = claire, vandita
+
+<!-- Connection.new(owner: julien, buddy: joel).save
+Connection.new(owner: julien, buddy: vandita).save
+Connection.new(owner: claire, buddy: julien).save
+Connection.new(owner: vandita, buddy: julien).save
+Connection.new(owner: joel, buddy: claire).save
+ -->
+
+
+<ul class="nav nav-tabs">
   <li class="nav-item">
     <a href="#connections" data-toggle="tab" role="tab" class="nav-link active">Connections</a>
   </li>
@@ -26,25 +30,24 @@
   </li>
 
 <div class="tab-content">
-  <div role="tab-panel" class="tab-pane active" id="Connections">
+  <div role="tab-panel" class="tab-pane active" id="connections">
     <div class="cards">
     <% @connections.each do |user| %>
-      <%= render partial: "shared/usercards", locals: {user: user} %>
+      <li><%= user.buddy.firstname %> <%= user.buddy.lastname %></li>
     <% end %>
     </div>
   </div>
+
   <div role="tab-panel" class="tab-pane" id="buddies">
     <div class="cards">
-    <% @connections.each do |user| %>
-      <%= render partial: "shared/usercards", locals: {user: user} %>
-    <% end %>
+
     </div>
   </div>
 
   <div role="tab-panel" class="tab-pane" id="buddyof">
     <div class="cards">
       <% @connections.each do |user| %>
-              <%= render partial: "shared/usercards", locals: {user: user} %>
+        <li><%= "tbd" %></li>
       <% end %>
 
     </div>
@@ -53,7 +56,7 @@
   <div role="tab-panel" class="tab-pane" id="connectionof">
      <div class="cards">
       <% @connections.each do |user| %>
-              <%= render partial: "shared/usercards", locals: {user: user} %>
+        <li><%= "tbd" %></li>
       <% end %>
 
     </div>

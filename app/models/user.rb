@@ -7,5 +7,10 @@ class User < ApplicationRecord
   has_many :buddy_connections, :class_name => 'Connection', :foreign_key => 'buddy_id'
   has_many :goals
   has_many :messages
-  has_many :buddies, through: :owner_connections, source: :buddy
+  has_many :connections, through: :owner_connections, source: :buddy
+  has_many :followers, through: :owner_connections, source: :owner
+  # has_many :goal_connections, through: :goals, source: :goal
+  # has_many :buddies, through: :goals_connection, source: :buddy
+
+
 end
