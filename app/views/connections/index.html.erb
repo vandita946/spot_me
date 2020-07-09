@@ -12,12 +12,13 @@
   <li class="nav-item">
     <a href="#fans" data-toggle="tab" role="tab" class="nav-link">Fans</a>
   </li>
+</ul>
 
-<div class="tab-content">
+<div class="tab-content" style="text-align:center">
   <div role="tab-panel" class="tab-pane active" id="connections">
     <div class="cards">
       <% @connections.each do |connection| %>
-        <li><%= connection.buddy.firstname %> <%= connection.buddy.lastname %></li>
+        <p><%= connection.buddy.firstname %> <%= connection.buddy.lastname %></p>
       <% end %>
     </div>
   </div>
@@ -25,7 +26,7 @@
   <div role="tab-panel" class="tab-pane" id="buddies">
     <div class="cards">
      <% @buddies.each do |buddy| %>
-        <li><%= buddy.firstname %> <%= buddy.lastname %></li>
+        <p><%= buddy.firstname %> <%= buddy.lastname %></p>
       <% end %>
     </div>
   </div>
@@ -33,7 +34,7 @@
   <div role="tab-panel" class="tab-pane" id="buddyof">
     <div class="cards">
       <% @buddyofs.each do |buddy| %>
-        <li><%= buddy.firstname %> <%= buddy.lastname %></li>
+        <p><%= buddy.firstname %> <%= buddy.lastname %></p>
       <% end %>
     </div>
   </div>
@@ -41,7 +42,7 @@
   <div role="tab-panel" class="tab-pane" id="fans">
      <div class="cards">
       <% @fans.each do |fan| %>
-        <li><%= fan.owner.firstname %> <%= fan.owner.lastname %></li>
+        <p><%= fan.owner.firstname %> <%= fan.owner.lastname %></p>
       <% end %>
 
     </div>
