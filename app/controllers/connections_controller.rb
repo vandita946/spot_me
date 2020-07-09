@@ -6,6 +6,12 @@ class ConnectionsController < ApplicationController
     # connectionof: you can see who added you as a connection
     @user = current_user
     @connections = @user.owner_connections
+    @buddies = @user.buddies
+    # @user.goals.each do |goal|
+    #   goal.connections.each do |connection|
+    #     @buddies << connection.buddy
+    #   end
+    # end
     # @followers = @user.buddy_connections
     # @buddyof
     # @connectionof
@@ -52,9 +58,4 @@ class ConnectionsController < ApplicationController
   end
 end
 
-def filter_by(connections)
-    # @connections = connections.select { |connection| connection.status == "Connections" }
-    # @buddies = connections.select { |connection| connection.status == "Buddies" }
-    # @buddyof = connections.select { |connection| connection.status == "Buddy Of" }
-    # @connectionof = connections.select { |connection| connection.status == "Connection of" }
-  end
+

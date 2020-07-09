@@ -32,15 +32,17 @@ Connection.new(owner: joel, buddy: claire).save
 <div class="tab-content">
   <div role="tab-panel" class="tab-pane active" id="connections">
     <div class="cards">
-    <% @connections.each do |user| %>
-      <li><%= user.buddy.firstname %> <%= user.buddy.lastname %></li>
-    <% end %>
+      <% @connections.each do |connection| %>
+        <li><%= connection.buddy.firstname %> <%= connection.buddy.lastname %></li>
+      <% end %>
     </div>
   </div>
 
   <div role="tab-panel" class="tab-pane" id="buddies">
     <div class="cards">
-
+      <% @buddies.each do |buddy| %>
+        <li><%= buddy.firstname %> <%= buddy.lastname %></li>
+      <% end %>
     </div>
   </div>
 
