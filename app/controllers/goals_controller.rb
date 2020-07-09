@@ -25,7 +25,7 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
-
+    @milestones = @goal.milestones.sort_by(&:deadline)
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
     authorize @goal
