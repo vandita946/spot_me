@@ -62,7 +62,7 @@ class GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permit(:title, :description, :deadline, :progress, :status, :start_date)
+    params.require(:goal).permit(:icon, :title, :description, :deadline, :progress, :status, :start_date, :logo)
   end
 
   def get_latest(goal)
