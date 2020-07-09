@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-
+CompletionMessage.destroy_all
 Milestone.destroy_all
 Connection.destroy_all
 Goal.destroy_all
