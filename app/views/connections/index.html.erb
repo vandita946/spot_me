@@ -1,20 +1,3 @@
-<h4>CHECKLIST
-<ul>
-  <li># Users: julien, joel, vandita, claire</li>
-  <li># Goals: Goal 1 - julien (joel), Goal 2 - julien(claire), Goal 3 - claire(julien)</li>
-  <li># Connections: joel, claire, vandita</li>
-  <li># Buddy: joel, vandita</li>
-  <li># Buddyof: claire</li>
-  <li># Fans: claire, vandita</li>
-</ul>
-
-<!-- Connection.new(owner: julien, buddy: joel).save
-Connection.new(owner: julien, buddy: vandita).save
-Connection.new(owner: claire, buddy: julien).save
-Connection.new(owner: vandita, buddy: julien).save
-Connection.new(owner: joel, buddy: claire).save
- -->
-
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
@@ -27,14 +10,15 @@ Connection.new(owner: joel, buddy: claire).save
     <a href="#buddyof" data-toggle="tab" role="tab" class="nav-link">Supporting</a>
   </li>
   <li class="nav-item">
-    <a href="#connectionof" data-toggle="tab" role="tab" class="nav-link">Fans</a>
+    <a href="#fans" data-toggle="tab" role="tab" class="nav-link">Fans</a>
   </li>
+</ul>
 
-<div class="tab-content">
+<div class="tab-content" style="text-align:center">
   <div role="tab-panel" class="tab-pane active" id="connections">
     <div class="cards">
       <% @connections.each do |connection| %>
-        <li><%= connection.buddy.firstname %> <%= connection.buddy.lastname %></li>
+        <p><%= connection.buddy.firstname %> <%= connection.buddy.lastname %></p>
       <% end %>
     </div>
   </div>
@@ -42,24 +26,24 @@ Connection.new(owner: joel, buddy: claire).save
   <div role="tab-panel" class="tab-pane" id="buddies">
     <div class="cards">
      <% @buddies.each do |buddy| %>
-        <li><%= buddy.firstname %> <%= buddy.lastname %></li>
+        <p><%= buddy.firstname %> <%= buddy.lastname %></p>
       <% end %>
     </div>
   </div>
 
   <div role="tab-panel" class="tab-pane" id="buddyof">
     <div class="cards">
-
+      <% @buddyofs.each do |buddy| %>
+        <p><%= buddy.firstname %> <%= buddy.lastname %></p>
+      <% end %>
     </div>
   </div>
 
   <div role="tab-panel" class="tab-pane" id="fans">
      <div class="cards">
       <% @fans.each do |fan| %>
-        <li><%= fan.owner.firstname %> <%= fan.owner.lastname %></li>
+        <p><%= fan.owner.firstname %> <%= fan.owner.lastname %></p>
       <% end %>
 
     </div>
   </div>
-
-  <% raise %>

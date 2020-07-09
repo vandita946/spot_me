@@ -6,13 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+GoalConnection.destroy_all
+Connection.destroy_all
 CompletionMessage.destroy_all
 Milestone.destroy_all
-Connection.destroy_all
 Goal.destroy_all
 User.destroy_all
-GoalConnection.destroy_all
 
 
 owner = User.new(firstname: "Goal", lastname: "Owner", email: "owner@spotme.com", password: "123456")
@@ -109,9 +108,9 @@ GoalConnection.new(connection_id: connect_3.id, goal_id: goal_3.id).save #claire
 
 puts "created 3 goal connections"
 
-# Users: julien, joel, vandita, claire
+# Users: julien
 # Goals: Goal 1 - julien (joel), Goal 2 - julien(claire), Goal 3 - claire(julien)
-# Connections: Julien [joel, claire, vandita]
-# Buddy: Julien [joel, vandita]
-# Buddyof: Julien [claire]
-# Fans: (claire, vandita)
+# Connections: joel, claire, vandita
+# Buddy: joel, vandita
+# Buddyof: claire
+# Fans: claire, vandita

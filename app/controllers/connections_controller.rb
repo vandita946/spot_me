@@ -9,16 +9,6 @@ class ConnectionsController < ApplicationController
     @fans = @user.buddy_connections
     @buddies = @user.buddies
     @buddyofs = @user.buddyofs
-    # @user.goals.each do |goal|
-    #   goal.connections.each do |connection|
-    #     @buddies << connection.buddy
-    #   end
-    # end
-    # @followers = @user.buddy_connections
-    # @buddyof
-    # @connectionof
-
-    # filter_by(@connections)
   end
 
   def search

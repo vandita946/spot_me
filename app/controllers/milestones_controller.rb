@@ -8,12 +8,13 @@ class MilestonesController < ApplicationController
     def new
         @goal = Goal.find(params[:goal_id])
         @milestone = Milestone.new
+
     end
 
     def create
         @goal = Goal.find(params[:goal_id])
         @milestone = Milestone.new(milestone_params)
-        @goal.milestone = @milestone
+        @goal.milestones << @milestone
         if @milestone.save
             redirect_to goal_path(@goal), notice: "Milestone successfully created! "
         else
