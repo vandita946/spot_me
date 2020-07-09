@@ -5,13 +5,16 @@
     <h6><%= @user.lastname %></h6>
     <p>Email: <%= @user.email %></p>
     <p>Number of goals: <strong><%= @user.goals.size %></strong></p>
+    <%= link_to edit_user_registration_path(@user) do %>
+        <button type="button" class="btn btn-primary">Edit</button>
+    <% end %>
     <% @user.goals.each do |goal| %>
-    <div class="container">
-        <%= link_to edit_user_registration_path(goal) do %>
-            <%= goal.title %>
-            <%= goal.description %>
-            <%= goal.status %>
-            <%= goal.progress %>
+        <div class="container">
+            <%= link_to edit_user_registration_path(goal) do %>
+                <%= goal.title %>
+                <%= goal.description %>
+                <%= goal.status %>
+                <%= goal.progress %>
             <% end %>
         </div>
     <% end %>
