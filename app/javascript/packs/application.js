@@ -35,7 +35,6 @@ document.addEventListener('turbolinks:load', () => {
   initChatroomCable()
 });
 
-
 // Server-to-client(s) pushes:
 //  Broadcast in a model-specific channel:
 //    ChatroomChannel.broadcast_to(@chatroom, data) in a channel folder for milestones
