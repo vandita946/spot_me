@@ -13,6 +13,7 @@
 
     <li>Description: <%= goal.description %></li>
     <% if goal.status != "Completed" %>
+      
       <li><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</li>
       <li>Progress: <%= goal.progress.round() %>%</li>
     <% end %>
