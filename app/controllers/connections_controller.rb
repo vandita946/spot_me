@@ -9,6 +9,7 @@ class ConnectionsController < ApplicationController
     @fans = @user.buddy_connections
     @buddies = @user.buddies
     @buddyofs = @user.buddyofs
+    @goal_connection = GoalConnection.new
   end
 
   def search
@@ -45,6 +46,7 @@ class ConnectionsController < ApplicationController
   def connection_params
     params.require(:connection).permit(:owner_id, :buddy_id)
   end
+
 end
 
 
