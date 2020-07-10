@@ -1,5 +1,5 @@
 class Chatroom < ApplicationRecord
   belongs_to :topic, polymorphic: true, dependent: :destroy
 
-  has_many :messages
+  has_many :messages, dependent: :destroy
 end
