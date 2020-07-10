@@ -12,9 +12,9 @@ class CompletionMessagesController < ApplicationController
         if @completion_message.save
             @milestone.is_completed = true
             @milestone.save
-            redirect_to goals_path, notice: "Another step closer! "
+            redirect_to request.referrer, notice: "Another step closer! "
         else
-            redirect_to goals_path, notice: "Your milestone couldn't be marked as complete. "
+            redirect_to request.referrer, notice: "Your milestone couldn't be marked as complete. "
 
 
         end

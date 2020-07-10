@@ -3,7 +3,7 @@ class Milestone < ApplicationRecord
   after_save :update_goal_progress
   belongs_to :goal
 
-  has_one :completion_message
+  has_one :completion_message, dependent: :destroy
 
   validates :name, :deadline, :weightage, presence: true
   validates :weightage, inclusion: { in: (1..5) }
