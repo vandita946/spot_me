@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  get 'connections/index'
+  get 'connections/index', as: :connections
   get 'connections/new'
   get 'connections/create'
   get 'connections/:id', to: 'connections#show', as: :connection
@@ -36,5 +36,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy] do
     resources :connections
   end
+
+  resources :goal_connections, only: [:create]
 
 end
