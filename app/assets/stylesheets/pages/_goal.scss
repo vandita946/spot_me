@@ -1,7 +1,31 @@
-
-
 i {
     font-style: normal;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+.fa-check-square {
+    color: $white;
+    font-size: 1.5rem;
+    &:hover:before{
+        content: '\f0c8';
+        color: $pink;
+    }
+}
+
+
+
+.fa-square{
+    color: $white;
+    font-size: 1.5rem;
+
+    &:hover:before{
+        content: '\f14a';
+        color: $pink;
+    }
 }
 
 #done {

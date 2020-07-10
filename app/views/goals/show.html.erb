@@ -37,13 +37,20 @@
                                     <div class="card-body">
                                         <h2 class="card-title mb-0"> <%= milestone.name %>
                                         <% if milestone.is_completed %>
-                                          <i id="done" class="fa fa-check" aria-hidden="true"></i>
+                                          <%= form_for milestone, remote: true do |f| %>
+                                            <%= f.hidden_field :is_completed, value: false %>
+                                            <button class="btn" type="submit">
+                                              <i class="far fa-check-square"></i>
+                                            </button>
+                                          <% end %>
+                                          
                                           <h6><%= milestone.completion_message.content %></h6>
+                                        <% else %>
+                                        <button class="btn" id="milestone-add" data-toggle="modal" data-target="#completion-<%=milestone.id%>" >
+                                          <i class="far fa-square"></i>
+                                          </button>
                                         <% end %>
                                         </h2>
-                                         <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
-                                        <i class="far fa-edit"></i>
-                                        </a>
                                         <p class='card-subtitle'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
                                               <div class="stars">
                                               <% milestone.weightage.times do %>
@@ -54,11 +61,9 @@
                                                 <% end %>
                                               </div>
                                        
-                                        <% if !milestone.is_completed %>
-                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completion-<%=milestone.id%>" data-whatever="@mdo">Mark as complete</button>
-                                        
-                                        <% end %>
-                                        
+                                        <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
+                                        <i class="far fa-edit"></i>
+                                        </a>
                                     </div>
                           </div>
                       <% end %>
@@ -67,10 +72,10 @@
           </div>
 
     </div>
+  <%= render partial: "shared/new_milestone", locals: {goal: @goal, milestone: Milestone.new} %>
 
 <div class="container d-flex justify-content-center mt-3">
-  <%= render partial: "shared/new_milestone", locals: {goal: @goal, milestone: Milestone.new} %>
-  <a id="milestone-add" href="blank" data-toggle="modal" data-target="#milestone-add" >
+  <a id="milestone-add" href="blank" data-toggle="modal" data-target="#new-milestone" >
     <i id="add-milestone" class="fas fa-plus justify-content-center"></i>
   </a>
 </div>
