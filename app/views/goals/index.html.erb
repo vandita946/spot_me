@@ -16,7 +16,6 @@
       <li><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</li>
      <% else%>
       <li>Ended <%= (Date.today - goal.deadline).to_i %> days ago</li>
-
     <% end %>
 
     <li>Progress: <%= goal.progress.round() %>%</li>

@@ -1,15 +1,8 @@
 class Goal < ApplicationRecord
- # before_create do
- #    self.day ||= Date.today unless self.day
- #  end
-
-  ICONS = {"&#xf270;" => "suitcase",'heart' => "<i class='fa fa-heart'></i>", 'trophy' => "<i class='fa fa-trophy'></i>"}
-
 
   belongs_to :user
   has_one :chatroom, as: :topic
   #has_one :goal_connection, as: :goal
-
   has_many :milestones
   has_many :goal_connections
   has_many :connections, through: :goal_connections
