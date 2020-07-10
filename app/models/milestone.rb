@@ -21,7 +21,11 @@ class Milestone < ApplicationRecord
     end
     progress = completed.fdiv(total) * 100
     self.goal.progress = progress
-    self.goal.status = "Completed" if progress == 100.0
+    if progress == 100.0
+      self.goal.status = "Completed"
+    elsif progress < 100.0
+      self.goal.status = "In Progress"
+    end
     self.goal.save
   end
 end
