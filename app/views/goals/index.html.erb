@@ -1,49 +1,47 @@
 <div class="container">
-
-<h1>Here are all your goals, <%= current_user.firstname %></h1>
+  <h1>Here are all your goals, <%= current_user.firstname %></h1>
   <% if @goals.empty? %>
-  <p>No goals yet!</p>
+    <p>No goals yet!</p>
     <%= link_to "Let's get goaling!", new_goal_path, class: "btn btn-primary mb-5" %>
   <% else %>
-  <% @goals.each do |goal| %>
-  <ul>
-    <li><i class="fa fa-<%= goal.icon %>"></i> Title: <%= goal.title %></li>
-
-   <!-- if no buddy => no buddy yet otherwise print buddy's name -->
-
-    <li>Description: <%= goal.description %></li>
-    <% if goal.status != "Past" %>
-      <li><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</li>
-     <% else%>
-      <li>Ended <%= (Date.today - goal.deadline).to_i %> days ago</li>
-    <% end %>
-
-    <li>Progress: <%= goal.progress.round() %>%</li>
-    <li>Status: <%= goal.status %></li>
-    <% if goal.status == "In Progress" || goal.status == "Not Started" %>
-      <% if goal.get_latest %>
-        <% milestone = goal.get_latest %>
-        <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
-        <li>Upcoming milestone: <%= milestone.name %> by <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></li>
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completion-<%=milestone.id%>" data-whatever="@mdo">Mark as complete</button>
+    <% @goals.each do |goal| %>
+      <div class="card" style="width: 30rem;">
+        <%= link_to goal_path(goal) do%>
+        <div class="card-body">
+          <h4 class="card-title mb-2"> <%= goal.title %></h4>
+          <i class="fa fa-<%= goal.icon %> mb-3"></i>
+          <h6 class='card-subtitle mb-2'> <%= goal.description%></h4>
+          <% if goal.status != "Past" %>
+            <p class="card-subtitle"><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</p>
+          <% else%>
+            <p class="card-subtitle">Ended <%= (Date.today - goal.deadline).to_i %> day(s) ago</p>
+          <% end %>
+          <div class="progress mt-2">
+            <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=goal.progress%>%"></div>
+          </div>
+          <p class="card-subtitle mt-2"><%= goal.status %></p>
+          <% if goal.status == "In Progress" || goal.status == "Not Started" %>
+            <% if goal.get_latest %>
+              <div class="card-subtitle mt-2" style="background-color: $white; border: solid 2px; border-radius:2px;">
+                <% milestone = goal.get_latest %>
+                <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
+                Upcoming: <%= milestone.name %> by <%= milestone.deadline.strftime("%A, %-d/%-m/%y")%>
+                <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>"><i class="far fa-square"></i></button>   
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
       <% end %>
     <% end %>
-  </ul>
-  <%= link_to "View my goal", goal_path(goal), class: "btn btn-primary mb-5"%>
-
-  <%= link_to "Delete", {:controller => :goals,
-      :action => 'destroy', :id => goal.id }, :method => :delete,
-      data: { confirm: "Are you sure?" }, class: "btn btn-danger mb-5" %>
-
   <% end %>
 
-</br>
+    
+    
+    
+    <!-- if no buddy => no buddy yet otherwise print buddy's name -->
 
-    <%= link_to "Add a goal", new_goal_path, class: "btn btn-primary mb-5" %>
 
-<% end %>
-
-
+      <%= link_to "Add a goal", new_goal_path, class: "btn btn-success mb-5" %>
 
 </div>

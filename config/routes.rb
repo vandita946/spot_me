@@ -13,8 +13,7 @@ Rails.application.routes.draw do
   get 'connections/destroy'
   devise_for :users
 
-  root to: 'pages#home'
-
+  root to: 'goals#index'
   # resources :users, only: [:show, :edit, :update, :destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   resources :goals do
     resources :milestones
   end
+
 
   resources :milestones do
     resources :completion_messages

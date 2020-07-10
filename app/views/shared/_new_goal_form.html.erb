@@ -4,10 +4,19 @@
   <%= f.input :title, label: 'Name the goal, make it big!', error: 'Name is mandatory, please specify one' %>
   <%= f.input :description, label: 'Describe what you want to achieve', hint: '250 char. max' %>
 
-<fieldset >
+<%# <fieldset >
   <input type="radio" name="goal[icon]" value="heart" ><label><i class="fa fa-heart"></i></label>
   <input type="radio" name="goal[icon]" value="suitcase" ><label><i class="fa fa-suitcase"></i></label>
-</fieldset>
+</fieldset> %>
+
+<label for="goal_icon">Pick an icon!</label>
+  <fieldset>
+    <input type="radio" class="radio_item" id="heart" name="goal[icon]" value="heart" ><label class="label_item" for="heart"><i class="fa fa-heart"></i></label>
+    <input type="radio" class="radio_item" id="trophy" name="goal[icon]" value="trophy" ><label class="label_item" for="trophy"><i class="fas fa-trophy"></i></label>
+    <input type="radio" class="radio_item" id="star" name="goal[icon]" value="star" ><label class="label_item" for="star"><i class="fas fa-star"></i></label>
+    <input type="radio" class="radio_item" id="suitcase" name="goal[icon]" value="suitcase" ><label class="label_item" for="suitcase"><i class="fas fa-suitcase"></i></label>
+    <input type="radio" class="radio_item" id="book" name="goal[icon]" value="book" ><label class="label_item" for="book"><i class="fas fa-book"></i></label>
+  </fieldset>
 
   <%= f.input :start_date, as: :date, input_html: { value: Date.today } %>
   <%= f.input :deadline, as: :date %>
