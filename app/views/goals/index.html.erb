@@ -12,10 +12,14 @@
    <!-- if no buddy => no buddy yet otherwise print buddy's name -->
 
     <li>Description: <%= goal.description %></li>
-    <% if goal.status != "Completed" %>
+    <% if goal.status != "Past" %>
       <li><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</li>
-      <li>Progress: <%= goal.progress.round() %>%</li>
+     <% else%>
+      <li>Ended <%= (Date.today - goal.deadline).to_i %> days ago</li>
+
     <% end %>
+
+    <li>Progress: <%= goal.progress.round() %>%</li>
     <li>Status: <%= goal.status %></li>
     <% if goal.status == "In Progress" || goal.status == "Not Started" %>
       <% if goal.get_latest %>

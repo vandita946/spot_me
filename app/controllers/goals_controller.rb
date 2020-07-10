@@ -4,6 +4,12 @@ class GoalsController < ApplicationController
   def index
     @user = current_user
     @goals = @user.goals.sort_by(&:deadline)
+
+    @goals.each do |goal|
+      if goal.deadline <= Date.today
+        goal.status = "Past"
+      end
+    end
     @completion_message = CompletionMessage.new
   end
 
@@ -14,27 +20,33 @@ class GoalsController < ApplicationController
   end
 
   def create
+    raise
     @goal = Goal.new(goal_params)
     @goal.user = current_user
     @chatroom = Chatroom.new(topic: @goal)
 
-    if @goal.start_date >= Date.today
 
+    if @goal.start_date >= Date.today
       @goal.status = "Not started"
     else
       @goal.status = "In Progress"
     end
 
     if @goal.save && @chatroom.save
+      # && (@goal.deadline >= Date.today)
+
       redirect_to goals_path, notice: "Your goal has been added"
     else
       render "new", alert: "Your goal is missing something "
     end
-
   end
 
   def show
     @goal = Goal.find(params[:id])
+    if @goal.deadline <= Date.today
+      @goal.status = "Past"
+    end
+
     @milestones = @goal.milestones.sort_by(&:deadline)
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
