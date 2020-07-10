@@ -7,7 +7,7 @@
   <% else %>
   <% @goals.each do |goal| %>
   <ul>
-    <li><%=raw goal.icon %> Title: <%= goal.title %></li>
+    <li><i class="fa fa-<%= goal.icon %>"></i> Title: <%= goal.title %></li>
 
    <!-- if no buddy => no buddy yet otherwise print buddy's name -->
 

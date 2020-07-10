@@ -3,7 +3,7 @@ class Goal < ApplicationRecord
  #    self.day ||= Date.today unless self.day
  #  end
 
-  ICONS = {"suitcase" => "<i class='fa fa-suitcase'></i>",'heart' => "<i class='fa fa-heart'></i>", 'trophy' => "<i class='fa fa-trophy'></i>"}
+  ICONS = {"&#xf270;" => "suitcase",'heart' => "<i class='fa fa-heart'></i>", 'trophy' => "<i class='fa fa-trophy'></i>"}
 
 
   belongs_to :user
@@ -17,9 +17,6 @@ class Goal < ApplicationRecord
   validates :title, :description, :start_date, :deadline, :icon, presence: true
 
   # validates :status, inclusion: { in: ["Not Started", "In Progress", "Completed", "Archived"] }
-
-  validates :icon, inclusion: { in: ["<i class='fa fa-suitcase'></i>", "<i class='fa fa-heart'></i>", "<i class='fa fa-trophy'></i>"] }
-
   # before_save :ensure_one_goal_connection
 
   def get_latest
