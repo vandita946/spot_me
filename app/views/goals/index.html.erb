@@ -26,7 +26,7 @@
         <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
         <li>Upcoming milestone: <%= milestone.name %> by <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></li>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completion" data-whatever="@mdo">Mark as complete</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completion-<%=milestone.id%>" data-whatever="@mdo">Mark as complete</button>
       <% end %>
     <% end %>
   </ul>
