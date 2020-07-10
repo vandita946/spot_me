@@ -1,52 +1,16 @@
+
 <div class="container">
 <%= simple_form_for @goal do |f| %>
   <%= f.input :title, label: 'Give it a name', error: 'Name is mandatory, please specify one' %>
   <%= f.input :description, label: 'Describe what you want to achieve', hint: '250 char. max' %>
 
-  <!-- <label for="icons">Choose an icon:</label>
-<select name="goal[icon]" id="icons" form="iconform" style="font-family: 'Font Awesome 5 Free';">
-  <option value="trophee"><i class="fas fa-trophy"></i>
-</option>
-  <option value="saab"><i class="fa fa-suitcase"></i></option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select> -->
-  <%#= f.input :icon, :label => "ICONS", :collection => Goal::ICONS %>
-  <div class="dropdown">
-    <input name="goal[icon]" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i><i class="fa fa-trophy"></i>
-        <i class="fa fa-bri-ball">
-    </input>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <span class="dropdown-item" data-value="icon-1">
-          <i class="fa fa-suitcase"></i></span>
+<fieldset >
+  <input type="radio" name="goal[icon]" value="heart" ><label><i class="fa fa-heart"></i></label>
+  <input type="radio" name="goal[icon]" value="suitcase" ><label><i class="fa fa-suitcase"></i></label>
+</fieldset>
 
-        <span class="dropdown-item" data-value="icon-2">
-          <i class="fa fa-heart"></i></span>
-
-        <span class="dropdown-item" data-value="icon-2">
-          <i class="fa fa-dollar-sign"></i></span>
-
-        <span class="dropdown-item" data-value="icon-3">
-          <i class="fa fa-map-marked-alt"></i></span>
-
-        <span class="dropdown-item" data-value="icon-4">
-          <i class="fa fa-carrot"></i></span>
-
-        <span class="dropdown-item" data-value="icon-4">
-          <i class="fa fa-dumbbell"></i></span>
-
-        <span class="dropdown-item" data-value="icon-5">
-          <i class="fa fa-award"></i></span>
-
-        <span class="dropdown-item" data-value="icon-5">
-          <i class="fa fa-book-open"></i></span>
-     </div>
-  </div>
-
-
-  <%= f.input :start_date, as: :date, html5: true %>
-  <%= f.input :deadline, as: :date, html5: true %>
+  <%= f.input :start_date, as: :date, input_html: { value: Date.today } %>
+  <%= f.input :deadline, as: :date %>
 
   <%= f.hidden_field :progress, value: 0.0 %>
   <!-- get the ids & info of existing buddy connections -->

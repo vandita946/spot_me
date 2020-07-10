@@ -20,7 +20,7 @@ class GoalsController < ApplicationController
   end
 
   def create
-    raise
+
     @goal = Goal.new(goal_params)
     @goal.user = current_user
     @chatroom = Chatroom.new(topic: @goal)
