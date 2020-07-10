@@ -38,6 +38,7 @@ class GoalsController < ApplicationController
     @milestones = @goal.milestones.sort_by(&:deadline)
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
+    @completion_message = CompletionMessage.new
     # authorize @goal
   end
 
