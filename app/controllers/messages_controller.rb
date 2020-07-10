@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
             elsif @chatroom.topic.class == Connection
                 redirect_to connection_path(@chatroom.topic, anchor: "message-#{@message.id}")
             else
-                redirect_to chatroom_path(@chatroom.topic, anchor: "message-#{@message.id}")
+                redirect_to chatroom_path(@chatroom, anchor: "message-#{@message.id}")
             end
             # redirect_to URI(request.referrer).path(anchor: "message-#{@message.id}"), notice: "works"
         else
