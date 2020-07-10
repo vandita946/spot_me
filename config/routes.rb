@@ -32,4 +32,6 @@ Rails.application.routes.draw do
     resources :connections
   end
 
+  resources :goal_connections, only: [:create]
+
 end

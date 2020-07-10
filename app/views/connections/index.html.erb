@@ -18,7 +18,21 @@
   <div role="tab-panel" class="tab-pane active" id="connections">
     <div class="cards">
       <% @connections.each do |connection| %>
-        <p><%= connection.buddy.firstname %> <%= connection.buddy.lastname %></p>
+        <p><%= connection.buddy.firstname %> <%= connection.buddy.lastname %> </p>
+        <%= simple_form_for(@goal_connection, url: goal_connections_path) do |f| %>
+        <%= f.input :goal, collection: current_user.goals %>
+        <%= f.input :connection, { value: connection.id, as: :hidden } %>
+        <%= f.submit "add as a buddy" %>
+        <% end %>
+ <!-- if @goals.empty?
+   "No goals yet...!"
+   link_to "Let's get goaling!", new_goal_path
+   else
+   @goals.each do |goal|
+    Title: goal.title
+  end
+ -->
+
       <% end %>
     </div>
   </div>
