@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  get 'connections/index'
+  get 'connections/index', as: :connections
   get 'connections/new'
   get 'connections/create'
   get 'connections/:id', to: 'connections#show', as: :connection
