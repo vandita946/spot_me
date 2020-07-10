@@ -35,6 +35,7 @@
     <div class="cards">
       <% @buddyofs.each do |buddy| %>
         <p><%= buddy.firstname %> <%= buddy.lastname %></p>
+         <p>GOALS:<%= buddy.goal_ids %></p>
       <% end %>
     </div>
   </div>
@@ -47,3 +48,4 @@
 
     </div>
   </div>
+

@@ -30,14 +30,10 @@ class ConnectionsController < ApplicationController
   end
 
   def show
-    # there won't be a connection show view, clicking on a buddy's profile will lead to user view
-
-    # INCLUDE WHEN YOUR MVC IS READY. CHEERS. -JOEL
-    ###########################################
+    # should show the chatroom for this connection
     @connection = Connection.find(params[:id])
     @chatroom = Chatroom.where(topic: @connection)[0]
     @message = Message.new
-    ###########################################
   end
 
   def destroy
