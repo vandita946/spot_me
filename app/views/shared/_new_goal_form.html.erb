@@ -1,0 +1,57 @@
+<div class="container">
+<%= simple_form_for @goal do |f| %>
+  <%= f.input :title, label: 'Give it a name', error: 'Name is mandatory, please specify one' %>
+  <%= f.input :description, label: 'Describe what you want to achieve', hint: '250 char. max' %>
+
+  <!-- <label for="icons">Choose an icon:</label>
+<select name="goal[icon]" id="icons" form="iconform" style="font-family: 'Font Awesome 5 Free';">
+  <option value="trophee"><i class="fas fa-trophy"></i>
+</option>
+  <option value="saab"><i class="fa fa-suitcase"></i></option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select> -->
+ <%= f.input :icon, :label => "ICONS", :collection => Goal::ICONS %>
+  <!-- <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bri-ball"></i>
+    </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#" data-value="icon-1">
+          <i class="fa fa-suitcase"></i></a>
+
+        <a class="dropdown-item" href="#" data-value="icon-2">
+          <i class="fa fa-heart"></i></a>
+
+        <a class="dropdown-item" href="#" data-value="icon-2">
+          <i class="fa fa-dollar-sign"></i></a>
+
+        <a class="dropdown-item" href="#" data-value="icon-3">
+          <i class="fa fa-map-marked-alt"></i></a>
+
+        <a class="dropdown-item" href="#" data-value="icon-4">
+          <i class="fa fa-carrot"></i></a>
+
+        <a class="dropdown-item" href="#" data-value="icon-4">
+          <i class="fa fa-dumbbell"></i></a>
+
+        <a class="dropdown-item" href="#" data-value="icon-5">
+          <i class="fa fa-award"></i></a>
+
+        <a class="dropdown-item" href="#" data-value="icon-5">
+          <i class="fa fa-book-open"></i></a>
+     </div>
+  </div>
+ -->
+
+  <%= f.input :start_date, as: :date, html5: true %>
+  <%= f.input :deadline, as: :date, html5: true %>
+
+  <%= f.hidden_field :progress, value: 0.0 %>
+  <!-- get the ids & info of existing buddy connections -->
+  <!-- data of our buddy : current_user.connections.first.id / name -->
+  <!-- current_user.connections.first is a user / name -->
+  <%= f.button :submit %>
+ <% end %>
+</div>

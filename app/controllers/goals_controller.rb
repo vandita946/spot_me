@@ -18,13 +18,15 @@ class GoalsController < ApplicationController
     @goal.user = current_user
     @chatroom = Chatroom.new(topic: @goal)
 
-    if @goal.start_date > Date.today
-      @goas.status = "Not started"
-    else @goal.status = "In Progress"
+    if @goal.start_date >= Date.today
+
+      @goal.status = "Not started"
+    else
+      @goal.status = "In Progress"
     end
 
     if @goal.save && @chatroom.save
-    redirect_to goals_path, notice: "Your goal has been added"
+      redirect_to goals_path, notice: "Your goal has been added"
     else
       render "new", alert: "Your goal is missing something "
     end
@@ -60,6 +62,16 @@ class GoalsController < ApplicationController
   end
 
   private
+
+  # def icon_for(goal)
+  #   @icon = goal.icon
+  #   if @icon.empty?
+  #       @icon_goal = image_tag("", alt: goal.name)
+  #   else
+  #       @icon_goal = image_tag(@icon.url, alt: goal.name)
+  #   end
+  #   return @icon_goal
+  # end
 
   def goal_params
     params.require(:goal).permit(:icon, :title, :description, :deadline, :progress, :status, :start_date, :logo)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_035520) do
+ActiveRecord::Schema.define(version: 2020_07_10_040217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_035520) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "start_date", default: "2020-07-09"
+    t.string "icon", default: "<i class='fa fa-trophy'></i>"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
