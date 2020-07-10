@@ -35,7 +35,8 @@
                         <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
                         <div class="card" style="width: 30rem;">
                                     <div class="card-body">
-                                        <h2 class="card-title mb-0"> <%= milestone.name %>
+                                        <h2 class="card-title mb-0"> <%= milestone.name %>                                        </h2>
+
                                         <% if milestone.is_completed %>
                                           <%= form_for milestone, remote: true do |f| %>
                                             <%= f.hidden_field :is_completed, value: false %>
@@ -44,13 +45,12 @@
                                             </button>
                                           <% end %>
                                           
-                                          <h6><%= milestone.completion_message.content %></h6>
+                                          <h6 id="completion-bubble"><%= milestone.completion_message.content %></h6>
                                         <% else %>
                                         <button class="btn" id="milestone-add" data-toggle="modal" data-target="#completion-<%=milestone.id%>" >
                                           <i class="far fa-square"></i>
                                           </button>
                                         <% end %>
-                                        </h2>
                                         <p class='card-subtitle'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
                                               <div class="stars">
                                               <% milestone.weightage.times do %>
@@ -98,8 +98,8 @@
   <% end %>
 </div>
 <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
-  <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.id}" %>
-  <%= f.button :submit, class: "btn btn-primary" %>
+  <%= f.input :content, label: false, placeholder: "What's on your mind?" %>
+  <%= f.button :submit, "Send message", class: "btn btn-primary" %>
 <% end %>
 
 </div>
