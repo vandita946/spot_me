@@ -38,7 +38,7 @@ claire.save
 
 puts "created 4 named users"
 
-goal_1 = Goal.new(title: "Write a book", description: "I want to finally write the novel idea I've had for years!", deadline: Date.today + 100, user_id: julien.id, status: "In Progress")
+goal_1 = Goal.new(title: "Write a book", description: "I want to finally write the novel idea I've had for years!", deadline: Date.today + 100, user_id: julien.id, status: "In Progress", start_date: Date.today)
 goal_1.save
 puts "#{julien.firstname} #{julien.lastname} is going to #{goal_1.title}"
 
@@ -114,6 +114,7 @@ Chatroom.create(topic: connect_5)
 Chatroom.create(topic: connect_6)
 
 puts "created chatroom for connection"
+
 
 # END
 
