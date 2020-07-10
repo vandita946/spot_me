@@ -10,7 +10,7 @@
     <% end %>
     <% @user.goals.each do |goal| %>
         <div class="container">
-            <%= link_to edit_user_registration_path(goal) do %>
+            <%= link_to goal_path(goal) do %>
                 <%= goal.title %>
                 <%= goal.description %>
                 <%= goal.status %>
