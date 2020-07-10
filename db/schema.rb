@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_040217) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "start_date", default: "2020-07-09"
+    t.date "start_date", default: "2020-07-08"
     t.string "icon", default: "<i class='fa fa-trophy'></i>"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end

@@ -8,7 +8,6 @@ class MilestonesController < ApplicationController
     def new
         @goal = Goal.find(params[:goal_id])
         @milestone = Milestone.new
-
     end
 
     def create

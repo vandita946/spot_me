@@ -19,6 +19,7 @@ class CompletionMessagesController < ApplicationController
 
         end
     end
+    
 
     private
 
