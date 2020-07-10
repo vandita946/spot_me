@@ -3,7 +3,7 @@ class Goal < ApplicationRecord
   belongs_to :user
   has_one :chatroom, as: :topic
   # has_one :goal_connection, as: :goal
-  has_many :milestones
+  has_many :milestones, dependent: :destroy
   has_many :goal_connections
   has_many :connections, through: :goal_connections
   validates :user, presence: true

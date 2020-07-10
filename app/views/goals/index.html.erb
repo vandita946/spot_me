@@ -2,8 +2,8 @@
 
 <h1>Here are all your goals, <%= current_user.firstname %></h1>
   <% if @goals.empty? %>
-  <%= "No goals yet...!" %>
-  <%= link_to "Let's get goaling!", new_goal_path %>
+  <p>No goals yet!</p>
+    <%= link_to "Let's get goaling!", new_goal_path, class: "btn btn-primary mb-5" %>
   <% else %>
   <% @goals.each do |goal| %>
   <ul>
