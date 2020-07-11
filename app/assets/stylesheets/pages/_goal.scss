@@ -83,7 +83,15 @@ h2{
 }
 
 #goal-edit {
+    i{
+
+  
     font-size: 20px;
+    color: $blue;
+    &:hover{
+        color: $pink;
+    }
+}
 }
 
 #add-milestone {
