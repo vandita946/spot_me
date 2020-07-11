@@ -17,6 +17,7 @@ class GoalsController < ApplicationController
     @goal = Goal.new
     @goal.user = current_user
     @goal_connection = GoalConnection.new
+    @milestone = Milestone.new
   end
 
   def create

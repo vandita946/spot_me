@@ -1,0 +1,51 @@
+
+<div class="container">
+<h3>It's time to finally launch that blog!</h3>
+<%= simple_form_for @goal do |f| %>
+  <%= f.input :title, label: 'Name the goal, make it big!', error: 'Name is mandatory, please specify one', input_html: {value: f.object.title || "Launch my blog"} %>
+  <%= f.input :description, label: 'Describe what you want to achieve', hint: '250 char. max', input_html: {value: f.object.description || "I'm going to finally publish the content ideas I've had for years." } %>
+
+<label for="goal_icon">Pick an icon!</label>
+  <fieldset>
+    <input type="radio" class="radio_item" id="heart" name="goal[icon]" value="heart" ><label class="label_item" for="heart"><i class="fa fa-heart"></i></label>
+    <input type="radio" class="radio_item" id="trophy" name="goal[icon]" value="trophy" ><label class="label_item" for="trophy"><i class="fas fa-trophy"></i></label>
+    <input type="radio" class="radio_item" id="star" name="goal[icon]" value="star" ><label class="label_item" for="star"><i class="fas fa-star"></i></label>
+    <input type="radio" class="radio_item" id="suitcase" name="goal[icon]" value="suitcase" ><label class="label_item" for="suitcase"><i class="fas fa-suitcase"></i></label>
+    <input type="radio" class="radio_item" id="book" name="goal[icon]" value="book" ><label class="label_item" for="book"><i class="fas fa-book"></i></label>
+    <input type="radio" class="radio_item" id="laptop" name="goal[icon]" value="laptop" checked><label class="label_item" for="laptop"><i class="fas fa-laptop-code"></i></label>
+  </fieldset>
+  <br>
+    Start date: <%= f.date_field :start_date, value: Date.today || f.object.start_date %>
+    <br><br>
+    Deadline: <%= f.date_field :deadline, value: Date.today + 365 || f.object.deadline %>
+  <%= f.hidden_field :progress, value: 0.0 %>
+  <!-- get the ids & info of existing buddy connections -->
+  <!-- data of our buddy : current_user.connections.first.id / name -->
+  <!-- current_user.connections.first is a user / name -->
+  <br><br>
+    <h5>Let's add some milestones!</h5>
+  <%= f.simple_fields_for @milestone do |m| %>
+    <%= m.input :name, input_html: {value: m.object.name || 'Think of a blog url and register it!'} %>
+    Deadline: <%= m.date_field :deadline, value: Date.today + 3 || f.object.deadline %>
+          <div class="form-group milestone_weightage form-group-valid">
+            <label for="milestone_weightage">Weightage<abbr title="required">*</abbr></label>
+            <br>
+                        <small>How important is this milestone to you?</small>
+
+            <div class="star-rating">
+              <fieldset>
+                <input type="radio" id="star-1-5" name="@milestone[weightage]" value=5><label for="star-1-5" title="5"></label>
+                <input type="radio" id="star-1-4" name="@milestone[weightage]" value=4  ><label for="star-1-4" title="4"></label>
+                <input type="radio" id="star-1-3" name="@milestone[weightage]" value=3 ><label for="star-1-3" title="3"></label>
+                <input type="radio" id="star-1-2" name="@milestone[weightage]" value=2 ><label for="star-1-2" title="2"></label>
+                <input type="radio" id="star-1-1" name="@milestone[weightage]" value=1 ><label for="star-1-1" title="1"></label>
+              </fieldset>
+            </div>
+          </div>
+  <% end %>
+
+
+
+  <%= f.button :submit, class: "btn btn-primary" %>
+ <% end %>
+</div>
