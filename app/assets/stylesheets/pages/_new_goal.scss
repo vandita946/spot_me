@@ -11,12 +11,28 @@
             opacity: 1;
         }
     }
-    
+
     .radio_item:checked + label {
         color: $pink;
         opacity: 1;
     }
 
 label {
-cursor: pointer;   
+cursor: pointer;
 }
+
+#new_goal_form {
+  display: none;
+}
+
+// #blog_template{
+//   display: none;
+// }
+
+// #milestones{
+//   display:none;
+// }
+
+// #goal_form{
+//   display: block;
+// }

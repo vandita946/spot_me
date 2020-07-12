@@ -1,5 +1,20 @@
 <div class="container">
   <h1>Let's get goaling!</h1>
-  <%# <%= render partial: "shared/blog_goal_template", locals: {goal: @goal, milestone: @milestone} %> 
-  <%= render partial: "shared/new_goal_form"%>
+
+  <h6>Pick from one of our goal templates or design one from scratch</h6>
+
+  <button id="design" class="btn btn-primary">
+    <%= link_to "Design my own","#", id: "design" %>
+  </button>
+
+  <button id="blog" class="btn btn-primary">
+    <%= link_to "Finally launch that blog!","#", id: "blog" %>
+  </button>
+
+  <div id="new_goal_form">
+      <%= render partial: "shared/new_goal_form"%>
+  </div>
+
+<%#  <div id="blog_template">
+    <%= render partial: "shared/blog_goal_template" %>
 </div>

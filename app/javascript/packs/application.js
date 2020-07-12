@@ -34,6 +34,24 @@ document.addEventListener('turbolinks:load', () => {
 
   initChatroomCable();
 });
+$(document).on("click","#design",function(event){
+  $('#new_goal_form').show();
+  $('#blog_template').hide();
+  event.preventDefault();
+});
+
+$(document).on("click","#blog",function(event){
+  $('#blog_template').show();
+  $('#new_goal_form').hide();
+  event.preventDefault();
+});
+
+// $(document).on("click","#create",function(event){
+//   $('#milestones').show();
+//   $('#goal_form').hide();
+// });
+
+
 
 // Server-to-client(s) pushes:
 //  Broadcast in a model-specific channel:
