@@ -1,3 +1,4 @@
+<div id="#completion_message_form">
 <div class="modal fade" id="completion-<%=milestone.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -12,9 +13,10 @@
             <%= f.input :content, input_html: {value: f.object.content || 'I did it!'} %>
             <%= f.submit "Submit", class: "btn btn-primary" %>
         <% end %>
-        
+
       </div>
 
     </div>
   </div>
+</div>
 </div>
