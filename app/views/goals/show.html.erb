@@ -9,7 +9,7 @@
     <h1>
       <%= @goal.title %>
       <br>
-        <a id="goal-edit" href="blank" data-toggle="modal" data-target="#goal-edit" >
+        <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
           <i class="fas fa-edit"></i>
         </a>
     </h1>
@@ -44,7 +44,7 @@
                                               <i class="far fa-check-square"></i>
                                             </button>
                                           <% end %>
-                                          
+
                                           <h6 id="completion-bubble"><%= milestone.completion_message.content %></h6>
                                         <% else %>
                                         <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>" >
@@ -60,7 +60,7 @@
                                                   <i class="far fa-star"></i>
                                                 <% end %>
                                               </div>
-                                       
+
                                         <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
                                         <i class="far fa-edit"></i>
                                         </a>

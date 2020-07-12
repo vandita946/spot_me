@@ -4,10 +4,12 @@ class Goal < ApplicationRecord
   has_one :chatroom, as: :topic
   # has_one :goal_connection, as: :goal
   has_many :milestones, dependent: :destroy
+
   has_many :goal_connections
   has_many :connections, through: :goal_connections
   validates :user, presence: true
   validates :title, :description, :start_date, :deadline, :icon, presence: true
+
 
   # validates :status, inclusion: { in: ["Not Started", "In Progress", "Completed", "Archived"] }
   # before_save :ensure_one_goal_connection
@@ -20,5 +22,10 @@ class Goal < ApplicationRecord
   # def ensure_one_goal_connection
   #   false if self.goal_connections > 1
   # end
-end
 
+  # def blog_template
+  #   blog = Goal.create(title: "Launch my blog", description: "I'm going to finally publish the content ideas I've had for years!", icon: "laptop", start_date: Date.today, deadline: Date.today + 60)
+  #   Chatroom.create(topic: blog)
+  #   return blog
+  # end
+end

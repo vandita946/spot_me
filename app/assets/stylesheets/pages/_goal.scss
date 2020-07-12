@@ -1,3 +1,28 @@
+.icons{
+.radio_item{
+    display: none !important;
+    }
+
+    .label_item {
+        font-size: 20px;
+        margin: 2px;
+    color: $blue;
+    opacity: 0.5;
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    .radio_item:checked + label {
+        color: $pink;
+        opacity: 1;
+    }
+  }
+
+label {
+cursor: pointer;
+}
+
 i {
     font-style: normal;
 }
@@ -82,10 +107,10 @@ h2{
     color: $white;
 }
 
-#goal-edit {
+#edit-icon {
     i{
 
-  
+
     font-size: 20px;
     color: $blue;
     &:hover{
@@ -109,5 +134,5 @@ h2{
     padding: 5px 5px;
     width: inherit;
     border-radius: 2px;
- 
+
 }
