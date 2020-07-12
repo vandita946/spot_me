@@ -20,13 +20,15 @@
             <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=goal.progress%>%"></div>
           </div>
           <p class="card-subtitle mt-2"><%= goal.status %></p>
+            <% end %>
+
           <% if goal.status == "In Progress" || goal.status == "Not Started" %>
             <% if goal.get_latest %>
               <div class="card-subtitle mt-2" style="background-color: $white; border: solid 2px; border-radius:2px;">
                 <% milestone = goal.get_latest %>
                 <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
                 Upcoming: <%= milestone.name %> by <%= milestone.deadline.strftime("%A, %-d/%-m/%y")%>
-                <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>"><i class="far fa-square"></i></button>   
+                <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>"><i class="far fa-square"></i></button>
               </div>
             <% end %>
           <% end %>
@@ -34,11 +36,10 @@
       </div>
       <% end %>
     <% end %>
-  <% end %>
 
-    
-    
-    
+
+
+
     <!-- if no buddy => no buddy yet otherwise print buddy's name -->
 
 
