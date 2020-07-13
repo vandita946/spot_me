@@ -2,10 +2,6 @@
   <%# <%= link_to "Independent Goal", new_goal_path %>
 <%# <% end %>
 
-
- <%= current_user.see_your_goal_buddies(@goal) %>
-
-
 <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
 
 
@@ -29,7 +25,7 @@
   </div>
 
     <div class="container d-flex flex-grow-1 justify-content-center">
-          
+
       <div class="row">
         <div class="col-2">
           <div class="progress progress-bar-vertical">

@@ -33,8 +33,6 @@ class GoalsController < ApplicationController
     end
 
     if @goal.save && @chatroom.save
-      # && (@goal.deadline >= Date.today)
-
       redirect_to new_goal_milestone_path(@goal), notice: "Your goal has been added"
     else
       render "new", alert: "Your goal is missing something "
