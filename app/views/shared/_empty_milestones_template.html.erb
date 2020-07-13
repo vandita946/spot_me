@@ -1,5 +1,9 @@
 <div class="container">
     <% @goal.milestones.each_with_index do |milestone, index| %>
+        
+        <% if index < 3 %>
+            
+        
         <div id="milestone-<%=index%>-form">
         <%= simple_form_for [@goal, milestone], remote: true do |f| %>
             <%= f.input :name %>
@@ -24,9 +28,10 @@
             </button>
         <% end %>
         </div>
-    
+            <% end %>
+
     <% end %>
     <button class="btn btn-success" id="submit-all" type="button">
-        Add milestones
+        Continue
     </button>
 </div>
