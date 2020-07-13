@@ -1,0 +1,24 @@
+.icons{
+    .radio_item{
+        display: none !important;
+        }
+    
+        .label_item {
+            font-size: 20px;
+            margin: 2px;
+        color: $blue;
+        opacity: 0.5;
+            &:hover{
+                opacity: 1;
+            }
+        }
+    
+        .radio_item:checked + label {
+            color: $pink;
+            opacity: 1;
+        }
+      }
+    
+    label {
+    cursor: pointer;
+    }

@@ -8,7 +8,7 @@
   <input type="radio" name="goal[icon]" value="heart" ><label><i class="fa fa-heart"></i></label>
   <input type="radio" name="goal[icon]" value="suitcase" ><label><i class="fa fa-suitcase"></i></label>
 </fieldset> %>
-
+<div class="icons">
 <label for="goal_icon">Pick an icon!</label>
   <fieldset>
     <input type="radio" class="radio_item" id="heart" name="goal[icon]" value="heart" ><label class="label_item" for="heart"><i class="fa fa-heart"></i></label>
@@ -18,7 +18,7 @@
     <input type="radio" class="radio_item" id="book" name="goal[icon]" value="book" ><label class="label_item" for="book"><i class="fas fa-book"></i></label>
     <input type="radio" class="radio_item" id="laptop" name="goal[icon]" value="laptop"><label class="label_item" for="laptop"><i class="fas fa-laptop-code"></i></label>
   </fieldset>
-
+</div>
   <%= f.input :start_date, as: :date, input_html: { value: Date.today }, html5: true %>
   <%= f.input :deadline, as: :date, input_html: { value: Date.today + 60 }, html5: true %>
 
