@@ -113,3 +113,55 @@
 <% end %>
 
 </div>
+
+
+<!-- Development use only: Button trigger modal -->
+<%# <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> %>
+
+<% if @user.nil? %>
+
+  <!-- Modal -->
+  <div class="modal fade notauser" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <h5 class="modal-title" id="staticBackdropLabel">Register as a user to view the goal</h5>
+          <%# <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> %>
+        </div>
+        <div class="modal-body">
+          To view the goal, please register or login as a user. <br> <br>
+          To be a buddy, please register or login as a user. <br> <br>
+          User, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, joel, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <%= link_to :back do %>
+            <button type="button" class="btn btn-link">Go back</button>
+          <% end %>
+          <%# <%= link_to "< Go Back", :back %>
+
+          <%= link_to new_user_session_path do %>
+            <button type="button" class="btn btn-secondary mx-3">Sign In</button>
+          <% end %>
+
+          <%= link_to new_user_registration_path(goal: @goal) do %>
+            <button type="button" class="btn btn-primary">Register</button>
+          <% end %>
+
+          <%# <button type="button" class="btn btn-secondary" data-dismiss="modal">Home</button> %>
+          <%# <button type="button" class="btn btn-primary">Understood</button> %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

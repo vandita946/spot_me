@@ -26,6 +26,12 @@
             <%= f.input :password_confirmation,
                         required: true,
                         input_html: { autocomplete: "new-password" } %>
+            <%# used to import %>
+            <% if params[:goal] %>
+            <%= f.input :goal, as: :hidden, input_html: { value: params[:goal] } %>
+            <% elsif params[:contact] %>
+            <%= f.input :contact, as: :hidden, input_html: { value: params[:contact] } %>
+            <% end %>
           </div>
 
           <div class="form-actions">
