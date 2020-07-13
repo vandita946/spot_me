@@ -3,7 +3,7 @@
 
   <h6>Pick from one of our goal templates or design one from scratch</h6>
 
-  <button id="new_goal" class="btn btn-primary">
+  <button id="design" class="btn btn-primary">
     <%= link_to "Design my own","#", id: "design" %>
   </button>
 
@@ -23,8 +23,8 @@
     <%= link_to "Run a marathon","#", id: "marathon" %>
   </button>
 
-  <div id="new_goal_template">
-      <%= render partial: "shared/new_goal_template"%>
+  <div id="new_goal_form">
+      <%= render partial: "shared/new_goal_form"%>
   </div>
 
   <div id="blog_template">
