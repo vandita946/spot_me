@@ -1,0 +1,25 @@
+<div class="container">
+<%= simple_form_for (@goal) do |f| %>
+          <%= f.input :title, input_html: { value: template[:goal][:title] } %>
+          <%= f.input :description, input_html: { value: template[:goal][:description] } %>
+          <div class="icons">
+          <label for="goal_icon">Icon:</label>
+          <fieldset>
+            <input type="radio" class="radio_item" id="heart" name="goal[icon]" value="heart" <%= "checked" if template[:goal][:icon] == "heart" %>><label class="label_item" for="heart"><i class="fa fa-heart"></i></label>
+            <input type="radio" class="radio_item" id="trophy" name="goal[icon]" value="trophy" <%= "checked" if template[:goal][:icon] == "trophy" %> ><label class="label_item" for="trophy"><i class="fas fa-trophy"></i></label>
+            <input type="radio" class="radio_item" id="star" name="goal[icon]" value="star" <%= "checked" if template[:goal][:icon] == "star" %> ><label class="label_item" for="star"><i class="fas fa-star"></i></label>
+            <input type="radio" class="radio_item" id="suitcase" name="goal[icon]" value="suitcase" <%= "checked" if template[:goal][:icon] == "suitcase" %> ><label class="label_item" for="suitcase"><i class="fas fa-suitcase"></i></label>
+            <input type="radio" class="radio_item" id="book" name="goal[icon]" value="book" <%= "checked" if template[:goal][:icon] == "book" %>><label class="label_item" for="book"><i class="fas fa-book"></i></label>
+            <input type="radio" class="radio_item" id="laptop" name="goal[icon]" value="laptop" <%= "checked" if template[:goal][:icon] == "laptop" %>><label class="label_item" for="laptop"><i class="fas fa-laptop-code"></i></label>
+          </fieldset>
+        </div>
+          <%= f.input :start_date, as: :date, input_html: { value: template[:goal][:start_date] }, html5: true %>
+          <%= f.input :deadline,  as: :date, input_html: { value: template[:goal][:deadline] }, html5: true %>
+    <%= f.button :submit, "Let's add some milestones!", id: "create", class: "btn btn-primary" %>
+  <% end %>
+
+  <!-- get the ids & info of existing buddy connections -->
+  <!-- data of our buddy : current_user.connections.first.id / name -->
+  <!-- current_user.connections.first is a user / name -->
+
+</div>
