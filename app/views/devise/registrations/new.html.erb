@@ -10,6 +10,11 @@
           <%= f.error_notification %>
 
           <div class="form-inputs">
+
+           <%= image_tag "default_profile.jpg", class: "avatar-large" %>
+           <%= f.file_field :avatar %>
+
+
             <%= f.input :email,
                         required: true,
                         autofocus: true,

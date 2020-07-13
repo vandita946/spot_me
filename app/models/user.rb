@@ -9,8 +9,18 @@ class User < ApplicationRecord
   has_many :messages
   has_many :connections, through: :owner_connections, source: :buddy
   has_many :fans, through: :buddy_connections, source: :owner
+  has_one_attached :avatar
+  after_commit :add_default_avatar, on: [:create, :update]
   # has_many :goal_connections, through: :goals, source: :goal
   # has_many :buddies, through: :goals_connection, source: :buddy
+
+  def avatar_thumbnail
+    if avatar.attached?
+      avatar.variant(resize: "150x150!").processed
+    else
+      "/default_profile.jpg"
+    end
+  end
 
   def buddies
     buddies = []
@@ -31,4 +41,21 @@ class User < ApplicationRecord
     end
   buddyofs
   end
+
+  private
+
+  def add_default_avatar
+    unless avatar.attached?
+      avatar.attach(
+        io: File.open(
+          Rails.root.join(
+            'app', 'assets', 'images', 'default_profile.jpg'
+          )
+        ),
+        filename: 'default_profile.jpg',
+        content_type: 'images.jpg',
+      )
+    end
+  end
+
 end
