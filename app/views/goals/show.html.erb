@@ -1,7 +1,13 @@
 <%# <% if policy(Goal).show? %>
   <%# <%= link_to "Independent Goal", new_goal_path %>
 <%# <% end %>
+
+
+ <%= current_user.see_your_goal_buddies(@goal) %>
+
+
 <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
+
 
 <div class="container justify-content-center">
   <div class="goal-head">
