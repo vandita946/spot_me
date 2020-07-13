@@ -7,7 +7,9 @@ class MilestonesController < ApplicationController
 
     def new
         @goal = Goal.find(params[:goal_id])
-        @milestone = Milestone.new
+        3.times do
+            @goal.milestones.build
+        end
     end
 
     def create
