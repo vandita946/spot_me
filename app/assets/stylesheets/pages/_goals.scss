@@ -12,10 +12,12 @@
     background-color: $green !important;
 }
 
-a {
+.card-body {
+    a {
     color: $white;
     &:hover{
         text-decoration: none;
         color: $white;
+    }
     }
 }

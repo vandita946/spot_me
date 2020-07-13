@@ -5,6 +5,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  # To prevent recreating the same email account / override
+  validates :email, presence: true, uniqueness: true
+  
   has_many :owner_connections, :class_name => 'Connection', :foreign_key => 'owner_id'
   has_many :buddy_connections, :class_name => 'Connection', :foreign_key => 'buddy_id'
   has_many :goals, dependent: :destroy
@@ -12,10 +16,11 @@ class User < ApplicationRecord
   has_many :connections, through: :owner_connections, source: :buddy
   # has_many :connections, through: :buddy_connections, source: :owner
   has_many :fans, through: :buddy_connections, source: :owner
-
   # has_many :goal_connections, through: :connections, source: :goal
   # has_many :buddies, through: :goals_connection, source: :buddy
 
+
+  # Used for creating connections when visitor registers from links provided
   after_save :generate_connection
 
   def generate_connection
@@ -28,6 +33,8 @@ class User < ApplicationRecord
       connection.save!
     end
   end
+
+
 
   has_one_attached :avatar
   after_commit :add_default_avatar, on: [:create, :update]
@@ -97,4 +104,3 @@ class User < ApplicationRecord
   end
 
 end
-
