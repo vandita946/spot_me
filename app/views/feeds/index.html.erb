@@ -5,14 +5,15 @@
 <!-- display last checked milestone -->
 <!-- YOU -->
 <!-- upcoming deadline -->
-<% current_user.buddyofs.each do |hash| %>
+<% current_user.fullinfo_buddyofs.each do |hash| %>
 <p>You've officially started to Spot
   <%= hash[:owner].firstname %> 's goal called
-  "<%= hash[:goal].title %>". This achievment will be yours too, congrats and good luck !
+  "<%= hash[:goal].title %>" since <%= hash[:goal].created_at %>
+  This achievment will be yours too, congrats and good luck !
   <% end %>
    </p>
 <!-- get the timestamp of goal connection created to set the event in feeds -->
-<% current_user.buddyofs.each do |hash| %>
+<% current_user.fullinfo_buddyofs.each do |hash| %>
 <p><%= hash[:owner].firstname %> just achieved
   "<%= hash[:goal].title %>". Time to celebrate !
   <% end %>

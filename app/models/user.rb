@@ -32,7 +32,19 @@ class User < ApplicationRecord
     buddies
   end
 
+
   def buddyofs
+    buddyofs = []
+    Goal.all.each do |goal|
+      goal.goal_connections.each do |gc|
+       buddyofs << gc.connection.owner if gc.connection.buddy == self
+      end
+    end
+  buddyofs
+  end
+
+
+  def fullinfo_buddyofs
     buddyofs = []
     Goal.all.each do |goal|
       goal.goal_connections.each do |gc|
@@ -41,6 +53,7 @@ class User < ApplicationRecord
           goal = gc.goal
           buddyofs << { owner: owner,
             goal: goal }
+
         end
       end
     end
