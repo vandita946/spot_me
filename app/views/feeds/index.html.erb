@@ -2,8 +2,15 @@
 <h1>Here are the latest updates</h1>
 
 <!-- display last checked milestone -->
-<% @feeds.each do |feed| %>
-<%= feed.name %>
-<%= feed.is_completed %>
+
+<% @sorted_milestones.each do |sms| %>
+    <% if sms.is_completed %>
+     <p>You checked <%= sms.name %> (<%= sms.goal.title %> goal) as done ! Congrats ! </p>
+         <p><%= sms.updated_at.strftime("%l.%M%P %A %-d/%-m/%y") %></p>
+    <% end %>
 <% end %>
+
+<!-- add a timestamp => when action was done -->
+
+
 
