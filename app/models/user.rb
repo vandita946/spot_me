@@ -35,7 +35,7 @@ class User < ApplicationRecord
   end
 
 
-  
+
   has_one_attached :avatar
   after_commit :add_default_avatar, on: [:create, :update]
   # has_many :goal_connections, through: :goals, source: :goal

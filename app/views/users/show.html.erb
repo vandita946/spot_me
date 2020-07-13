@@ -20,12 +20,13 @@
     <% end %>
 </div>
 
-<!-- Development use only: Button trigger modal -->
-
+<%# LOGIC GATES HERE %>
 <% if @current_user.nil? %>
-<button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
+
+<!-- Development use only: Button trigger modal -->
+<%# <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
   Launch static backdrop modal
-</button>
+</button> %>
 
   <!-- Modal -->
   <div class="modal fade notauser" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
