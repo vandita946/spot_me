@@ -34,48 +34,41 @@ document.addEventListener('turbolinks:load', () => {
 
   initChatroomCable();
 });
-$(document).on("click","#design",function(event){
-  $('#new_goal_form').show();
-  $('#blog_template').hide();
-  $('#vacation_template').hide();
-  $('#dating_template').hide();
-  $('#marathon_template').hide();
+
+const templates = ['#new_goal_template', '#blog_template', '#vacation_template', '#marathon_template', '#dating_template'];
+const buttons = ['#new_goal', '#blog', '#vacation', '#marathon', '#dating'];
+function showTemplate(name){
+  templates.forEach(template =>{
+    if (template != name){
+      $(template).hide();
+    } else {
+      $(template).show();
+    }
+  });
+}
+
+$(document).on("click","#new_goal",function(event){
+  showTemplate('#new_goal_template');
   event.preventDefault();
 });
 
 $(document).on("click","#blog",function(event){
-  $('#new_goal_form').hide();
-  $('#blog_template').show();
-  $('#vacation_template').hide();
-  $('#dating_template').hide();
-  $('#marathon_template').hide();
+  showTemplate('#blog_template');
   event.preventDefault();
 });
 
 $(document).on("click","#vacation",function(event){
-  $('#new_goal_form').hide();
-  $('#blog_template').hide();
-  $('#vacation_template').show();
-  $('#dating_template').hide();
-  $('#marathon_template').hide();
+  showTemplate("#vacation_template");
   event.preventDefault();
 });
 
 $(document).on("click","#dating",function(event){
-  $('#new_goal_form').hide();
-  $('#blog_template').hide();
-  $('#vacation_template').hide();
-  $('#dating_template').show();
-  $('#marathon_template').hide();
+  showTemplate("#dating_template");
   event.preventDefault();
 });
 
 $(document).on("click","#marathon",function(event){
-  $('#new_goal_form').hide();
-  $('#blog_template').hide();
-  $('#vacation_template').hide();
-  $('#dating_template').hide();
-  $('#marathon_template').show();
+  showTemplate("#marathon_template");
   event.preventDefault();
 });
 
@@ -99,6 +92,7 @@ $(document).on("click","#submit-all",function(event){
 
 $(document).on("click","#milestone-0-remove",function(event){
   $('#milestone-0-form').remove();
+
 });
 
 $(document).on("click","#milestone-1-remove",function(event){
@@ -107,6 +101,23 @@ $(document).on("click","#milestone-1-remove",function(event){
 
 $(document).on("click","#milestone-2-remove",function(event){
   $('#milestone-2-form').remove();
+});
+
+$(document).on("click","#milestone-3-remove",function(event){
+  $('#milestone-2-form').remove();
+});
+
+$(document).on("click","#milestone-4-remove",function(event){
+  $('#milestone-2-form').remove();
+});
+
+$(document).on("click","#milestone-5-remove",function(event){
+  $('#milestone-2-form').remove();
+});
+
+$(document).on("click","#add-another",function(event){
+  let counter = document.querySelectorAll("form").length;
+  $(`#milestone-${counter+1}-form`).show();
 });
 
 
