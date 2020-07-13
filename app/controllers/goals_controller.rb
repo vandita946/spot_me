@@ -71,7 +71,7 @@ class GoalsController < ApplicationController
   def destroy
     @goal = Goal.find(params[:id])
     @goal.destroy
-    redirect_to goals_path
+    redirect_to goals_path, alert: "Your goal has been deleted. "
   end
 
   private

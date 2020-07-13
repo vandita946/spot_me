@@ -3,7 +3,7 @@ class Milestone < ApplicationRecord
   after_save :update_goal_progress
   belongs_to :goal
 
-  has_one :completion_message
+  has_one :completion_message, dependent: :destroy
 
   validates :name, :deadline, :weightage, presence: true
   validates :weightage, inclusion: { in: (1..5) }
@@ -21,7 +21,11 @@ class Milestone < ApplicationRecord
     end
     progress = completed.fdiv(total) * 100
     self.goal.progress = progress
-    self.goal.status = "Completed" if progress == 100.0
+    if progress == 100.0
+      self.goal.status = "Completed"
+    elsif progress < 100.0
+      self.goal.status = "In Progress"
+    end
     self.goal.save
   end
 end

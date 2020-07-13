@@ -8,12 +8,13 @@
     <div class="goal-details">
     <h1>
       <%= @goal.title %>
-        <a id="goal-edit" href="blank" data-toggle="modal" data-target="#goal-edit" >
+      <br>
+        <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
           <i class="fas fa-edit"></i>
         </a>
     </h1>
     <p> <%= @goal.status %> </p>
-    <p> <%= @goal.description %> </p>
+    <h6> <%= @goal.description %> </h6>
 
     </div>
   </div>
@@ -34,11 +35,22 @@
                         <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
                         <div class="card" style="width: 30rem;">
                                     <div class="card-body">
-                                        <h2 class="card-title"> <%= milestone.name %>
+                                        <h2 class="card-title mb-0"> <%= milestone.name %>                                        </h2>
+
                                         <% if milestone.is_completed %>
-                                          <i id="done" class="fa fa-check" aria-hidden="true"></i>
+                                          <%= form_for milestone, remote: true do |f| %>
+                                            <%= f.hidden_field :is_completed, value: false %>
+                                            <button class="btn" type="submit">
+                                              <i class="far fa-check-square"></i>
+                                            </button>
+                                          <% end %>
+
+                                          <h6 id="completion-bubble"><%= milestone.completion_message.content %></h6>
+                                        <% else %>
+                                        <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>" >
+                                          <i class="far fa-square"></i>
+                                          </button>
                                         <% end %>
-                                        </h2>
                                         <p class='card-subtitle'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
                                               <div class="stars">
                                               <% milestone.weightage.times do %>
@@ -48,10 +60,10 @@
                                                   <i class="far fa-star"></i>
                                                 <% end %>
                                               </div>
+
                                         <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
                                         <i class="far fa-edit"></i>
                                         </a>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completion-<%=milestone.id%>" data-whatever="@mdo">Mark as complete</button>
                                     </div>
                           </div>
                       <% end %>
@@ -60,10 +72,10 @@
           </div>
 
     </div>
-
-<div class="container">
   <%= render partial: "shared/new_milestone", locals: {goal: @goal, milestone: Milestone.new} %>
-  <a id="milestone-add" href="blank" data-toggle="modal" data-target="#milestone-add" >
+
+<div class="container d-flex justify-content-center mt-3">
+  <a id="milestone-add" href="blank" data-toggle="modal" data-target="#new-milestone" >
     <i id="add-milestone" class="fas fa-plus justify-content-center"></i>
   </a>
 </div>
@@ -86,8 +98,8 @@
   <% end %>
 </div>
 <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
-  <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.id}" %>
-  <%= f.button :submit, class: "btn btn-primary" %>
+  <%= f.input :content, label: false, placeholder: "What's on your mind?" %>
+  <%= f.button :submit, "Send message", class: "btn btn-primary" %>
 <% end %>
 
 </div>

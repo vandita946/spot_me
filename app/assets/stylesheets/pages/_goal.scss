@@ -1,6 +1,55 @@
-.stars {
-    i {
-        color: $white;
+.icons{
+.radio_item{
+    display: none !important;
+    }
+
+    .label_item {
+        font-size: 20px;
+        margin: 2px;
+    color: $blue;
+    opacity: 0.5;
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    .radio_item:checked + label {
+        color: $pink;
+        opacity: 1;
+    }
+  }
+
+label {
+cursor: pointer;
+}
+
+i {
+    font-style: normal;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+.fa-check-square {
+    color: $white;
+    font-size: 1.5rem;
+    &:hover:before{
+        content: '\f0c8';
+        color: $pink;
+    }
+}
+
+
+
+.fa-square{
+    color: $white;
+    font-size: 1.5rem;
+
+    &:hover:before{
+        content: '\f14a';
+        color: $pink;
     }
 }
 
@@ -30,10 +79,13 @@
     background-color: $pink;
 }
 
+.progress-bar{
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
 
 .goal-head {
-    display:flex;
-    justify-content: center;
+    text-align: center;
 }
 
 .cards-container {
@@ -43,26 +95,44 @@
 }
 
 .card {
-    margin: 5px;
+    display: flex;
+    margin: 10px;
     text-align: center;
     background-color: $blue;
     color: $white;
+    justify-content: center;
 }
 
 #edit {
     color: $white;
 }
 
-#goal-edit {
+#edit-icon {
+    i{
+
+
     font-size: 20px;
+    color: $blue;
+    &:hover{
+        color: $pink;
+    }
+}
 }
 
 #add-milestone {
     color: $white;
-    font-size: 20px;
-    margin-top: 20px;
-    padding: 5px;
+    font-size: 25px;
+    padding: 10px;
     border: solid 2px;
     border-radius: 50%;
     background-color: $pink;
+}
+
+#completion-bubble{
+    color: $dark-gray;
+    background-color: $white;
+    padding: 5px 5px;
+    width: inherit;
+    border-radius: 2px;
+
 }

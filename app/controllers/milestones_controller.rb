@@ -34,6 +34,12 @@ class MilestonesController < ApplicationController
         end
     end
 
+    def destroy
+        @milestone = Milestone.find(params[:id])
+        @milestone.destroy
+        redirect_to request.referrer
+    end
+
     private
 
     def milestone_params

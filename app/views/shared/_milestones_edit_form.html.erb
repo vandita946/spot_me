@@ -17,16 +17,18 @@
             <label for="milestone_weightage">Weightage<abbr title="required">*</abbr></label>
             <div class="star-rating">
               <fieldset>
-                <input type="radio" id="star-<%=milestone.id%>-5" name="milestone[weightage]" value=5 ><label for="star-<%=milestone.id%>-5" title="5"></label>
-                <input type="radio" id="star-<%=milestone.id%>-4" name="milestone[weightage]" value=4 ><label for="star-<%=milestone.id%>-4" title="4"></label>
-                <input type="radio" id="star-<%=milestone.id%>-3" name="milestone[weightage]" value=3 ><label for="star-<%=milestone.id%>-3" title="3"></label>
-                <input type="radio" id="star-<%=milestone.id%>-2" name="milestone[weightage]" value=2 ><label for="star-<%=milestone.id%>-2" title="2"></label>
-                <input type="radio" id="star-<%=milestone.id%>-1" name="milestone[weightage]" value=1 ><label for="star-<%=milestone.id%>-1" title="1"></label>
+                <input type="radio" id="star-<%=milestone.id%>-5" name="milestone[weightage]" value=5 <%= "checked" if milestone.weightage == 5 %> ><label for="star-<%=milestone.id%>-5" title="5"></label>
+                <input type="radio" id="star-<%=milestone.id%>-4" name="milestone[weightage]" value=4 <%= "checked" if milestone.weightage == 4 %>><label for="star-<%=milestone.id%>-4" title="4"></label>
+                <input type="radio" id="star-<%=milestone.id%>-3" name="milestone[weightage]" value=3 <%= "checked" if milestone.weightage == 3 %>><label for="star-<%=milestone.id%>-3" title="3"></label>
+                <input type="radio" id="star-<%=milestone.id%>-2" name="milestone[weightage]" value=2 <%= "checked" if milestone.weightage == 2 %>><label for="star-<%=milestone.id%>-2" title="2"></label>
+                <input type="radio" id="star-<%=milestone.id%>-1" name="milestone[weightage]" value=1 <%= "checked" if milestone.weightage == 1 %>><label for="star-<%=milestone.id%>-1" title="1"></label>
               </fieldset>
             </div>
           </div>
           <%= f.button :submit, "Update", class: "btn btn-primary" %>
         <% end %>
+        <%= link_to "Delete", {:controller => :milestones, :action => 'destroy', :id => milestone.id }, :method => :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger mt-2" %>
+
       </div>
     </div>
   </div>
