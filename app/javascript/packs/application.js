@@ -37,24 +37,86 @@ document.addEventListener('turbolinks:load', () => {
   initModalVisitors();
 
 });
+
 $(document).on("click","#design",function(event){
   $('#new_goal_form').show();
   $('#blog_template').hide();
+  $('#vacation_template').hide();
+  $('#dating_template').hide();
+  $('#marathon_template').hide();
   event.preventDefault();
 });
 
 $(document).on("click","#blog",function(event){
-  $('#blog_template').show();
   $('#new_goal_form').hide();
+  $('#blog_template').show();
+  $('#vacation_template').hide();
+  $('#dating_template').hide();
+  $('#marathon_template').hide();
   event.preventDefault();
 });
 
-// $(document).on("click","#create",function(event){
-//   $('#milestones').show();
-//   $('#goal_form').hide();
-// });
+$(document).on("click","#vacation",function(event){
+  $('#new_goal_form').hide();
+  $('#blog_template').hide();
+  $('#vacation_template').show();
+  $('#dating_template').hide();
+  $('#marathon_template').hide();
+  event.preventDefault();
+});
 
+$(document).on("click","#dating",function(event){
+  $('#new_goal_form').hide();
+  $('#blog_template').hide();
+  $('#vacation_template').hide();
+  $('#dating_template').show();
+  $('#marathon_template').hide();
+  event.preventDefault();
+});
 
+$(document).on("click","#marathon",function(event){
+  $('#new_goal_form').hide();
+  $('#blog_template').hide();
+  $('#vacation_template').hide();
+  $('#dating_template').hide();
+  $('#marathon_template').show();
+  event.preventDefault();
+});
+
+$(document).on("click","#submit-all",function(event){
+  $('#milestone-0-submit').click();
+  $('#milestone-1-submit').click();
+  $('#milestone-2-submit').click();
+  $('#milestone-3-submit').click();
+  $('#milestone-4-submit').click();
+});
+
+$(document).on("click","#milestone-0-remove",function(event){
+  $('#milestone-0-form').remove();
+
+});
+
+$(document).on("click","#milestone-1-remove",function(event){
+  $('#milestone-1-form').remove();
+});
+
+$(document).on("click","#milestone-2-remove",function(event){
+  $('#milestone-2-form').remove();
+});
+
+$(document).on("click","#milestone-3-remove",function(event){
+  $('#milestone-3-form').remove();
+});
+
+$(document).on("click","#milestone-4-remove",function(event){
+  $('#milestone-4-form').remove();
+});
+
+$(document).on("click","#add-another",function(event){
+  $('#milestone-3-form').show();
+  $('#milestone-4-form').show();
+  $('#add-another').hide();
+});
 
 // Server-to-client(s) pushes:
 //  Broadcast in a model-specific channel:

@@ -11,10 +11,35 @@
     <%= link_to "Finally launch that blog!","#", id: "blog" %>
   </button>
 
+  <button id="vacation" class="btn btn-primary">
+    <%= link_to "Dream vacay","#", id: "vacation" %>
+  </button>
+
+  <button id="dating" class="btn btn-primary">
+    <%= link_to "Find the one","#", id: "dating" %>
+  </button>
+
+  <button id="marathon" class="btn btn-primary">
+    <%= link_to "Run a marathon","#", id: "marathon" %>
+  </button>
+
   <div id="new_goal_form">
       <%= render partial: "shared/new_goal_form"%>
   </div>
 
-<%#  <div id="blog_template">
-    <%= render partial: "shared/blog_goal_template" %>
+  <div id="blog_template">
+    <%= render partial: "shared/goal_template", locals: { template: @goal.blog_template, goal: @goal } %>
+  </div>
+
+  <div id="vacation_template">
+    <%= render partial: "shared/goal_template", locals: { template: @goal.vacation_template, goal: @goal } %>
+  </div>
+
+  <div id="dating_template">
+    <%= render partial: "shared/goal_template", locals: { template: @goal.dating_template, goal: @goal } %>
+  </div>
+
+  <div id="marathon_template">
+    <%= render partial: "shared/goal_template", locals: { template: @goal.marathon_template, goal: @goal } %>
+  </div>
 </div>
