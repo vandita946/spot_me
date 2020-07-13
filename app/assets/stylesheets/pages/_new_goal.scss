@@ -2,7 +2,7 @@
     display: none !important;
     }
 
-    .label_item {
+    .label_ite m {
         font-size: 20px;
         margin: 2px;
     color: $blue;
@@ -25,9 +25,23 @@ cursor: pointer;
   display: none;
 }
 
-// #blog_template{
-//   display: none;
-// }
+#blog_template{
+  display: none;
+}
+
+#dating_template{
+    display: none;
+}
+
+#vacation_template{
+display: none;
+}
+
+#marathon_template{
+display: none;
+}
+
+  
 
 // #milestones{
 //   display:none;
