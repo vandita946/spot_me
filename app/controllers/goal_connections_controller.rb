@@ -14,7 +14,7 @@ class GoalConnectionsController < ApplicationController
 
   private
 
-  def permit_parameterstaking
+  def permit_parameters
     params.permit!
   end
 end
