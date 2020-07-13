@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'connections/search'
   get 'connections/buddies'
   get 'connections/destroy'
+
+  get 'feeds/index'
   devise_for :users
 
   root to: 'pages#home'
