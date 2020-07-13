@@ -52,6 +52,7 @@ class GoalsController < ApplicationController
     @message = Message.new
     @completion_message = CompletionMessage.new
     # authorize @goal
+    @user = current_user
   end
 
   def edit

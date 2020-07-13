@@ -25,6 +25,7 @@ require("channels")
 // External imports
 import "bootstrap";
 import { initChatroomCable } from "../channels/chatroom_channel";
+import { initModalVisitors } from "../channels/modal_visitor";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
@@ -33,6 +34,8 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
 
   initChatroomCable();
+  initModalVisitors();
+
 });
 $(document).on("click","#design",function(event){
   $('#new_goal_form').show();

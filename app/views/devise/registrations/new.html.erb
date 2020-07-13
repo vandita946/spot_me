@@ -21,6 +21,8 @@
             <%= f.input :password_confirmation,
                         required: true,
                         input_html: { autocomplete: "new-password" } %>
+            <%# used to import %>
+            <%= f.input :goal, as: :hidden, input_html: { value: params[:goal] } %>
           </div>
 
           <div class="form-actions">
