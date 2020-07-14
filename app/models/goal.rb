@@ -5,7 +5,7 @@ class Goal < ApplicationRecord
   # has_one :goal_connection, as: :goal
   has_many :milestones, dependent: :destroy
   accepts_nested_attributes_for :milestones, allow_destroy: true
-  has_many :goal_connections
+  has_many :goal_connections, dependent: :destroy
   has_many :connections, through: :goal_connections
   validates :user, presence: true
   validates :title, :description, :start_date, :deadline, :icon, presence: true
@@ -19,16 +19,25 @@ class Goal < ApplicationRecord
     sorted = incomplete.sort_by(&:deadline).first
   end
 
+  def owner
+    User.find(self.user_id)
+  end
+
   # def ensure_one_goal_connection
   #   false if self.goal_connections > 1
   # end
 
   def get_goal_buddies(user)
     goal_buddies = []
+    requested = []
     self.goal_connections.each do |gc|
-      goal_buddies << gc.connection.buddy if gc.connection.owner == user
+      if gc.status == "Accepted"
+        goal_buddies << gc.connection.buddy if gc.connection.owner == user
+      elsif gc.status == "Requested"
+        requested << gc.connection.buddy if gc.connection.owner == user
+      end
     end
-    goal_buddies
+    return { goal_buddies: goal_buddies, requested: requested }
   end
 
   def blog_template

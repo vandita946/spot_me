@@ -92,9 +92,9 @@ goal_3.save
 
 puts "created goal 3"
 
-GoalConnection.new(connection_id: connect_1.id, goal_id: goal_1.id).save! #julien, joel
-GoalConnection.new(connection_id: connect_6.id, goal_id: goal_2.id).save! #julien, vandita
-GoalConnection.new(connection_id: connect_3.id, goal_id: goal_3.id).save! #claire, julien
+GoalConnection.new(connection_id: connect_1.id, goal_id: goal_1.id, status: "Accepted").save! #julien, joel
+GoalConnection.new(connection_id: connect_6.id, goal_id: goal_2.id, status: "Accepted").save! #julien, vandita
+GoalConnection.new(connection_id: connect_3.id, goal_id: goal_3.id, status: "Accepted").save! #claire, julien
 
 puts "created 3 goal connections"
 
