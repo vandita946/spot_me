@@ -1,0 +1,84 @@
+<div class="container justify-content-center">
+  <div class="goal-head">
+    <div class="goal-details">
+    <h1>
+      <%= @goal.title %>
+      <br>
+      <i id="title-icon" class="fa fa-<%= @goal.icon %> mb-3"></i>
+
+      <br>
+        <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
+          <i class="fas fa-edit"></i>
+        </a>
+    </h1>
+    <p> <%= @goal.status %> </p>
+    <h6> <%= @goal.description %> </h6>
+
+    </div>
+  </div>
+
+    <div class="container d-flex flex-grow-1 justify-content-center">
+
+      <div class="row">
+        <div class="col-2">
+          <div class="progress progress-bar-vertical">
+          <div class="progress-bar" role="progressbar" style="height: <%= @goal.progress %>%" role="progressbar" aria-valuenow="<%= @goal.progress %>" aria-valuemin="0" aria-valuemax="100">
+          </div>
+          </div>
+        </div>
+
+        <div class="col">
+        <div class="cards-container">
+          <% @milestones.each do |milestone| %>
+            <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
+            <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
+            <div class="card" style="">
+              <div class="card-body">
+                <h2 class="card-title mb-0"> <%= milestone.name %></h2>
+
+                <% if milestone.is_completed %>
+                  <%= form_for milestone, remote: true do |f| %>
+                    <%= f.hidden_field :is_completed, value: false %>
+                    <button class="btn" type="submit">
+                      <i class="far fa-check-square"></i>
+                    </button>
+                  <% end %>
+
+                  <h6 id="completion-bubble"><%= milestone.completion_message.content %></h6>
+                <% else %>
+                <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>" >
+                  <i class="far fa-square"></i>
+                  </button>
+                <% end %>
+                <p class='card-subtitle'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
+                    <div class="stars">
+                    <% milestone.weightage.times do %>
+                        <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5 - milestone.weightage).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                    </div>
+
+                <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>" >
+                <i class="far fa-edit"></i>
+                </a>
+              </div>
+              </div>
+          <% end %>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  <%= render partial: "shared/new_milestone", locals: {goal: @goal, milestone: Milestone.new} %>
+
+<% if @milestones.empty? %>
+  <strong class="container d-flex justify-content-center">You have no milestones yet, time to add some!</strong>
+<% end %>
+<div class="container d-flex justify-content-center mt-3">
+
+  <a id="milestone-add" href="blank" data-toggle="modal" data-target="#new-milestone" >
+    <i id="add-milestone" class="fas fa-plus justify-content-center"></i>
+  </a>
+</div>
