@@ -45,6 +45,12 @@ h2{
     display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
     align-items: flex-end;
     -webkit-align-items: flex-end; /* Safari 7.0+ */
+
+    // -webkit-transform: rotate(90deg);
+    // -moz-transform: rotate(90deg);
+    // -o-transform: rotate(90deg);
+    // -ms-transform: rotate(90deg);
+    // transform: rotate(90deg);
 }
 
 .progress-bar-vertical .progress-bar {
@@ -54,11 +60,23 @@ h2{
     -o-transition: height 0.6s ease;
     transition: height 0.6s ease;
     background-color: $pink;
+
+    // -webkit-transform: rotate(90deg);
+    // -moz-transform: rotate(90deg);
+    // -o-transform: rotate(90deg);
+    // -ms-transform: rotate(90deg);
+    // transform: rotate(90deg);
 }
 
 .progress-bar{
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-size: 40px 40px;
+
+    // -webkit-transform: rotate(90deg);
+    // -moz-transform: rotate(90deg);
+    // -o-transform: rotate(90deg);
+    // -ms-transform: rotate(90deg);
+    // transform: rotate(90deg);
 }
 
 .goal-head {

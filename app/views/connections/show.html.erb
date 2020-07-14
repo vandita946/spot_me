@@ -1,23 +1,49 @@
 <h1>Connections#show</h1>
 <p>Find me in app/views/connections/show.html.erb</p>
 
+  <div class="d-flex justify-content-center">
+    <h2 class="my-0 ml-3">Connection hotkey: <%= @connection.id %></h2>
+  </div>
 
-<div class="container">
-<h1>#<%= @chatroom.topic_id %></h1>
-<div id="messages" data-chatroom-id="<%= @chatroom.id %>">
-  <% @chatroom.messages.each do |message| %>
-    <div class="message-container" id="message-<%= message.id %>">
-      <i class="author">
-        <span><%= message.user.firstname %></span>
-        <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-      </i>
-      <p><%= message.content %></p>
-    </div>
+  <div class="d-flex justify-content-around">
+  <%= link_to user_path(@connection.owner.id) do %>
+    <h3><%= @connection.owner.firstname %></h3>
   <% end %>
+  <%= link_to user_path(@connection.buddy.id) do %>
+    <h3><%= @connection.buddy.firstname %></h3>
+  <% end %>
+  </div>
+
+<div class="container mb-3">
+  <div class="container d-flex"><h2 class="font-weight-bold"> Chat </h2></div>
+  <div class="overflow-auto chatroom-size rounded-lg" id="messages" data-chatroom-id="<%= @chatroom.id %>">
+    <% @chatroom.messages.each do |message| %>
+    <div class="notification">
+    <%# INSERT AVATAR HERE %>
+    <% if message.user.avatar_thumbnail %>
+    <%= image_tag message.user.avatar_thumbnail, class: "avatar-large" %>
+    <% else %>
+    <%= image_tag "Portrait_Placeholder.jpg", class: "avatar-large" %>
+    <% end %>
+    <div class="notification-content">
+      <div class="message-container" id="message-<%= message.id %>">
+        <i class="author">
+          <span><%= message.user.firstname %></span>
+          <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+        </i>
+        <p><%= message.content %></p>
+      </div>
+    </div>
+    </div>
+    <% end %>
+    <% if @chatroom.messages.size < 5 %>
+    <div class="d-flex align-items-end justify-content-center"><span class="bg-white text-center d-inline-flex px-2">No more messages &nbsp;<i class="fa fa-caret-up pt-1" aria-hidden="true"></i></span></div>
+    <% end %>
+  </div>
+  <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
+    <%= f.input :content, label: false, placeholder: "What's on your mind?" %>
+    <%= f.button :submit, "Send message", class: "btn btn-primary" %>
+  <% end %>
+
 </div>
 
-<%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
-  <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.id}" %>
-  <%= f.button :submit, class: "btn btn-primary" %>
-<% end %>
-</div>
