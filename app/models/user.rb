@@ -79,8 +79,14 @@ class User < ApplicationRecord
         if gc.connection.buddy == self && gc.status == "Accepted"
           owner = gc.connection.owner
           goal = gc.goal
+
+            milestones = []
+            gc.goal.milestones.each do |milestone|
+              milestones << milestone
+            end
           buddyofs << { owner: owner,
-            goal: goal }
+            goal: goal,
+            milestones: milestones }
 
         end
       end
