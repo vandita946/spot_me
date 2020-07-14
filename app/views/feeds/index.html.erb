@@ -1,18 +1,25 @@
 
+<div class="container">
+
 <h1>Here are the latest updates <%= @user.firstname %></h1>
 
 <!-- BUDDY -->
 <!-- display last checked milestone -->
 <!-- YOU -->
 <!-- upcoming deadline -->
+
+<!-- you start spottong a buddy's goal -->
 <% current_user.fullinfo_buddyofs.each do |hash| %>
 <p>You've officially started to Spot
   <%= hash[:owner].firstname %> 's goal called
   "<%= hash[:goal].title %>" since <%= hash[:goal].created_at %>
   This achievment will be yours too, congrats and good luck !
+  <% raise %>
   <% end %>
    </p>
-<!-- get the timestamp of goal connection created to set the event in feeds -->
+<!-- need to get the timestamp of goal connection created to set the event in feeds -->
+
+<!-- buddy achieved a goal -->
 <% current_user.fullinfo_buddyofs.each do |hash| %>
 <p><%= hash[:owner].firstname %> just achieved
   "<%= hash[:goal].title %>". Time to celebrate !
@@ -20,12 +27,14 @@
    </p>
 
 
+<!-- milestone of yours completed -->
 <% @sorted_milestones.each do |sms| %>
     <% if sms.is_completed %>
      <p><%= sms.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - You checked "<%= sms.name %>" (<%= sms.goal.title %> goal) as done ! Congrats !</p>
     <% end %>
 <% end %>
 
+<!-- deadline for milestone tomorrow -->
 <% @sorted_milestones.each do |sms| %>
     <% if sms.deadline == Date.today - 1 %>
      <p><%= sms.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %>
@@ -33,13 +42,15 @@
     <% end %>
 <% end %>
 
+<!-- you created a milestone -->
 <% @sorted_milestones.each do |sms| %>
      <p><%= sms.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - "<%= sms.name %>" milestone CREATED for <%= sms.goal.title %> goal.</p>
 <% end %>
 
+<!-- you created a goal -->
 <% @creation_date_sorted_goals.each do |cdsg| %>
      <p><%= cdsg.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - New goal "<%= cdsg.title %>" CREATED.</p>
 <% end %>
-<!-- add a timestamp => when action was done -->
 
 
+</div>
