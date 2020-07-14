@@ -1,9 +1,13 @@
 .bottom_navbar_container {
-  position: static;
-  z-index: 3;
-  padding-bottom: 0px;
-  margin-bottom: 0px;
+  justify-content: space-between;
   width: 100vw;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 0px;
+  width: 100%;
   height: 80px;
   background-color: #FFBB55;
 }
+
+
