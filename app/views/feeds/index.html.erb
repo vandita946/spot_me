@@ -15,7 +15,7 @@
             <% elsif news.deadline == Date.today - 1 %>
           <!-- WARNING deadline for milestone tomorrow -->
               <p>CAREFUL - <% Date.today.strftime("%-d/%-m/%y")  %> - "<%= news.name %>" milestone (<%= news.goal.title %> goal)'s deadline is TOMORROW ! Hurry up !</p>
-            <% else %>
+              <% elsif news.created_at.hour == news.updated_at.hour %>
           <!-- you created a milestone NEEDS TO BE FIXED -->
               <p><%= news.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - "<%= news.name %>" milestone CREATED for <%= news.goal.title %> goal.</p>
             <% end %>
@@ -31,29 +31,25 @@
     <% if news.is_a?(Goal) %>
           <% if @user.goal_ids.include?(news.id) %>
           <!-- fix creation notification only once -->
-
               <% if news.status == "Completed" %>
                 <p><%= news.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> -
                 You just achieved "<%= news.title %>" goal. Well done ! </p>
-              <% end %>
-
-              <!-- if the goal has just been created -->
-              <% if news.created_at == news.updated_at %>
+          <!-- if the goal has just been created -->
+              <% elsif news.created_at.hour == news.updated_at.hour %>
                 <p><%= news.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - New goal "<%= news.title %>" CREATED.</p>
               <% end %>
           <% else %>
 
         <!-- your buddy created a goal -->
-              <% if news.created_at == news.updated_at %>
-                <p><%= news.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> You've officially started to Spot
-                <%= news.user.firstname %>'s goal called "<%= news.title %>".
-                This achievment will be yours too, congrats and good luck !</p>
-              <% end %>
-        <!-- your buddy achieved a goal -->
               <% if news.status == "Completed" %>
                 <p><%= news.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> -
                 <%= news.user.firstname %> just achieved
                 "<%= news.title %>" goal. Time to celebrate together ! </p>
+        <!-- your buddy achieved a goal -->
+              <% elsif news.created_at.hour == news.updated_at.hour %>
+                <p><%= news.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> You've officially started to Spot
+                <%= news.user.firstname %>'s goal called "<%= news.title %>".
+                This achievment will be yours too, congrats and good luck !</p>
               <% end %>
 
           <% end %>
