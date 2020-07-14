@@ -4,7 +4,6 @@
 
 <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
 
-
 <div class="container justify-content-center">
   <div class="goal-head">
     <div class="goal-details">
@@ -12,15 +11,37 @@
       <%= @goal.title %>
       <br>
       <i id="title-icon" class="fa fa-<%= @goal.icon %> mb-3"></i>
-
       <br>
         <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
           <i class="fas fa-edit"></i>
         </a>
     </h1>
+
     <p> <%= @goal.status %> </p>
     <h6> <%= @goal.description %> </h6>
 
+    </div>
+    <div id="goal-buddies">
+    <% buddies = @goal.get_goal_buddies(current_user) %>
+    <% if buddies.empty? %>
+        <p>You don't have anyone to keep you accountable, yet!</p>
+        <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
+          Add one now!
+        </button>
+    <% else %>
+      <% if buddies.length == 1 %>
+        <p>Your buddy is: 
+      <% else %>
+        <p>Your buddies are: 
+      <% end %>
+      
+        <% buddies.each do |buddy| %>
+          <%= buddy.firstname %>
+        <% end %>
+      </p>
+    <% end %>
+      
     </div>
   </div>
 

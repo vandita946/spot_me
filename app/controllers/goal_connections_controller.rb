@@ -6,7 +6,7 @@ class GoalConnectionsController < ApplicationController
                                           connection: Connection.find(params[:goal_connection][:connection])
                                           )
     if @goal_connection.save
-      redirect_to request.referrer, notice: "You're buddy has been invited! "
+      redirect_to request.referrer, notice: "Your buddy has been invited! "
     else
       redirect_to request.referrer, alert: "Your buddy couldn't be added. "
     end
