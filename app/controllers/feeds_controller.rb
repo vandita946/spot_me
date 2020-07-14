@@ -7,18 +7,18 @@ class FeedsController < ApplicationController
     updates_milestones
     updates_goals_creation
 
-    updates_buddy_milestones
+    # updates_new_buddy_goal
 
-    sort_everything
+    # create sort_everything function
   end
 
   private
 
   def updates_milestones
     @user_milestones = []
-      @goals.each do |goal|
-        goal.milestones.each { |milestone| @user_milestones << milestone }
-      end
+    @goals.each do |goal|
+      goal.milestones.each { |milestone| @user_milestones << milestone }
+    end
     @sorted_milestones = @user_milestones.sort_by(&:updated_at).reverse
   end
 
@@ -27,17 +27,19 @@ class FeedsController < ApplicationController
     @creation_date_sorted_goals = @goals.sort_by(&:created_at).reverse
   end
 
-  def updates_buddy_milestones
-    # find user buddies & goals
-    @user_buddy_milestones = []
-
-    # @user.connections.each
-
-    #display updated
-
-
+  def updates_goals_creation
+    # get goals created at
     @creation_date_sorted_goals = @goals.sort_by(&:created_at).reverse
   end
+
+  # def updates_buddy_milestones
+  #   # find user buddies & goals
+  #   @user_buddy_milestones = []
+
+
+
+  #   @creation_date_sorted_goals = @goals.sort_by(&:created_at).reverse
+  # end
 
   def sort_everything
     # find a way to sort things with different attribute / created_at and updated_at
