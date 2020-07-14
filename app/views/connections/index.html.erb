@@ -7,9 +7,6 @@
     <a href="#buddies" data-toggle="tab" role="tab" class="nav-link">Buddies</a>
   </li>
   <li class="nav-item">
-    <a href="#requests" data-toggle="tab" role="tab" class="nav-link">Requests</a>
-  </li>
-  <li class="nav-item">
     <a href="#buddyof" data-toggle="tab" role="tab" class="nav-link">Supporting</a>
   </li>
   <li class="nav-item">
@@ -32,27 +29,7 @@
     </div>
   </div>
 
-  <div role="tab-panel" class="tab-pane" id="requests">
-    <div class="cards">
-     <% @requests.each do |request| %>
-          <p><%= request.goal.owner.firstname %> wants you to be their buddy on their goal to <%= request.goal.title %></p>
-          <%= form_for request, remote: true do |f| %>
-            <%= f.hidden_field :status, value: "Accepted" %>
-            <button class="btn btn-success" type="submit">
-              Accept
-            </button>
-          <% end %>
-          <%= form_for request, remote: true do |f| %>
-            <%= f.hidden_field :status, value: "Declined" %>
-            <button class="btn btn-danger" type="submit">
-              Decline
-            </button>
-          <% end %>
-      <% end %>
-    </div>
-  </div>
-
-    <div role="tab-panel" class="tab-pane" id="buddies">
+  <div role="tab-panel" class="tab-pane" id="buddies">
     <div class="cards">
      <% @buddies.each do |buddy| %>
         <p><%= buddy.firstname %> <%= buddy.lastname %></p>

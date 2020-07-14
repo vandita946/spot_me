@@ -9,7 +9,6 @@ class ConnectionsController < ApplicationController
     @fans = @user.buddy_connections
     @buddies = @user.buddies
     @buddyofs = @user.buddyofs
-    @requests = @user.requests
     @goal_connection = GoalConnection.new
   end
 

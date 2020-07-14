@@ -22,9 +22,8 @@
 
     </div>
     <div id="goal-buddies">
-    <% buddies = @goal.get_goal_buddies(current_user)[:goal_buddies] %>
-    <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
-    <% if buddies.empty? && requested.empty? %>
+    <% buddies = @goal.get_goal_buddies(current_user) %>
+    <% if buddies.empty? %>
         <p>You don't have anyone to keep you accountable, yet!</p>
         <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
@@ -33,7 +32,7 @@
     <% else %>
       <% if buddies.length == 1 %>
         <p>Your buddy is: 
-      <% elsif buddies.length > 1 %>
+      <% else %>
         <p>Your buddies are: 
       <% end %>
       
@@ -41,14 +40,6 @@
           <%= buddy.firstname %>
         <% end %>
       </p>
-
-      <% if requested.length >= 1 %>
-        <p>You've requested:</p>
-        <% requested.each do |req| %>
-          <%= req.firstname %>
-        <% end %>
-      <% end %>
-      
     <% end %>
       
     </div>
