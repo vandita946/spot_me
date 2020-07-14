@@ -23,6 +23,14 @@ class Goal < ApplicationRecord
   #   false if self.goal_connections > 1
   # end
 
+  def get_goal_buddies(user)
+    goal_buddies = []
+    self.goal_connections.each do |gc|
+      goal_buddies << gc.connection.buddy if gc.connection.owner == user
+    end
+    goal_buddies
+  end
+
   def blog_template
     goal = { title: "Launch my blog", description: "I'm going to finally publish the content ideas I've had for years!", icon: "laptop", start_date: Date.today, deadline: Date.today + 60}
     milestone_1 = { name: "Think of and register a url!", deadline: Date.today + 3, weightage: 3 }

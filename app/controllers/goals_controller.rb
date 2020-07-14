@@ -44,7 +44,7 @@ class GoalsController < ApplicationController
     if @goal.deadline <= Date.today
       @goal.status = "Past"
     end
-
+    @goal_connection = GoalConnection.new
     @milestones = @goal.milestones.sort_by(&:deadline)
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
