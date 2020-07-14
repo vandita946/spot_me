@@ -1,7 +1,8 @@
-class GoalPolicy < ApplicationPolicy
+class GoalConnectionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.where(user: user)
+      # or if user is connection >> define method in private
     end
   end
 
@@ -11,11 +12,7 @@ class GoalPolicy < ApplicationPolicy
 
   def show?
     user_is_owner?
-    # or if user is buddy >> define method in private
-  end
-
-  def update?
-    user_is_owner?
+    # or if user is connection >> define method in private
   end
 
   def destroy?
@@ -28,8 +25,7 @@ class GoalPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def user_is_buddy?
+  def user_is_connection?
     # define method
   end
-
 end

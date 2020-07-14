@@ -1,45 +1,48 @@
-<div class="container">
-  <h1>Let's get goaling!</h1>
+<% if policy(Goal).create? %>
 
-  <h6>Pick from one of our goal templates or design one from scratch</h6>
+  <div class="container">
+    <h1>Let's get goaling!</h1>
 
-  <button id="design" class="btn btn-primary">
-    <%= link_to "Design my own","#", id: "design" %>
-  </button>
+    <h6>Pick from one of our goal templates or design one from scratch</h6>
 
-  <button id="blog" class="btn btn-primary">
-    <%= link_to "Finally launch that blog!","#", id: "blog" %>
-  </button>
+    <button id="design" class="btn btn-primary">
+      <%= link_to "Design my own","#", id: "design" %>
+    </button>
 
-  <button id="vacation" class="btn btn-primary">
-    <%= link_to "Dream vacay","#", id: "vacation" %>
-  </button>
+    <button id="blog" class="btn btn-primary">
+      <%= link_to "Finally launch that blog!","#", id: "blog" %>
+    </button>
 
-  <button id="dating" class="btn btn-primary">
-    <%= link_to "Find the one","#", id: "dating" %>
-  </button>
+    <button id="vacation" class="btn btn-primary">
+      <%= link_to "Dream vacay","#", id: "vacation" %>
+    </button>
 
-  <button id="marathon" class="btn btn-primary">
-    <%= link_to "Run a marathon","#", id: "marathon" %>
-  </button>
+    <button id="dating" class="btn btn-primary">
+      <%= link_to "Find the one","#", id: "dating" %>
+    </button>
 
-  <div id="new_goal_form">
-      <%= render partial: "shared/new_goal_form"%>
+    <button id="marathon" class="btn btn-primary">
+      <%= link_to "Run a marathon","#", id: "marathon" %>
+    </button>
+
+    <div id="new_goal_form">
+        <%= render partial: "shared/new_goal_form"%>
+    </div>
+
+    <div id="blog_template">
+      <%= render partial: "shared/goal_template", locals: { template: @goal.blog_template, goal: @goal } %>
+    </div>
+
+    <div id="vacation_template">
+      <%= render partial: "shared/goal_template", locals: { template: @goal.vacation_template, goal: @goal } %>
+    </div>
+
+    <div id="dating_template">
+      <%= render partial: "shared/goal_template", locals: { template: @goal.dating_template, goal: @goal } %>
+    </div>
+
+    <div id="marathon_template">
+      <%= render partial: "shared/goal_template", locals: { template: @goal.marathon_template, goal: @goal } %>
+    </div>
   </div>
-
-  <div id="blog_template">
-    <%= render partial: "shared/goal_template", locals: { template: @goal.blog_template, goal: @goal } %>
-  </div>
-
-  <div id="vacation_template">
-    <%= render partial: "shared/goal_template", locals: { template: @goal.vacation_template, goal: @goal } %>
-  </div>
-
-  <div id="dating_template">
-    <%= render partial: "shared/goal_template", locals: { template: @goal.dating_template, goal: @goal } %>
-  </div>
-
-  <div id="marathon_template">
-    <%= render partial: "shared/goal_template", locals: { template: @goal.marathon_template, goal: @goal } %>
-  </div>
-</div>
+<% end %>

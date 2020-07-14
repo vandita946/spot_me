@@ -3,10 +3,12 @@ class MilestonesController < ApplicationController
     def index
         @goal = Goal.find(params[:goal_id])
         @milestones = @goal.milestones
+        authorize @goal
     end
 
     def new
         @goal = Goal.find(params[:goal_id])
+        authorize @goal
         5.times do
             @goal.milestones.build
         end
@@ -15,6 +17,8 @@ class MilestonesController < ApplicationController
     def create
         @goal = Goal.find(params[:goal_id])
         @milestone = Milestone.new(milestone_params)
+        authorize @goal
+        authorize @milestone
         @goal.milestones << @milestone
         if @milestone.save
             redirect_to goal_path(@goal), notice: "Milestone successfully created! "
@@ -25,10 +29,12 @@ class MilestonesController < ApplicationController
 
     def edit
         @milestone = Milestone.find(params[:id])
+        authorize @milestone
     end
 
     def update
         @milestone = Milestone.find(params[:id])
+        authorize @milestone
         if @milestone.update(milestone_params)
             redirect_to request.referrer, notice: "Milestone updated! "
         else
@@ -38,6 +44,7 @@ class MilestonesController < ApplicationController
 
     def destroy
         @milestone = Milestone.find(params[:id])
+        authorize @milestone
         @milestone.destroy
         redirect_to request.referrer
     end

@@ -7,6 +7,8 @@ class FeedsController < ApplicationController
     updates_milestones
     updates_goals_creation
 
+    @feed = policy_scope(Feed)
+
     # updates_new_buddy_goal
 
     # create sort_everything function

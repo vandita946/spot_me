@@ -1,4 +1,4 @@
-class GoalPolicy < ApplicationPolicy
+class MilestonePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.where(user: user)
@@ -6,7 +6,7 @@ class GoalPolicy < ApplicationPolicy
   end
 
   def create?
-    return true
+    user_is_owner?
   end
 
   def show?
