@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for goal_connection do |f| %>
-            <%= f.input :connection, label_method: ->(obj){ obj.buddy.firstname }, collection: current_user.owner_connections %>
+            <%= f.input :connection, label_method: ->(obj){ obj.buddy.firstname }, collection: current_user.owner_connections, label: "Pick a buddy from your connections" %>
             <%= f.input :goal, as: :hidden, input_html: { value: goal.id } %>
             <%= f.submit "Submit", class: "btn btn-primary" %>
         <% end %>
