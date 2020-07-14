@@ -48,6 +48,10 @@
           <%= req.firstname %>
         <% end %>
       <% end %>
+      <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+      <a href="blank" data-toggle="modal" data-target="#edit_buddies" >
+          <i class="fas fa-pencil-alt"></i>
+      </a>
       
     <% end %>
       

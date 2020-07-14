@@ -97,10 +97,11 @@ class User < ApplicationRecord
   def requests
     requests = []
     GoalConnection.where(status: "Requested").each do |gc|
-      if (gc.connection.buddy == self || gc.connection.owner == self) && gc.goal.owner != self
-        requests << gc
+      if gc.goal.owner != self
+        requests << gc if gc.connection.owner == self || gc.connection.buddy==self
       end
     end
+    requests
   end
 
   private
