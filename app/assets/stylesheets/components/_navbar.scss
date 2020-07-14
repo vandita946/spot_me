@@ -1,8 +1,50 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+.navbar_container {
+  position: static;
+  z-index: 3;
+  padding-top: 0px;
+  margin-top: 0px;
+  width: 100vw;
+  height: 80px;
+  background-color: white;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-brand {
+  position: absolute;
+  z-index: 4;
+  right: 0;
+  top: 0;
+}
+
+.navbar-toggler {
+  position: absolute;
+  top: 15px;
+  z-index: 5;
+}
+
+.navbar-collapse {
+  position: absolute;
+  top: 65px;
+  left: 15px;
+  z-index: 6;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.navbar-light .navbar-toggler {
+  border: none !important;
+}
+
+.navbar-nav {
+    background-color: #FFBB55;
+  }
+
+.nav-item {
+  padding: 0.25rem 0.75rem;
+}
+
+.navbar-nav :hover {
+  background-color: #ad6f18 !important;
+  color: white;
 }
