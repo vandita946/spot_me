@@ -6,7 +6,7 @@
   <% else %>
     <% @goals.each do |goal| %>
       <div class="card" style="width: 30rem;">
-        <%= link_to goal_path(goal) do%>
+        <%= link_to goal_path(goal), method: :get do%>
         <div class="card-body">
           <h4 class="card-title mb-2"> <%= goal.title %></h4>
           <i class="fa fa-<%= goal.icon %> mb-3"></i>
