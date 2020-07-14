@@ -27,7 +27,7 @@ class User < ApplicationRecord
     if self.goal
       connection = Connection.new(owner_id: Goal.find(self.goal).user_id, buddy_id: self.id)
       connection.save!
-      goal_connection = GoalConnection.create(connection_id: connection.id, goal_id: self.goal)
+      goal_connection = GoalConnection.create(connection_id: connection.id, goal_id: self.goal, status: "Accepted")
     elsif self.contact
       connection = Connection.new(owner_id: self.contact, buddy_id: self.id)
       connection.save!
@@ -52,19 +52,20 @@ class User < ApplicationRecord
   def buddies
     buddies = []
     self.goals.each do |goal|
-      goal.connections.each do |connection|
-        buddies << connection.buddy
+      goal.goal_connections.each do |gc|
+        buddies << gc.connection.buddy if gc.status == "Accepted"
       end
     end
     buddies
   end
 
-
   def buddyofs
     buddyofs = []
     Goal.all.each do |goal|
       goal.goal_connections.each do |gc|
-       buddyofs << gc.connection.owner if gc.connection.buddy == self
+        if gc.status == "Accepted"
+          buddyofs << gc.connection.owner if gc.connection.buddy == self
+        end
       end
     end
   buddyofs
@@ -75,16 +76,32 @@ class User < ApplicationRecord
     buddyofs = []
     Goal.all.each do |goal|
       goal.goal_connections.each do |gc|
-        if gc.connection.buddy == self
+        if gc.connection.buddy == self && gc.status == "Accepted"
           owner = gc.connection.owner
           goal = gc.goal
+
+            milestones = []
+            gc.goal.milestones.each do |milestone|
+              milestones << milestone
+            end
           buddyofs << { owner: owner,
-            goal: goal }
+            goal: goal,
+            milestones: milestones }
 
         end
       end
     end
   buddyofs
+  end
+
+  def requests
+    requests = []
+    GoalConnection.where(status: "Requested").each do |gc|
+      if gc.goal.owner != self
+        requests << gc if gc.connection.owner == self || gc.connection.buddy==self
+      end
+    end
+    requests
   end
 
   private

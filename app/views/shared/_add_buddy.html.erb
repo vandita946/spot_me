@@ -1,0 +1,23 @@
+<div id="add_buddy_form">
+<div class="modal fade" id="add_buddy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Time to add a buddy to hold you accountable!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for goal_connection do |f| %>
+            <%= f.input :connection, label_method: ->(obj){ obj.buddy.firstname }, collection: current_user.owner_connections, label: "Pick a buddy from your connections" %>
+            <%= f.input :goal, as: :hidden, input_html: { value: goal.id } %>
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+        <% end %>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

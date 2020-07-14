@@ -4,6 +4,4 @@ class Connection < ApplicationRecord
   has_many :goal_connections
   has_many :goals, through: :goal_connections
   has_one :chatroom, as: :topic
-
-
 end
