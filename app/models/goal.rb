@@ -4,7 +4,7 @@ class Goal < ApplicationRecord
   has_one :chatroom, as: :topic
   # has_one :goal_connection, as: :goal
   has_many :milestones, dependent: :destroy
-
+  accepts_nested_attributes_for :milestones, allow_destroy: true
   has_many :goal_connections
   has_many :connections, through: :goal_connections
   validates :user, presence: true
@@ -22,6 +22,14 @@ class Goal < ApplicationRecord
   # def ensure_one_goal_connection
   #   false if self.goal_connections > 1
   # end
+
+  def get_goal_buddies(user)
+    goal_buddies = []
+    self.goal_connections.each do |gc|
+      goal_buddies << gc.connection.buddy if gc.connection.owner == user
+    end
+    goal_buddies
+  end
 
   def blog_template
     goal = { title: "Launch my blog", description: "I'm going to finally publish the content ideas I've had for years!", icon: "laptop", start_date: Date.today, deadline: Date.today + 60}

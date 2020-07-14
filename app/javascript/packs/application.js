@@ -25,6 +25,7 @@ require("channels")
 // External imports
 import "bootstrap";
 import { initChatroomCable } from "../channels/chatroom_channel";
+import { initModalVisitors } from "../channels/modal_visitor";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
@@ -33,7 +34,10 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
 
   initChatroomCable();
+  initModalVisitors();
+
 });
+
 $(document).on("click","#design",function(event){
   $('#new_goal_form').show();
   $('#blog_template').hide();
@@ -79,26 +83,17 @@ $(document).on("click","#marathon",function(event){
   event.preventDefault();
 });
 
-// $(document).on("click","#milestone-0-submit",function(event){
-//   $('#milestone-0-form').hide();
-// });
-
-// $(document).on("click","#milestone-1-submit",function(event){
-//   $('#milestone-1-form').hide();
-// });
-
-// $(document).on("click","#milestone-2-submit",function(event){
-//   $('#milestone-2-form').hide();
-// });
-
 $(document).on("click","#submit-all",function(event){
   $('#milestone-0-submit').click();
   $('#milestone-1-submit').click();
   $('#milestone-2-submit').click();
+  $('#milestone-3-submit').click();
+  $('#milestone-4-submit').click();
 });
 
 $(document).on("click","#milestone-0-remove",function(event){
   $('#milestone-0-form').remove();
+
 });
 
 $(document).on("click","#milestone-1-remove",function(event){
@@ -109,14 +104,19 @@ $(document).on("click","#milestone-2-remove",function(event){
   $('#milestone-2-form').remove();
 });
 
+$(document).on("click","#milestone-3-remove",function(event){
+  $('#milestone-3-form').remove();
+});
 
+$(document).on("click","#milestone-4-remove",function(event){
+  $('#milestone-4-form').remove();
+});
 
-// $(document).on("click","#create",function(event){
-//   $('#milestones').show();
-//   $('#goal_form').hide();
-// });
-
-
+$(document).on("click","#add-another",function(event){
+  $('#milestone-3-form').show();
+  $('#milestone-4-form').show();
+  $('#add-another').hide();
+});
 
 // Server-to-client(s) pushes:
 //  Broadcast in a model-specific channel:

@@ -1,5 +1,6 @@
 <div class="container">
     <% @goal.milestones.each_with_index do |milestone, index| %>
+        <% if index < 3 %>
         <div id="milestone-<%=index%>-form">
         <%= simple_form_for [@goal, milestone], remote: true do |f| %>
             <%= f.input :name, input_html: { value: template[:milestones][index][:name]} %>
@@ -24,9 +25,47 @@
             </button>
         <% end %>
         </div>
-    
+        
+        <% else %>
+            <div id="milestone-<%=index%>-form" style="display:none;">
+        <%= simple_form_for [@goal, milestone], remote: true do |f| %>
+            <%= f.input :name %>
+            <%= f.input :deadline, as: :date, html5: true, input_html: { value: Date.today + 7}%>
+            <div class="form-group milestone_weightage form-group-valid">
+            <label for="milestone_weightage">Weightage<abbr title="required">*</abbr></label>
+            <div class="star-rating">
+                <fieldset>
+                <input type="radio" id="star-<%=index%>-5" name="milestone[weightage]" value=5><label for="star-<%=index%>-5" title="5"></label>
+                <input type="radio" id="star-<%=index%>-4" name="milestone[weightage]" value=4 ><label for="star-<%=index%>-4" title="4"></label>
+                <input type="radio" id="star-<%=index%>-3" name="milestone[weightage]" value=3 ><label for="star-<%=index%>-3" title="3"></label>
+                <input type="radio" id="star-<%=index%>-2" name="milestone[weightage]" value=2 ><label for="star-<%=index%>-2" title="2"></label>
+                <input type="radio" id="star-<%=index%>-1" name="milestone[weightage]" value=1 ><label for="star-<%=index%>-1" title="1"></label>
+                </fieldset>
+            </div>
+            </div>
+            <%# Hidden button so I can submit all the milestones at once in application.js%>
+            <button class="btn btn-primary" id="milestone-<%=index%>-submit" type="submit" style="display:none;"></button>
+            
+            <button class="btn btn-danger" id="milestone-<%=index%>-remove" type="button">
+                Remove
+            </button>
+        <% end %>
+        </div>
+
+        
+        <% end %>
+        
     <% end %>
+    
+    
+
+    <button class="btn btn-primary" id="add-another" type="button">
+        Add another milestone
+    </button>
+
+
+
     <button class="btn btn-success" id="submit-all" type="button">
-        Add milestones
+        Continue
     </button>
 </div>

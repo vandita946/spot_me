@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_043448) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "start_date"
-    t.string "icon", default: "<i class='fa fa-trophy'></i>"
+    t.string "icon", default: "trophy"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 

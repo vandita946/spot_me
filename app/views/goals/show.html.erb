@@ -1,6 +1,7 @@
 <%# <% if policy(Goal).show? %>
   <%# <%= link_to "Independent Goal", new_goal_path %>
 <%# <% end %>
+
 <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
 
 <div class="container justify-content-center">
@@ -10,20 +11,42 @@
       <%= @goal.title %>
       <br>
       <i id="title-icon" class="fa fa-<%= @goal.icon %> mb-3"></i>
-
       <br>
         <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
           <i class="fas fa-edit"></i>
         </a>
     </h1>
+
     <p> <%= @goal.status %> </p>
     <h6> <%= @goal.description %> </h6>
 
     </div>
+    <div id="goal-buddies">
+    <% buddies = @goal.get_goal_buddies(current_user) %>
+    <% if buddies.empty? %>
+        <p>You don't have anyone to keep you accountable, yet!</p>
+        <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
+          Add one now!
+        </button>
+    <% else %>
+      <% if buddies.length == 1 %>
+        <p>Your buddy is: 
+      <% else %>
+        <p>Your buddies are: 
+      <% end %>
+      
+        <% buddies.each do |buddy| %>
+          <%= buddy.firstname %>
+        <% end %>
+      </p>
+    <% end %>
+      
+    </div>
   </div>
 
     <div class="container d-flex flex-grow-1 justify-content-center">
-          
+
       <div class="row">
         <div class="col-2">
           <div class="progress progress-bar-vertical">
@@ -111,3 +134,58 @@
 <% end %>
 
 </div>
+
+
+
+<%# LOGIC GATES HERE %>
+<% if @user.nil? %>
+
+
+<!-- Development use only: Button trigger modal -->
+<%# <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> %>
+
+  <!-- Modal -->
+  <div class="modal fade notauser" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <h5 class="modal-title" id="staticBackdropLabel">Register as a user to view the goal</h5>
+          <%# <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> %>
+        </div>
+        <div class="modal-body">
+          To view the goal, please register or login as a user. <br> <br>
+          To be a buddy, please register or login as a user. <br> <br>
+          User, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, joel, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+          user, user, user, user, user, user, <br>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <%= link_to :back do %>
+            <button type="button" class="btn btn-link">Go back</button>
+          <% end %>
+          <%# <%= link_to "< Go Back", :back %>
+
+          <%= link_to new_user_session_path do %>
+            <button type="button" class="btn btn-secondary mx-3">Sign In</button>
+          <% end %>
+
+          <%= link_to new_user_registration_path(goal: @goal) do %>
+            <button type="button" class="btn btn-primary">Register</button>
+          <% end %>
+
+          <%# <button type="button" class="btn btn-secondary" data-dismiss="modal">Home</button> %>
+          <%# <button type="button" class="btn btn-primary">Understood</button> %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
