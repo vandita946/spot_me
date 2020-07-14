@@ -14,8 +14,10 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
+    <div class="container d-flex pt-80 mw-100 mh-100">
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+    </div>
 
-    <%= yield %>
   </body>
 </html>
