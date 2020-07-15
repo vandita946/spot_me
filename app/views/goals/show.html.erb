@@ -33,7 +33,7 @@
     <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
     <% if buddies.empty? && requested.empty? %>
         <p>You don't have anyone to keep you accountable, yet!</p>
-        <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
+        
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
           Add one now!
         </button>
@@ -102,7 +102,7 @@
     </div>
     <% end %>
     <% if @chatroom.messages.size < 5 %>
-    <span class="d-flex align-items-end justify-content-center bg-white">No more messages</span>
+    <div class="d-flex align-items-end justify-content-center"><span class="bg-white text-center d-inline-flex px-2">No more messages &nbsp;<i class="fa fa-caret-up pt-1" aria-hidden="true"></i></span></div>
     <% end %>
   </div>
   <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
