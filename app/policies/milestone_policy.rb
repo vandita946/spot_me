@@ -6,12 +6,11 @@ class MilestonePolicy < ApplicationPolicy
   end
 
   def create?
-    user_is_owner?
+    return true
   end
 
   def show?
     user_is_owner?
-    # or if user is buddy >> define method in private
   end
 
   def update?
@@ -26,10 +25,6 @@ class MilestonePolicy < ApplicationPolicy
 
   def user_is_owner?
     record.user == user
-  end
-
-  def user_is_buddy?
-    # define method
   end
 
 end

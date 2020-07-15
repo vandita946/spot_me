@@ -20,6 +20,7 @@ class GoalsController < ApplicationController
     @goal.user = current_user
     @goal_connection = GoalConnection.new
     authorize @goal
+    authorize @goal_connection
   end
 
   def create
@@ -27,8 +28,6 @@ class GoalsController < ApplicationController
     @goal.user = current_user
     @chatroom = Chatroom.new(topic: @goal)
     authorize @goal
-
-
 
     if @goal.start_date >= Date.today
       @goal.status = "Not started"

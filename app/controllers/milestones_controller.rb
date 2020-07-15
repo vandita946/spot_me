@@ -8,18 +8,16 @@ class MilestonesController < ApplicationController
 
     def new
         @goal = Goal.find(params[:goal_id])
-        authorize @goal
         5.times do
-            @goal.milestones.build
+          @goal.milestones.build
         end
     end
 
     def create
         @goal = Goal.find(params[:goal_id])
         @milestone = Milestone.new(milestone_params)
-        authorize @goal
-        authorize @milestone
         @goal.milestones << @milestone
+        authorize @milestone
         if @milestone.save
             redirect_to goal_path(@goal), notice: "Milestone successfully created! "
         else
