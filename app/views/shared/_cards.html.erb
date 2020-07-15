@@ -4,7 +4,7 @@
     <% @goals.each do |goal| %>
         <div class="card shadow mt-0">
 
-            <%= link_to goal_path(goal) do%>
+            <%= link_to goal_path(goal), method: 'GET' do%>
             <div class="card-body">
                     <div class="d-flex justify-content-center">
                         <h4 class="my-0"><i class="fa fa-<%= goal.icon %> mb-3"></i></h4>
