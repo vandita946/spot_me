@@ -1,5 +1,5 @@
 <div class="container">
-<h4>Let's create some milestones for your goal!</h4>
+<h4 style="text-align:center;">Let's create some milestones for your goal!</h4>
 <div id="milestones_template">
     <% if @goal.title.include? "blog" %>
         <%= render partial: "shared/milestones_template", locals: { template: @goal.blog_template, goal: @goal } %>
