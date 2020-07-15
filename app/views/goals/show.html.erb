@@ -93,8 +93,8 @@
     <% @chatroom.messages.each do |message| %>
     <div class="notification">
     <%# INSERT AVATAR HERE %>
-    <% if message.user.avatar_thumbnail %>
-    <%= image_tag message.user.avatar_thumbnail, class: "avatar-large" %>
+    <% if message.user.avatar %>
+    <%= image_tag message.user.avatar, class: "avatar-large" %>
     <% else %>
     <%= image_tag "Portrait_Placeholder.jpg", class: "avatar-large" %>
     <% end %>
