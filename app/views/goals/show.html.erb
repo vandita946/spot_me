@@ -33,7 +33,7 @@
     <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
     <% if buddies.empty? && requested.empty? %>
         <p>You don't have anyone to keep you accountable, yet!</p>
-        
+        <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
           Add one now!
         </button>
