@@ -28,42 +28,47 @@
     <div class="progress my-2">
       <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=@goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=@goal.progress%>%"></div>
     </div>
-    <div id="goal-buddies">
-    <% buddies = @goal.get_goal_buddies(current_user)[:goal_buddies] %>
-    <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
-    <% if buddies.empty? && requested.empty? %>
-        <p>You don't have anyone to keep you accountable, yet!</p>
-        
-        <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
-          Add one now!
-        </button>
-    <% else %>
-      <% if buddies.length == 1 %>
-        <p>Your buddy is: 
-      <% elsif buddies.length > 1 %>
-        <p>Your buddies are: 
-      <% end %>
-      
-        <% buddies.each do |buddy| %>
-          <%= buddy.firstname %>
-        <% end %>
-      </p>
-
-      <% if requested.length >= 1 %>
-        <p>You've requested:</p>
-        <% requested.each do |req| %>
-          <%= req.firstname %>
-        <% end %>
-      <% end %>
-      <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
-      <a href="blank" data-toggle="modal" data-target="#edit_buddies" >
-          <i class="fas fa-pencil-alt"></i>
-      </a>
-      
-    <% end %>
-      
+<%# ############# %>
+      <div id="goal-buddies">
+        <% buddies = @goal.get_goal_buddies(current_user)[:goal_buddies] %>
+        <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
+        <div class="d-flex justify-content-center flex-column">
+          <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+          <div><a href="blank" data-toggle="modal" data-target="#edit_buddies" ><i class="fas fa-pencil-alt"></i></a> <strong> Buddies: </strong><br></div>
+      </div>
+          <%# div %>
+          <div> 
+          <% if buddies.empty? && requested.empty? %>
+              <p>You don't have anyone to keep you accountable, yet!</p>
+              <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
+                Add one now!
+              </button>
+          <% else %>
+            <% if buddies.length == 1 %>
+              <p class="mb-0">Your buddy is: 
+            <% elsif buddies.length > 1 %>
+              <p class="mb-0">Your buddies are: 
+            <% end %>
+            
+              <% buddies.each do |buddy| %>
+                <%= buddy.firstname %> 
+              <% end %>
+            </p>
+            <div>
+            <% if requested.length >= 1 %>
+              <p>You've requested:
+              <% requested.each do |req| %>
+                <%= req.firstname %>
+              <% end %></p>
+            <% end %>
+            </div>
+          <% end %>
+          </div>
+        <%# div end %>
     </div>
   </div>
+<%# ############# %>
 </div>
 
   <%# Modal for editing the goal specifically %>

@@ -30,16 +30,16 @@
 
         }
 
-        &:hover,
-        &:hover ~ label {
-          color: $orange;
-          // text-shadow: 0 0 3px orange;
-          &:before {
-            content: '\f005  ';
-              font-weight: 900;
+          &:hover,
+          &:hover ~ label {
+            color: $orange;
+            // text-shadow: 0 0 3px orange;
+            &:before {
+              content: '\f005  ';
+                font-weight: 900;
 
+            }
           }
-        }
       }
     }
 
