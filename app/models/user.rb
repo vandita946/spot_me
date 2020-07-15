@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   # To prevent recreating the same email account / override
   validates :email, presence: true, uniqueness: true
-  
+
   has_many :owner_connections, :class_name => 'Connection', :foreign_key => 'owner_id'
   has_many :buddy_connections, :class_name => 'Connection', :foreign_key => 'buddy_id'
   has_many :goals, dependent: :destroy
@@ -79,8 +79,14 @@ class User < ApplicationRecord
         if gc.connection.buddy == self && gc.status == "Accepted"
           owner = gc.connection.owner
           goal = gc.goal
+
+            milestones = []
+            gc.goal.milestones.each do |milestone|
+              milestones << milestone
+            end
           buddyofs << { owner: owner,
-            goal: goal }
+            goal: goal,
+            milestones: milestones }
 
         end
       end

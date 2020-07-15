@@ -9,9 +9,11 @@
           <br>
           <i id="title-icon" class="fa fa-<%= @goal.icon %> mb-3"></i>
           <br>
+          <% if policy(@goal).edit? %>
             <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
               <i class="fas fa-edit"></i>
             </a>
+          <% end %>
         </h1>
         <p> <%= @goal.status %> </p>
         <h6> <%= @goal.description %> </h6>

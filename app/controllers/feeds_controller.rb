@@ -4,46 +4,46 @@ class FeedsController < ApplicationController
     @goals = @user.goals
     @connections = @user.connections
 
-    updates_milestones
-    updates_goals_creation
-
-    @feed = policy_scope(Feed)
-
+    # updates_milestones
+    # updates_goals_creation
     # updates_new_buddy_goal
 
     # create sort_everything function
+    sort_news
+
   end
 
   private
 
-  def updates_milestones
+  def user_milestones
     @user_milestones = []
     @goals.each do |goal|
       goal.milestones.each { |milestone| @user_milestones << milestone }
     end
-    @sorted_milestones = @user_milestones.sort_by(&:updated_at).reverse
+    @user_milestones
   end
 
-  def updates_goals_creation
-    # get goals created at
-    @creation_date_sorted_goals = @goals.sort_by(&:created_at).reverse
+  def updates_buddy_goals_creation
+    @buddy_goals = []
+    @user.fullinfo_buddyofs.each do |hash|
+      @buddy_goals << hash[:goal]
+    end
   end
 
-  def updates_goals_creation
-    # get goals created at
-    @creation_date_sorted_goals = @goals.sort_by(&:created_at).reverse
+  def updates_buddy_milestones
+    @buddy_milestones = []
+    @user.fullinfo_buddyofs.each do |hash|
+      @buddy_milestones << hash[:milestones]
+    end
+    @buddy_milestones.flatten!
   end
 
-  # def updates_buddy_milestones
-  #   # find user buddies & goals
-  #   @user_buddy_milestones = []
+  def sort_news
+    user_milestones
+    updates_buddy_goals_creation
+    updates_buddy_milestones
+    @sorted_news = [@user_milestones, @goals, @buddy_goals, @buddy_milestones].flatten!
 
-
-
-  #   @creation_date_sorted_goals = @goals.sort_by(&:created_at).reverse
-  # end
-
-  def sort_everything
-    # find a way to sort things with different attribute / created_at and updated_at
+    @sorted_news.sort_by! { |news| [news[:updated_at]] }.reverse!
   end
 end

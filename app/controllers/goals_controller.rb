@@ -20,7 +20,6 @@ class GoalsController < ApplicationController
     @goal.user = current_user
     @goal_connection = GoalConnection.new
     authorize @goal
-    authorize @goal_connection
   end
 
   def create
@@ -56,10 +55,6 @@ class GoalsController < ApplicationController
     @message = Message.new
     @completion_message = CompletionMessage.new
     authorize @goal
-    authorize @goal_connection
-    authorize @chatroom
-    authorize @message
-    authorize @completion_message
   end
 
   def edit

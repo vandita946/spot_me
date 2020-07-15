@@ -10,8 +10,8 @@ class GoalPolicy < ApplicationPolicy
   end
 
   def show?
-    user_is_owner?
-    # or if user is buddy >> define method in private
+    # if user is owner or if user is buddy >> define method in private
+    user_is_owner? || user_is_buddy?
   end
 
   def update?
@@ -29,7 +29,7 @@ class GoalPolicy < ApplicationPolicy
   end
 
   def user_is_buddy?
-    # define method
+    record.buddies.include? user
   end
 
 end
