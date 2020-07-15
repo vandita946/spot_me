@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   # To prevent recreating the same email account / override
   validates :email, presence: true, uniqueness: true
-  
+
   has_many :owner_connections, :class_name => 'Connection', :foreign_key => 'owner_id'
   has_many :buddy_connections, :class_name => 'Connection', :foreign_key => 'buddy_id'
   has_many :goals, dependent: :destroy
@@ -41,13 +41,13 @@ class User < ApplicationRecord
   # has_many :goal_connections, through: :goals, source: :goal
   # has_many :buddies, through: :goals_connection, source: :buddy
 
-  def avatar_thumbnail
-    if avatar.attached?
-      avatar.variant(resize: "150x150!").processed
-    else
-      "/default_profile.jpg"
-    end
-  end
+  # def avatar_thumbnail
+  #   if avatar.attached?
+  #     avatar.variant(resize: "150x150!").processed
+  #   else
+  #     "/default_profile.jpg"
+  #   end
+  # end
 
   def buddies
     buddies = []

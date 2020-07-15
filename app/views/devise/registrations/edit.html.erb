@@ -13,7 +13,7 @@
           <div class="form-inputs">
 
             <% if resource.avatar.attached? %>
-              <%= image_tag current_user.avatar_thumbnail, class: "avatar-large" %>
+              <%= image_tag current_user.avatar, class: "avatar-large" %>
             <% else %>
               <%= image_tag "default_profile.jpg", class: "avatar-large" %>
             <% end %>
