@@ -4,16 +4,18 @@
         <div class="card-body">
 
             <div class="container d-flex align-items-center justify-content-center px-0"><strong>You have no milestones yet, time to add some!</strong></div>
-        
+
         </div>
     </div>
 
 
 <% else %>
+
     <div class="cards">
+          <h5 class="d-flex justify-content-center mb-0 mt-3">My milestones</h4>
 
             <% @milestones.each do |milestone| %>
-                <div class="card shadow mb-0">
+                <div class="card shadow my-0">
                 <div class="card-body">
 
                     <div class="container d-flex align-items-center px-0">
@@ -56,7 +58,7 @@
                 </div>
 
             <% end %>
-        
+
     </div>
 <% end %>
 
