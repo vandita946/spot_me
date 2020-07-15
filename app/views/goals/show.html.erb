@@ -23,6 +23,7 @@
     <div class="progress my-2">
       <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=@goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=@goal.progress%>%"></div>
     </div>
+
     <div id="goal-buddies" style="text-align:center;">
     <% buddies = @goal.get_goal_buddies(current_user)[:goal_buddies] %>
     <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
@@ -70,6 +71,7 @@
 
     </div>
   </div>
+<%# ############# %>
 </div>
 
   <%# Modal for editing the goal specifically %>
