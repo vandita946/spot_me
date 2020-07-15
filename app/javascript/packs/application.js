@@ -7,8 +7,6 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-
-
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -123,6 +121,12 @@ if (document.getElementById('goal-buddies').innerText.includes("You don't have a
     $("#add_buddy").modal('show');
   });
 }
+
+$(document).on("click",'#clipboard-btn',function(event){
+  const link = document.getElementById("bar").innerText;
+  navigator.clipboard.writeText(link);
+  document.getElementById("clipboard-btn").innerText = "Copied!";
+});
 
 // Server-to-client(s) pushes:
 //  Broadcast in a model-specific channel:

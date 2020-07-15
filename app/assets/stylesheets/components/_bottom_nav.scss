@@ -2,12 +2,13 @@
   justify-content: space-between;
   width: 100vw;
   align-items: center;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-bottom: 0px;
   width: 100%;
-  height: 80px;
-  background-color: #FFBB55;
+  height: 50px;
+  background-color: $pink;
+  i{
+    color: $white;
+    font-size: 30px;
+  }
 }
 
 

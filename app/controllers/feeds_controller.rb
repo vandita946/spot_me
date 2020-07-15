@@ -3,6 +3,7 @@ class FeedsController < ApplicationController
     @user = current_user
     @goals = @user.goals
     @connections = @user.connections
+    @message = Message.new()
 
     sort_news
   end
