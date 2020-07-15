@@ -1,60 +1,9 @@
 
-<div class="container">
+<div class="d-block">
 
-<h1>Here are the latest updates <%= @user.firstname %></h1>
+<h1>Newsfeed</h1>
 
-<!-- iterate on all the news sorted by update date -->
-<% @sorted_news.each do |news| %>
-     <% if news.is_a?(Milestone) %>
-
-      <!-- and if the user is the owner of the goal -->
-        <% if @user.goal_ids.include?(news.goal_id) %>
-          <!-- news completed -->
-            <% if news.is_completed %>
-             <p><%= news.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - You checked "<%= news.name %>" (<%= news.goal.title %> goal) as done ! Congrats !</p>
-            <% elsif news.deadline == Date.today - 1 %>
-          <!-- WARNING deadline for milestone tomorrow -->
-              <p>CAREFUL - <% Date.today.strftime("%-d/%-m/%y")  %> - "<%= news.name %>" milestone (<%= news.goal.title %> goal)'s deadline is TOMORROW ! Hurry up !</p>
-              <% elsif news.created_at.hour == news.updated_at.hour %>
-          <!-- you created a milestone NEEDS TO BE FIXED -->
-              <p><%= news.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - "<%= news.name %>" milestone CREATED for <%= news.goal.title %> goal.</p>
-            <% end %>
-      <!-- or if the goal belongs to a buddy -->
-        <% else %>
-              <% if news.is_completed %>
-                <p><%= news.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - <%= news.goal.user.firstname %>
-                just completed the milestone "<%= news.name %>" from <%= news.goal.title %> goal. Cheers ! </p>
-              <% end %>
-        <% end %>
-      <% end %>
-
-    <% if news.is_a?(Goal) %>
-          <% if @user.goal_ids.include?(news.id) %>
-          <!-- fix creation notification only once -->
-              <% if news.status == "Completed" %>
-                <p><%= news.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> -
-                You just achieved "<%= news.title %>" goal. Well done ! </p>
-          <!-- if the goal has just been created -->
-              <% elsif news.created_at.hour == news.updated_at.hour %>
-                <p><%= news.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> - New goal "<%= news.title %>" CREATED.</p>
-              <% end %>
-          <% else %>
-
-        <!-- your buddy created a goal -->
-              <% if news.status == "Completed" %>
-                <p><%= news.updated_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> -
-                <%= news.user.firstname %> just achieved
-                "<%= news.title %>" goal. Time to celebrate together ! </p>
-        <!-- your buddy achieved a goal -->
-              <% elsif news.created_at.hour == news.updated_at.hour %>
-                <p><%= news.created_at.strftime("%l.%M%P %a. %-d/%-m/%y") %> You've officially started to Spot
-                <%= news.user.firstname %>'s goal called "<%= news.title %>".
-                This achievment will be yours too, congrats and good luck !</p>
-              <% end %>
-
-          <% end %>
-    <% end %>
-<% end %>
-
-
+  <div >
+ <%= render partial: "shared/feeds_messages", locals: { user: @user } %>
+  </div>
 </div>
