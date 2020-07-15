@@ -118,6 +118,12 @@ $(document).on("click","#add-another",function(event){
   $('#add-another').hide();
 });
 
+if (document.getElementById('goal-buddies').innerText.includes("You don't have anyone to keep you accountable, yet!")){
+  $(document).ready(function(){
+    $("#add_buddy").modal('show');
+  });
+}
+
 // Server-to-client(s) pushes:
 //  Broadcast in a model-specific channel:
 //    ChatroomChannel.broadcast_to(@chatroom, data) in a channel folder for milestones

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
     <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
 
@@ -107,6 +108,119 @@
 
         </div>
 
+=======
+<%# <% if policy(Goal).show? %>
+  <%# <%= link_to "Independent Goal", new_goal_path %>
+<%# <% end %>
+<div class="container d-flex flex-column">
+  <div class="d-flex justify-content-center">
+    <h2 class="my-0"><i id="title-icon" class="fa fa-<%= @goal.icon %> mb-3"></i></h2>
+    <h2 class="my-0 ml-3"><%= @goal.title %></h2>
+  </div>
+
+
+  <div class="container p-0">
+    <!--Navigation links with a Smooth Scroll effect-->
+    <ul class="smooth-scroll list-unstyled list-inline d-flex justify-content-around mb-1">
+      <li class="list-inline-item"><h5><a href="#test1" class="text-decoration-none">Chatbox</a></h5></li>
+      <li class="list-inline-item"><h5><a href="#test2" class="text-decoration-none">Milestones</a></h5></li>
+    </ul>
+  </div>
+
+
+  <div class="container mb-1"><h6 class="text-muted" style="text-decoration: underline;">Description: <br></h6><h6>  <%= @goal.description %> </h6></div>
+  <div class="container d-flex justify-content-center">
+    <p class="my-0 mr-3"> <%= @goal.status %> </p>
+    <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
+      <i class="fas fa-edit"></i>
+    </a> 
+  </div>
+  <div class="px-3">
+    <div class="progress my-2">
+      <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=@goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=@goal.progress%>%"></div>
+    </div>
+    <div id="goal-buddies">
+    <% buddies = @goal.get_goal_buddies(current_user)[:goal_buddies] %>
+    <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
+    <% if buddies.empty? && requested.empty? %>
+        <p>You don't have anyone to keep you accountable, yet!</p>
+        
+        <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
+          Add one now!
+        </button>
+    <% else %>
+      <% if buddies.length == 1 %>
+        <p>Your buddy is: 
+      <% elsif buddies.length > 1 %>
+        <p>Your buddies are: 
+      <% end %>
+      
+        <% buddies.each do |buddy| %>
+          <%= buddy.firstname %>
+        <% end %>
+      </p>
+
+      <% if requested.length >= 1 %>
+        <p>You've requested:</p>
+        <% requested.each do |req| %>
+          <%= req.firstname %>
+        <% end %>
+      <% end %>
+      <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+      <a href="blank" data-toggle="modal" data-target="#edit_buddies" >
+          <i class="fas fa-pencil-alt"></i>
+      </a>
+      
+    <% end %>
+      
+    </div>
+  </div>
+</div>
+
+  <%# Modal for editing the goal specifically %>
+  <%= render partial: "shared/goal_edit", locals: {goal: @goal} %> 
+
+
+  <div class="container d-flex flex-column" id="text2"><%= render 'shared/goalcards' %></div>
+  
+
+
+</br>
+
+
+
+<%# Chatroom for the goal %>
+<div class="container mb-3" id="test1">
+  <div class="container d-flex"><h2 class="font-weight-bold"> Chat </h2></div>
+  <div class="overflow-auto chatroom-size rounded-lg" id="messages" data-chatroom-id="<%= @chatroom.id %>">
+    <% @chatroom.messages.each do |message| %>
+    <div class="notification">
+    <%# INSERT AVATAR HERE %>
+    <% if message.user.avatar_thumbnail %>
+    <%= image_tag message.user.avatar_thumbnail, class: "avatar-large" %>
+    <% else %>
+    <%= image_tag "Portrait_Placeholder.jpg", class: "avatar-large" %>
+    <% end %>
+    <div class="notification-content">
+      <div class="message-container" id="message-<%= message.id %>">
+        <i class="author">
+          <span><%= message.user.firstname %></span>
+          <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+        </i>
+        <p><%= message.content %></p>
+      </div>
+    </div>
+    </div>
+    <% end %>
+    <% if @chatroom.messages.size < 5 %>
+    <div class="d-flex align-items-end justify-content-center"><span class="bg-white text-center d-inline-flex px-2">No more messages &nbsp;<i class="fa fa-caret-up pt-1" aria-hidden="true"></i></span></div>
+    <% end %>
+  </div>
+  <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
+    <%= f.input :content, label: false, placeholder: "What's on your mind?" %>
+    <%= f.button :submit, "Send message", class: "btn btn-primary" %>
+  <% end %>
+>>>>>>> master
 
       <%= render partial: "shared/new_milestone", locals: {goal: @goal, milestone: Milestone.new} %>
 
@@ -199,5 +313,9 @@
         </div>
       </div>
 
+<<<<<<< HEAD
     <% end %>
+=======
+<% end %>
+>>>>>>> master
 

@@ -1,1 +1,41 @@
-<div class=container></div>
+
+<div class="cards">
+
+    <% @goals.each do |goal| %>
+        <div class="card shadow mt-0">
+
+            <%= link_to goal_path(goal) do%>
+            <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <h4 class="my-0"><i class="fa fa-<%= goal.icon %> mb-3"></i></h4>
+                        <h4 class="my-0 ml-3"> <%= goal.title %></h4>
+                    </div>
+                    <h6 class='card-subtitle mb-2'> <%= goal.description%></h6>
+                    <% if goal.status != "Past" %>
+                        <p class="card-text"><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</p>
+                    <% else%>
+                        <p class="card-text">Ended <%= (Date.today - goal.deadline).to_i %> day(s) ago</p>
+                    <% end %>
+                    <div class="progress mt-2">
+                        <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=goal.progress%>%"></div>
+                    </div>
+                    <p class="card-text mt-2"><%= goal.status %></p>
+            <% end %>
+
+                <% if goal.status == "In Progress" || goal.status == "Not Started" %>
+                    <% if goal.get_latest %>
+                        <div class="card-subtitle mt-2 p-2" style="background-color: $white; border: solid 2px; border-radius:2px;">
+                            <% milestone = goal.get_latest %>
+                            <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
+                            Upcoming: <%= milestone.name %> by <%= milestone.deadline.strftime("%A, %-d/%-m/%y")%>
+                            <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>"><i class="far fa-square"></i></button>
+                        </div>
+                    <% end %>
+     
+                <% end %>
+            </div>
+
+        </div>
+    <% end %>
+    
+</div>

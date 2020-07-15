@@ -27,6 +27,13 @@ class GoalConnectionsController < ApplicationController
 
   end
 
+  def destroy
+    @goal_connection = GoalConnection.find(params[:id])
+    if @goal_connection.destroy
+      redirect_to request.referrer, alert: "Your buddy has been removed. "
+    end
+  end
+
   private
 
   def permit_parameters
