@@ -56,7 +56,10 @@
 
     <% end %>
       </div>
-          <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+      <% if @user %>
+        <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+      <% end %>
+
      <div class="container p-0">
     <!--Navigation links with a Smooth Scroll effect-->
     <ul class="smooth-scroll list-unstyled list-inline d-flex justify-content-center mb-1">
