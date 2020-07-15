@@ -41,13 +41,13 @@ class User < ApplicationRecord
   # has_many :goal_connections, through: :goals, source: :goal
   # has_many :buddies, through: :goals_connection, source: :buddy
 
-  def avatar_thumbnail
-    if avatar.attached?
-      avatar.variant(resize: "150x150!").processed
-    else
-      "/default_profile.jpg"
-    end
-  end
+  # def avatar_thumbnail
+  #   if avatar.attached?
+  #     avatar.variant(resize: "150x150!").processed
+  #   else
+  #     "/default_profile.jpg"
+  #   end
+  # end
 
   def buddies
     buddies = []
