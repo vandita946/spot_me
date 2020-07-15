@@ -1,7 +1,7 @@
-<% if policy(Goal).create? %>
+<div class="container">
+  <h1 style="text-align:center;">Let's get goaling!</h1>
 
-  <div class="container">
-    <h1>Let's get goaling!</h1>
+  <p style="text-align:center;">Pick from one of our goal templates or design one from scratch</p>
 
 <div class="template-buttons">
   <button id="design" class="btn btn-primary">
@@ -27,20 +27,15 @@
     <%= render partial: "shared/goal_template", locals: { template: @goal.blog_template, goal: @goal } %>
   </div>
 
-    <div id="blog_template">
-      <%= render partial: "shared/goal_template", locals: { template: @goal.blog_template, goal: @goal } %>
-    </div>
-
-    <div id="vacation_template">
-      <%= render partial: "shared/goal_template", locals: { template: @goal.vacation_template, goal: @goal } %>
-    </div>
-
-    <div id="dating_template">
-      <%= render partial: "shared/goal_template", locals: { template: @goal.dating_template, goal: @goal } %>
-    </div>
-
-    <div id="marathon_template">
-      <%= render partial: "shared/goal_template", locals: { template: @goal.marathon_template, goal: @goal } %>
-    </div>
+  <div id="vacation_template">
+    <%= render partial: "shared/goal_template", locals: { template: @goal.vacation_template, goal: @goal } %>
   </div>
-<% end %>
+
+  <div id="dating_template">
+    <%= render partial: "shared/goal_template", locals: { template: @goal.dating_template, goal: @goal } %>
+  </div>
+
+  <div id="marathon_template">
+    <%= render partial: "shared/goal_template", locals: { template: @goal.marathon_template, goal: @goal } %>
+  </div>
+</div>
