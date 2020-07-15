@@ -4,9 +4,11 @@
 <div class="container d-flex flex-column">
     <h2 class="my-0"><i id="title-icon" class="fa fa-<%= @goal.icon %>"></i></h2>
 
+    <h5 class="d-flex justify-content-center mt-1 m-0">My goal</h5>
+
   <div class="d-flex justify-content-center">
     <h2 class="my-0 mt-3 mb-3"><%= @goal.title %></h2>
-    
+
   </div>
   <div class="container mb-1"><h6 class="text-muted" style="text-align: center;"><%= @goal.description %></h6></div>
 
@@ -15,7 +17,7 @@
     <p class="my-0 mr-3"> <%= @goal.status %> </p>
     <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
       <i class="fas fa-edit"></i>
-    </a> 
+    </a>
   </div>
   <div class="px-3">
     <div class="progress my-2">
@@ -33,11 +35,11 @@
         </button>
     <% else %>
       <% if buddies.length == 1 %>
-        <p class="mb-0">Your buddy is: 
+        <p class="mb-0">Your buddy is:
       <% elsif buddies.length > 1 %>
-        <p class="mb-0">Your buddies are: 
+        <p class="mb-0">Your buddies are:
       <% end %>
-      
+
         <% buddies.each do |buddy| %>
           <%= buddy.firstname %>
         <% end %>
@@ -51,7 +53,7 @@
         </p>
       <% end %>
 
-      
+
     <% end %>
       </div>
           <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
@@ -66,7 +68,6 @@
       </li>
       <li class="list-inline-item"><h5><a href="#test1" class="text-decoration-none"><i class="far fa-comments"></i></a></h5></li>
     </ul>
-      
 
     </div>
   </div>
@@ -74,11 +75,11 @@
 </div>
 
   <%# Modal for editing the goal specifically %>
-  <%= render partial: "shared/goal_edit", locals: {goal: @goal} %> 
+  <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
 
 
   <div class="container d-flex flex-column" id="text2"><%= render 'shared/goalcards' %></div>
-  
+
 
 
 </br>
@@ -144,7 +145,7 @@
         <% path = request.original_fullpath() %>
         <% goal_id = path.split('/')[-1] %>
         <% goal = Goal.find(goal_id) %>
-        
+
         <br><br><br><br><br><br><br><br><br>
         <h6 style="text-align: center;">To become a buddy on <%= goal.owner.firstname %>'s goal to</h6>
         <h6 style="text-align: center;"><%= goal.title.downcase %>,</h6>
