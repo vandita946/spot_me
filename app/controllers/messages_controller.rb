@@ -12,7 +12,12 @@ class MessagesController < ApplicationController
             )
             if @chatroom.topic.class == Goal
                 # render URI(request.referrer).path, alert: "#{request.referrer}"
-                redirect_to goal_path(@chatroom.topic, anchor: "message-#{@message.id}")
+                if request.referrer.include?("goals")
+                  redirect_to goal_path(@chatroom.topic, anchor: "message-#{@message.id}")
+                elsif request.referrer.include?("feeds")
+                  redirect_to request.referrer
+                end
+
             elsif @chatroom.topic.class == Connection
                 redirect_to connection_path(@chatroom.topic, anchor: "message-#{@message.id}")
             else

@@ -1,0 +1,41 @@
+h1 {
+  font-size: 2em;
+  text-align: center;
+}
+
+p {
+  font-size: 0.9em;
+  margin-bottom: 0;
+}
+
+.time {
+  font-style: italic;
+  font-size: 0.8em;
+  margin-bottom: 0;
+  font-weight: 350;
+}
+
+span > a {
+  color: #e0e0da;
+  font-size: 1.2em;
+  &:hover{
+        color: $white;
+        text-decoration: none;
+        font-size: 1em;
+    }
+}
+
+.feed {
+  color: $white;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.feed #yours {
+    background-color: $blue;
+}
+
+.feed #buddys {
+    background-color: $pink;
+}
