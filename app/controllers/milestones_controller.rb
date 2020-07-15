@@ -11,6 +11,7 @@ class MilestonesController < ApplicationController
         5.times do
           @goal.milestones.build
         end
+        authorize @goal
     end
 
     def create

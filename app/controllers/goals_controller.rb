@@ -20,7 +20,6 @@ class GoalsController < ApplicationController
     @goal.user = current_user
     @goal_connection = GoalConnection.new
     authorize @goal
-    authorize @goal_connection
   end
 
   def create
