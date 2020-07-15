@@ -23,6 +23,17 @@ display: none;
 display: none;
 }
 
+.template-buttons{
+  a{
+    color: $white;
+  }
+  button {
+    margin: 2px;
+  }
+  display: grid;
+  margin-bottom: 5px;
+}
+
   
 
 // #milestones{
