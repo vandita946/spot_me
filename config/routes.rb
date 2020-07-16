@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'connections/index', as: :connections
   get 'connections/new'
   get 'users/requests', as: :requests
+  get 'users/invite_friends', as: :invite
   get 'connections/create'
   get 'connections/:id', to: 'connections#show', as: :connection
   get 'connections/search'

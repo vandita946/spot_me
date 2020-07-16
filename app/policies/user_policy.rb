@@ -7,6 +7,10 @@ class UserPolicy < ApplicationPolicy
     return true
   end
 
+   def invite_friends?
+    return true
+  end
+
   def show?
     return true
   end
