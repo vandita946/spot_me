@@ -14,6 +14,10 @@ class GoalPolicy < ApplicationPolicy
     return true
   end
 
+  def view?
+    user_is_owner? || user_is_buddy?
+  end
+
   def update?
     user_is_owner?
   end
