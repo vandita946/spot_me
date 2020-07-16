@@ -52,7 +52,7 @@
                             <p class='card-subtitle mt-1'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
                             <%# edit modal %>
                         <% if policy(@goal).edit? %>
-                            <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>">
+                            <a id="edit" class="font-size-updates" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>">
                                 <p>Update&nbsp;<i class="far fa-edit"></i></p>
                             </a>
                             <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
