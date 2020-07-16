@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body" style="text-align:center;">
         <!-- Target -->
-        <textarea id="invite_link" style="display:none;">spotmeco.herokuapp.com/users/<%= current_user.id %></textarea>
+        <textarea id="invite_link" style="display:none;">spotmeco.herokuapp.com/<%= ("/users" + current_user.id) if !current_user.nil? %></textarea>
         <!-- Trigger -->
         <button class="btn btn-primary" id="copy_link" data-clipboard-action="copy" data-clipboard-target="#invite_link">
             Copy invite link
