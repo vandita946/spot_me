@@ -14,10 +14,10 @@ class User < ApplicationRecord
   has_many :goals, dependent: :destroy
   has_many :messages
   has_many :connections, through: :owner_connections, source: :buddy
-  # has_many :connections, through: :buddy_connections, source: :owner
+  has_many :connections, through: :buddy_connections, source: :owner
   has_many :fans, through: :buddy_connections, source: :owner
-  # has_many :goal_connections, through: :connections, source: :goal
-  # has_many :buddies, through: :goals_connection, source: :buddy
+  has_many :goal_connections, through: :connections, source: :goal
+  has_many :buddies, through: :goals_connection, source: :buddy
 
 
   # Used for creating connections when visitor registers from links provided

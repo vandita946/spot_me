@@ -1,27 +1,35 @@
 class GoalPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope.where(user: user)
     end
   end
 
-  def create
+  def create?
     return true
   end
 
   def show?
-    return true
+    # if user is owner or if user is buddy >> define method in private
+    user_is_owner? || user_is_buddy?
   end
 
   def update?
-    record.user == user
-    # For documentation purposes - fact check:
-    # - record: the restaurant passed to the `authorize` method in controller
-    # - user:   the `current_user` signed in with Devise.
+    user_is_owner?
   end
 
   def destroy?
+    user_is_owner?
+  end
+
+  private
+
+  def user_is_owner?
     record.user == user
+  end
+
+  def user_is_buddy?
+    record.buddies.include? user
   end
 
 end

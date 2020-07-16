@@ -15,9 +15,6 @@
 
   <div class="container d-flex justify-content-center">
     <p class="my-0 mr-3"> <%= @goal.status %> </p>
-    <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
-      <i class="fas fa-edit"></i>
-    </a>
   </div>
   <div class="px-3">
     <div class="progress my-2">
@@ -56,7 +53,7 @@
 
     <% end %>
       </div>
-      <% if @user %>
+      <% if policy(@goal).show? %>
         <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
       <% end %>
 
@@ -77,9 +74,10 @@
 <%# ############# %>
 </div>
 
+  <% if policy(@goal).show? %>
   <%# Modal for editing the goal specifically %>
   <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
-
+  <% end %>
 
   <div class="container d-flex flex-column" id="text2"><%= render 'shared/goalcards' %></div>
 

@@ -24,8 +24,6 @@ class GoalsController < ApplicationController
     @goal = Goal.new(goal_params)
     @goal.user = current_user
     @chatroom = Chatroom.new(topic: @goal)
-
-
     if @goal.start_date >= Date.today
       @goal.status = "Not started"
     else
@@ -40,6 +38,7 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @goal = Goal.find(params[:id])
     if @goal.deadline <= Date.today
       @goal.status = "Past"
@@ -49,8 +48,7 @@ class GoalsController < ApplicationController
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
     @completion_message = CompletionMessage.new
-    # authorize @goal
-    @user = current_user
+    authorize @goal
   end
 
   def edit
