@@ -20,7 +20,7 @@
         <p>No one to keep me accountable yet!</p>
         <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
-          Add one now!
+          Add buddies now!
         </button>
 
     <% else %>
@@ -141,6 +141,7 @@
 <br><br>
 <p class="d-flex justify-content-center text-center mt-1 m-0"> Oh shoot! You're not <%= @goal.user.firstname %>'s buddy on this goal. Goals can be quite personal, so we'd rather not show you anything else for now.</p>
 
+
 <% end %>
 
   <%# start of pundit for icons %>
@@ -152,6 +153,7 @@
     <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
   <% end %>
   <%# end of pundit %>
+
 
 
 <%# LOGIC GATES HERE %>
