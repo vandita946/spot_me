@@ -4,6 +4,7 @@ class Milestone < ApplicationRecord
   belongs_to :goal
 
   has_one :completion_message, dependent: :destroy
+  has_one :user, through: :goal
 
   validates :name, :deadline, :weightage, presence: true
   validates :weightage, inclusion: { in: (1..5) }

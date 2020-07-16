@@ -26,7 +26,7 @@
           <%= f.input :deadline, as: :date, html5: true %>
           <%= f.button :submit, "Update", class: "btn btn-primary" %>
         <% end %>
-        <%= link_to "Delete", {:controller => :goals, :action => 'destroy', :id => goal.id }, :method => :delete, data: { confirm: "Are you sure you want to give up?" }, class: "btn btn-danger mt-2" %>
+        <%= link_to "Delete", {:controller => :goals, :action => 'destroy', :id => goal.id }, :method => :delete, data: { confirm: "Are you sure you want to give up?" }, class: "btn btn-light mt-2" %>
       </div>
     </div>
   </div>

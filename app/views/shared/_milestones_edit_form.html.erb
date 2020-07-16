@@ -27,7 +27,7 @@
           </div>
           <%= f.button :submit, "Update", class: "btn btn-primary" %>
         <% end %>
-        <%= link_to "Delete", {:controller => :milestones, :action => 'destroy', :id => milestone.id }, :method => :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger mt-2" %>
+        <%= link_to "Delete", {:controller => :milestones, :action => 'destroy', :id => milestone.id }, :method => :delete, data: { confirm: "Are you sure?" }, class: "btn btn-light mt-2" %>
 
       </div>
     </div>

@@ -1,4 +1,4 @@
-.navbar_container {
+ .navbar_container {
   padding-top: 0px;
   margin-top: 0px;
   width: 100vw;
@@ -35,7 +35,7 @@
 }
 
 .navbar-nav {
-    background-color: #FFBB55;
+  background-color: #FFBB55;
   }
 
 .nav-item {
@@ -45,4 +45,16 @@
 .navbar-nav :hover {
   background-color: #ad6f18 !important;
   color: white;
+}
+
+#notification-badge{
+  background-color: #04C4D9;
+  color: #FEFEFD;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 0.4em 0.7em;
+  vertical-align: top;
+  margin-left: -1.5em;
+
+  margin-top: -0.5em;
 }

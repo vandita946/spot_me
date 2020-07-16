@@ -19,13 +19,13 @@
             </div>
             <%# Hidden button so I can submit all the milestones at once in application.js%>
             <button class="btn btn-primary" id="milestone-<%=index%>-submit" type="submit" style="display:none;"></button>
-            
-            <button class="btn btn-danger" id="milestone-<%=index%>-remove" type="button">
+
+            <button class="btn btn-light" id="milestone-<%=index%>-remove" type="button">
                 Remove
             </button>
         <% end %>
         </div>
-        
+
         <% else %>
             <div id="milestone-<%=index%>-form" style="display:none;">
         <%= simple_form_for [@goal, milestone], remote: true do |f| %>
@@ -45,19 +45,19 @@
             </div>
             <%# Hidden button so I can submit all the milestones at once in application.js%>
             <button class="btn btn-primary" id="milestone-<%=index%>-submit" type="submit" style="display:none;"></button>
-            
-            <button class="btn btn-danger" id="milestone-<%=index%>-remove" type="button">
+
+            <button class="btn btn-light" id="milestone-<%=index%>-remove" type="button">
                 Remove
             </button>
         <% end %>
         </div>
 
-        
+
         <% end %>
-        
+
     <% end %>
     <br>
-    
+
 
     <button class="btn btn-primary mr-1" id="add-another" type="button">
         Add another milestone
