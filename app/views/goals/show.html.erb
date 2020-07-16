@@ -28,16 +28,16 @@
     <% buddies = @goal.get_goal_buddies(current_user)[:goal_buddies] %>
     <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
     <% if buddies.empty? && requested.empty? %>
-        <p>You don't have anyone to keep you accountable, yet!</p>
+        <p>No one to keep me accountable yet!</p>
         <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
           Add one now!
         </button>
     <% else %>
       <% if buddies.length == 1 %>
-        <p class="mb-0">Your buddy is:
+        <p class="mb-0">My buddy :
       <% elsif buddies.length > 1 %>
-        <p class="mb-0">Your buddies are:
+        <p class="mb-0">My buddies :
       <% end %>
 
         <% buddies.each do |buddy| %>
@@ -46,7 +46,7 @@
       </p>
 
       <% if requested.length >= 1 %>
-        <p>You've requested:
+        <p>I've requested:
         <% requested.each do |req| %>
           <%= req.firstname %>
         <% end %>
@@ -56,7 +56,10 @@
 
     <% end %>
       </div>
-          <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+      <% if @user %>
+        <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+      <% end %>
+
      <div class="container p-0">
     <!--Navigation links with a Smooth Scroll effect-->
     <ul class="smooth-scroll list-unstyled list-inline d-flex justify-content-center mb-1">

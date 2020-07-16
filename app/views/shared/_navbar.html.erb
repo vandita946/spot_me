@@ -1,39 +1,47 @@
-<div class="navbar_container fixed-top">
-  <div class="navbar navbar-light">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-     <% if user_signed_in? %>
-      <div><%= image_tag current_user.avatar, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %> &nbsp<%= current_user.firstname %> &nbsp <i class="fa fa-chevron-down" aria-hidden="true"></i></div>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
+<% if user_signed_in? %>
+  <div class="navbar_container fixed-top">
+    <div class="navbar navbar-light">
 
-        <li class="nav-item active">
-          <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to "Invite Friends", "#", class: "nav-link" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <div><%= image_tag current_user.avatar, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %> &nbsp<%= current_user.firstname %> &nbsp <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+      </button>
 
-        </li>
-        <li class="nav-item active">
-          <%= link_to "View Connections", connections_path, class: "nav-link" %>
-        </li>
-         <li class="nav-item active">
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-        </li>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
 
-        <% end %>
+              <li class="nav-item active">
+                <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to "Invite Friends", "#", class: "nav-link" %>
 
-      </ul>
-    </div>
+              </li>
+              <li class="nav-item active">
+                <%= link_to "View Connections", connections_path, class: "nav-link" %>
+              </li>
+               <li class="nav-item active">
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            </ul>
 
-    <div class="navbar-brand">
-      <%= link_to feeds_index_path do %>
-        <%= cl_image_tag("spotme_logo_phgj7v.svg", :height=>60, :crop=>"scale") %>
-      <% end %>
+          </div>
+
+          <div class= "navbar-brand">
+            <%= link_to feeds_index_path do %>
+            <%= cl_image_tag("spotme_logo_phgj7v.svg", :height=>80, :crop=>"scale", class: "navbar-brand") %>
+            <% end %>
+          </div>
+
+
     </div>
   </div>
-</div>
 
+<% else %>
+    <div class="container d-flex  justify-content-center pt-8">
+        <%= cl_image_tag("spotme_logo_phgj7v.svg", :height=>120, :crop=>"scale") %>
+    </div>
+  <% end %>
 

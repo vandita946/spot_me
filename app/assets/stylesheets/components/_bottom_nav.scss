@@ -1,13 +1,13 @@
 .bottom_navbar_container {
+  display: flex;
   justify-content: space-between;
-  width: 100vw;
   align-items: center;
-  width: 100%;
-  height: 50px;
+  width: 100vw;
+  height: 65px;
   background-color: $pink;
-  i{
+  i {
     color: $white;
-    font-size: 30px;
+    font-size: 40px;
   }
 }
 
