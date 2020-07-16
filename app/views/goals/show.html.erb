@@ -93,16 +93,35 @@
 <div class="container mb-3" id="test1">
   <div class="container d-flex"><h2 class="font-weight-bold"> Chat </h2></div>
   <div class="overflow-auto chatroom-size rounded-lg" id="messages" data-chatroom-id="<%= @chatroom.id %>">
-    <% @chatroom.messages.each do |message| %>
+    <% if @chatroom.messages.size < 5 %>
     <div class="notification">
+      <%= cl_image_tag("spotme_logo_phgj7v.svg", class: "avatar-large") %>
+      <div class="notification-content">
+        <div class="message-container">
+          <i class="author">
+            <span>Spotme Bot</span>
+            <small><%= @chatroom.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+          </i>
+          <p class="text-justify"><br>As a member of a Spotme, <br>you'll be able to send messages buddies and connections in the goal to achieve what we've declared. 
+          <br><br>When you download the Spotme desktop and mobile apps, you can receive notifications on all your devices and stay in sync when you’re on the move. 
+          <br><br>Whatever you do on one device is reflected everywhere — Spotme apps keep your place, letting you pick up conversations wherever you left off.
+          <br><br>When you join a goalpage, we’ll guide you through the process of setting up your account. We’ll ask you to enter your full name and a password so you can sign in and out with ease.
+          <br><br>Send something &nbsp;<i class="fa fa-caret-down pt-1" aria-hidden="true"></i></p>
+        </div>
+      </div>
+    </div>
+    <%# options %>
+    <% end %>
+    <% @chatroom.messages.each do |message| %>
+    <div class="notification" id="message-<%= message.id %>">
     <%# INSERT AVATAR HERE %>
     <% if message.user.avatar %>
     <%= image_tag message.user.avatar, class: "avatar-large" %>
     <% else %>
-    <%= image_tag "Portrait_Placeholder.jpg", class: "avatar-large" %>
+    <%= cl_image_tag("spotme_logo_phgj7v.svg", class: "avatar-large") %>
     <% end %>
     <div class="notification-content">
-      <div class="message-container" id="message-<%= message.id %>">
+      <div class="message-container" >
         <i class="author">
           <span><%= message.user.firstname %></span>
           <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
@@ -112,17 +131,15 @@
     </div>
     </div>
     <% end %>
-    <% if @chatroom.messages.size < 5 %>
-    <div class="d-flex align-items-end justify-content-center"><span class="bg-white text-center d-inline-flex px-2">No more messages &nbsp;<i class="fa fa-caret-up pt-1" aria-hidden="true"></i></span></div>
-    <% end %>
   </div>
   <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
-    <%= f.input :content, label: false, placeholder: "What's on your mind?" %>
-    <%= f.button :submit, "Send message", class: "btn btn-primary" %>
+    <div class="d-flex align-items-start">
+    <div class= "flex-grow-1"><%= f.input :content, label: false, placeholder: "What's on your mind?" %></div>
+    <%= button_tag type: 'submit', class: "btn btn-primary" do %><i class="fa fa-paper-plane" aria-hidden="true"></i><% end %>
+    </div>
   <% end %>
 
 </div>
-
 
 
 <%# LOGIC GATES HERE %>
