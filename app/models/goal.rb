@@ -2,7 +2,7 @@ class Goal < ApplicationRecord
 
   belongs_to :user
   has_one :chatroom, as: :topic
-  # has_one :goal_connection, as: :goal
+
   has_many :milestones, dependent: :destroy
   accepts_nested_attributes_for :milestones, allow_destroy: true
 
@@ -13,7 +13,6 @@ class Goal < ApplicationRecord
 
   validates :user, presence: true
   validates :title, :description, :start_date, :deadline, :icon, presence: true
-
 
   # validates :status, inclusion: { in: ["Not Started", "In Progress", "Completed", "Archived"] }
   # before_save :ensure_one_goal_connection

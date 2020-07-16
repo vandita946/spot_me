@@ -3,6 +3,10 @@ class UserPolicy < ApplicationPolicy
     return true
   end
 
+  def requests?
+    return true
+  end
+
   def show?
     return true
   end
