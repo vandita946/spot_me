@@ -116,17 +116,18 @@ $(document).on("click","#add-another",function(event){
   $('#add-another').hide();
 });
 
-if (document.getElementById('goal-buddies').innerText.includes("You don't have anyone to keep you accountable, yet!")){
-  $(document).ready(function(){
-    $("#add_buddy").modal('show');
-  });
-}
-
 $(document).on("click",'#clipboard-btn',function(event){
   const link = document.getElementById("bar").innerText;
   navigator.clipboard.writeText(link);
   document.getElementById("clipboard-btn").innerText = "Copied!";
 });
+
+$(document).on("click",'#copy_link',function(event){
+  const link = document.getElementById("invite_link").innerText;
+  navigator.clipboard.writeText(link);
+  document.getElementById("copy_link").innerText = "Copied!";
+});
+
 
 // Server-to-client(s) pushes:
 //  Broadcast in a model-specific channel:
