@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   skip_before_action :authenticate_user!, only: [ :show ]
 
     def show
@@ -12,17 +13,17 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        
+
         if @user.update(user_params)
           redirect_to request.referrer, notice: "Your particulars are updated! "
         else
             render :edit, alert: "Your particulars couldn't be updated. "
         end
     end
-    
+
     def destroy
         @user = User.find(params[:id])
-    end 
+    end
 
     private
 

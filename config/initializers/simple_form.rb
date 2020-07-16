@@ -143,7 +143,7 @@ SimpleForm.setup do |config|
   # config.custom_inputs_namespaces << "CustomInputs"
 
   # Default priority for time_zone inputs.
-  # config.time_zone_priority = nil
+  config.time_zone_priority = "Indonesia"
 
   # Default priority for country inputs.
   # config.country_priority = nil
