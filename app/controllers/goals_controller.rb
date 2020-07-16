@@ -3,7 +3,9 @@ class GoalsController < ApplicationController
 
   def index
     @user = current_user
-    @goals = @user.goals.sort_by(&:deadline)
+    @goals = policy_scope(Goal).sort_by(&:deadline)
+
+    # @goals = @user.goals.sort_by(&:deadline) // commented out for pundit
 
     @goals.each do |goal|
       if goal.deadline <= Date.today
@@ -17,14 +19,14 @@ class GoalsController < ApplicationController
     @goal = Goal.new
     @goal.user = current_user
     @goal_connection = GoalConnection.new
+    authorize @goal
   end
 
   def create
-
     @goal = Goal.new(goal_params)
     @goal.user = current_user
     @chatroom = Chatroom.new(topic: @goal)
-
+    authorize @goal
 
     if @goal.start_date >= Date.today
       @goal.status = "Not started"
@@ -40,7 +42,9 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @goal = Goal.find(params[:id])
+    @user = current_user
     if @goal.deadline <= Date.today
       @goal.status = "Past"
     end
@@ -49,16 +53,17 @@ class GoalsController < ApplicationController
     @chatroom = Chatroom.where(topic: @goal)[0]
     @message = Message.new
     @completion_message = CompletionMessage.new
-    # authorize @goal
-    @user = current_user
+    authorize @goal
   end
 
   def edit
     @goal = Goal.find(params[:id])
+    authorize @goal
   end
 
   def update
     @goal = Goal.find(params[:id])
+    authorize @goal
 
     if @goal.update(goal_params)
       redirect_to request.referrer, notice: "Goal updated! "
@@ -71,6 +76,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     @goal.destroy
     redirect_to goals_path, alert: "Your goal has been deleted. "
+    authorize @goal
   end
 
   private

@@ -5,14 +5,17 @@ class UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
         @current_user = current_user
+        authorize @user
     end
 
     def edit
         @user = User.find(params[:id])
+        authorize @user
     end
 
     def update
         @user = User.find(params[:id])
+        authorize @user
 
         if @user.update(user_params)
           redirect_to request.referrer, notice: "Your particulars are updated! "
@@ -23,6 +26,8 @@ class UsersController < ApplicationController
 
     def destroy
         @user = User.find(params[:id])
+
+        authorize @user
     end
 
     private
