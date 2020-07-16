@@ -8,6 +8,7 @@ class Goal < ApplicationRecord
 
   has_many :goal_connections, dependent: :destroy
   has_many :connections, through: :goal_connections
+
   has_many :buddies, through: :connections, source: :buddy
 
   validates :user, presence: true

@@ -42,6 +42,7 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @goal = Goal.find(params[:id])
     @user = current_user
     if @goal.deadline <= Date.today
