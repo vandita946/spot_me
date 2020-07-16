@@ -26,11 +26,8 @@ class GoalsController < ApplicationController
     @goal = Goal.new(goal_params)
     @goal.user = current_user
     @chatroom = Chatroom.new(topic: @goal)
-<<<<<<< HEAD
-=======
     authorize @goal
 
->>>>>>> master
     if @goal.start_date >= Date.today
       @goal.status = "Not started"
     else
