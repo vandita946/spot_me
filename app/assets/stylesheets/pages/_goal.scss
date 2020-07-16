@@ -10,7 +10,7 @@ h2{
 }
 
 .fa-check-square {
-    color: $white;
+    color: $pink;
     font-size: 1.5rem;
     &:hover:before{
         content: '\f0c8';
@@ -21,7 +21,7 @@ h2{
 
 
 .fa-square{
-    color: $white;
+    color: $pink;
     font-size: 1.5rem;
 
     &:hover:before{
@@ -93,20 +93,20 @@ h2{
     display: flex;
     margin: 10px;
     text-align: center;
-    background-color: $blue;
+    background-color: $white;
     color: $white;
     justify-content: center;
 }
 
 #edit {
-    color: $white;
+    color: $blue;
 }
 
 #edit-icon {
     i{
 
 
-    font-size: 20px;
+    font-size: 30px;
     color: $blue;
     &:hover{
         color: $pink;
@@ -134,4 +134,16 @@ h2{
 
 #title-icon {
     color: $pink;
+}
+
+.username-blue {
+    color: $blue;
+}
+
+.goal-show-grey {
+    background-color: rgba(235, 235, 235, 0.55);
+}
+
+.font-size-updates {
+    font-size: 22px;
 }

@@ -3,7 +3,7 @@
     <div class="card shadow mb-0">
         <div class="card-body">
 
-            <div class="container d-flex align-items-center justify-content-center px-0"><strong>You have no milestones yet, time to add some!</strong></div>
+            <div class="container d-flex align-items-center justify-content-center px-0 text-dark"><strong>You have no milestones yet, time to add some!</strong></div>
 
         </div>
     </div>
@@ -11,12 +11,11 @@
 
 <% else %>
 
-    <div class="cards">
-          <h5 class="d-flex justify-content-center mb-0 mt-3">My milestones</h4>
+    <div class="cards rounded">
 
             <% @milestones.each do |milestone| %>
-                <div class="card shadow my-0">
-                <div class="card-body">
+                <div class="card shadow-sm my-0 rounded">
+                <div class="card-body bg-light text-dark rounded">
 
                     <div class="container d-flex align-items-center px-0">
                         <% if milestone.is_completed %>
@@ -38,29 +37,31 @@
                             <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
                           <% end %>
                         <% end %>
+                        
+                        <div class="flex-grow-1 justify-content-center">
+                                <h4 class="mb-0"><%= milestone.name %></h4>
 
-                        <h4 class="ml-3 mb-0 pb-1"><%= milestone.name %></h4>
+                                <div class="stars">
+                                    <% milestone.weightage.times do %>
+                                        <i class="fas fa-star icon-yellow"></i>
+                                    <% end %>
+                                    <% (5 - milestone.weightage).times do %>
+                                    <i class="far fa-star icon-yellow"></i>
+                                    <% end %>
+                                </div>
+                            <p class='card-subtitle mt-1'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
+                            <%# edit modal %>
+                        <% if policy(@goal).edit? %>
+                            <a id="edit" class="font-size-updates" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>">
+                                <p>Update&nbsp;<i class="far fa-edit"></i></p>
+                            </a>
+                            <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
+                        <% end %>
+                        </div>
                     </div>
-                    <% if milestone.is_completed %>
-                    <h6 id="completion-bubble"><%= milestone.completion_message.content %></h6>
-                    <% end %>
-
-                        <p class='card-subtitle'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
-                            <div class="stars">
-                                <% milestone.weightage.times do %>
-                                    <i class="fas fa-star"></i>
-                                <% end %>
-                                <% (5 - milestone.weightage).times do %>
-                                <i class="far fa-star"></i>
-                                <% end %>
-                            </div>
-                        <%# edit modal %>
-                      <% if policy(@goal).edit? %>
-                        <a id="edit" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
-                      <% end %>
+                        <% if milestone.is_completed %>
+                        <h6 class="mb-0 mt-1 border" id="completion-bubble"><%= milestone.completion_message.content %></h6>
+                        <% end %>
                 </div>
                 </div>
 
