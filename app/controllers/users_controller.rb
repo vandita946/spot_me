@@ -9,6 +9,11 @@ class UsersController < ApplicationController
       authorize @user
     end
 
+    def invite_friends
+      @user = current_user
+      authorize @user
+    end
+
 
     def show
         @user = User.find(params[:id])
