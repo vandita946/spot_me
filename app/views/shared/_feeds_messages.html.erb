@@ -11,7 +11,7 @@
               <div class="card shadow-sm p-2">
                 <div class="d-flex justify-content-between align-items-center">
                   <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
-                  <%= image_tag current_user.avatar_thumbnail, class: "avatar"%>
+                  <%= image_tag current_user.avatar, class: "avatar"%>
                 </div>
                 <p>You checked "<%= news.name %>" (<span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span>) as done ! Congrats !</p>
               </div>
@@ -20,7 +20,7 @@
                 <div class="card shadow-sm p-2">
                   <div class="d-flex justify-content-between align-items-center">
                     <p class="time"><%= Date.today.strftime("%a. %-d") %></p>
-                    <%= image_tag current_user.avatar_thumbnail, class: "avatar"%>
+                    <%= image_tag current_user.avatar, class: "avatar"%>
                   </div>
                   <p>"<%= news.name %>" milestone (<span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span>)'s deadline is TOMORROW ! Hurry up !</p>
                 </div>
@@ -29,7 +29,7 @@
               <div class="card shadow-sm p-2">
                 <div class="d-flex justify-content-between align-items-center">
                    <p class="time"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></p>
-                   <%= image_tag current_user.avatar_thumbnail, class: "avatar"%>
+                   <%= image_tag current_user.avatar, class: "avatar"%>
                 </div>
 
                  <p>"<%= news.name %>" milestone created for <span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span> goal.</p>
@@ -43,7 +43,7 @@
               <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
               <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
               <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
-              <%= image_tag news.goal.user.avatar_thumbnail, class: "avatar"%>
+              <%= image_tag news.goal.user.avatar, class: "avatar"%>
             </div>
             <p><%= news.goal.user.firstname %> just completed the milestone "<%= news.name %>" from <span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span> goal. Cheers ! </p>
           </div>
@@ -59,7 +59,7 @@
                 <div class="card shadow-sm p-2">
                   <div class="d-flex justify-content-between align-items-center">
                      <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
-                     <%= image_tag current_user.avatar_thumbnail, class: "avatar"%>
+                     <%= image_tag current_user.avatar, class: "avatar"%>
                   </div>
                   <p>You just achieved <span>"<%= link_to "#{news.title}", goal_path(news) %>"</span> goal. Well done ! </p>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="card shadow-sm p-2">
                   <div class="d-flex justify-content-between align-items-center">
                      <p class="time"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></p>
-                     <%= image_tag current_user.avatar_thumbnail, class: "avatar"%>
+                     <%= image_tag current_user.avatar, class: "avatar"%>
                   </div>
                   <p>New goal <span>"<%= link_to "#{news.title}", goal_path(news) %>"</span> created.</p>
                 </div>
@@ -82,7 +82,7 @@
                     <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
                     <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
                     <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
-                    <%= image_tag news.user.avatar_thumbnail, class: "avatar"%>
+                    <%= image_tag news.user.avatar, class: "avatar"%>
                   </div>
                   <p><%= news.user.firstname %> just achieved "<span>"<%= link_to "#{news.title}", goal_path(news) %>"</span>" goal. Time to celebrate together ! </p>
                 </div>
@@ -93,7 +93,7 @@
                     <p class="time"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></p>
                     <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
                     <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
-                    <%= image_tag news.user.avatar_thumbnail, class: "avatar"%>
+                    <%= image_tag news.user.avatar, class: "avatar"%>
                   </div>
                     <p>You've officially started to Spot <%= news.user.firstname %>'s goal called <span>"<%= link_to "#{news.title}", goal_path(news) %>"</span>.
                     This achievment will be yours too, congrats and good luck !</p>

@@ -3,7 +3,7 @@
     <div class="navbar navbar-light">
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <div><%= image_tag current_user.avatar_thumbnail, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %> &nbsp<%= current_user.firstname %> &nbsp <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          <div><%= image_tag current_user.avatar, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %> &nbsp<%= current_user.firstname %> &nbsp <i class="fa fa-chevron-down" aria-hidden="true"></i>
           </div>
       </button>
 
@@ -28,7 +28,9 @@
           </div>
 
           <div class= "navbar-brand">
-            <%= cl_image_tag("spotme_logo_phgj7v.svg", :width=>120, :crop=>"scale", class: "navbar-brand") %>
+            <%= link_to feeds_index_path do %>
+            <%= cl_image_tag("spotme_logo_phgj7v.svg", :height=>80, :crop=>"scale", class: "navbar-brand") %>
+            <% end %>
           </div>
 
     </div>
