@@ -88,10 +88,10 @@
 <%# Chatroom for the goal %>
 <div class="container mb-3" id="test1">
   <div class="container d-flex"><h2 class="font-weight-bold"> Chat </h2></div>
-  <div class="overflow-auto chatroom-size rounded-lg" id="messages" data-chatroom-id="<%= @chatroom.id %>">
+  <div class="overflow-auto chatroom-size rounded-top" id="messages" data-chatroom-id="<%= @chatroom.id %>">
     <% if @chatroom.messages.size < 5 %>
     <div class="notification">
-      <%= cl_image_tag("spotme_logo_phgj7v.svg", class: "avatar-large") %>
+      <%= cl_image_tag("spotme_logo_phgj7v.svg", class: "avatar") %>
       <div class="notification-content">
         <div class="message-container">
           <i class="author">
@@ -112,9 +112,9 @@
     <div class="notification" id="message-<%= message.id %>">
     <%# INSERT AVATAR HERE %>
     <% if message.user.avatar %>
-    <%= image_tag message.user.avatar, class: "avatar-large" %>
+    <%= image_tag message.user.avatar, class: "avatar" %>
     <% else %>
-    <%= cl_image_tag("spotme_logo_phgj7v.svg", class: "avatar-large") %>
+    <%= cl_image_tag("spotme_logo_phgj7v.svg", class: "avatar") %>
     <% end %>
     <div class="notification-content">
       <div class="message-container" >

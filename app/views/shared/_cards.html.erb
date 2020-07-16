@@ -26,9 +26,9 @@
 
                 <% if goal.status == "In Progress" || goal.status == "Not Started" %>
                     <% if goal.get_latest %>
-                        <div class="card-subtitle mt-2 p-2 border border-secondary" style=" border-radius:2px;">
+                        <div class="card-subtitle mt-2 p-2 border" >
                             <% milestone = goal.get_latest %>
-                            <div class="d-flex justify-content-around">
+                            <div class="d-flex justify-content-around text-dark">
                                 <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
                                 Upcoming: <%= milestone.name %> <br>by <%= milestone.deadline.strftime("%A, %-d/%-m/%y")%>
                                 <button class="btn text-dark" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>"><i class="far fa-square completion-pink"></i></button>
