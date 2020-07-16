@@ -5,9 +5,15 @@ class Goal < ApplicationRecord
   # has_one :goal_connection, as: :goal
   has_many :milestones, dependent: :destroy
   accepts_nested_attributes_for :milestones, allow_destroy: true
+
   has_many :goal_connections, dependent: :destroy
   has_many :connections, through: :goal_connections
+<<<<<<< HEAD
   has_many :buddies, through: :connections
+=======
+  has_many :buddies, through: :connections, source: :buddy
+
+>>>>>>> master
   validates :user, presence: true
   validates :title, :description, :start_date, :deadline, :icon, presence: true
 

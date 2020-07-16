@@ -11,6 +11,10 @@ class GoalPolicy < ApplicationPolicy
 
   def show?
     # if user is owner or if user is buddy >> define method in private
+    return true
+  end
+
+  def view?
     user_is_owner? || user_is_buddy?
   end
 

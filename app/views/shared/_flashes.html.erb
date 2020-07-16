@@ -1,9 +1,9 @@
 <% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-    <%= notice %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <div class="alert alert-info alert-dismissible fade show m-1 d-flex" role="alert">
+    <div><%= notice %></div>
+    <div><button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
-    </button>
+    </button></div>
   </div>
 <% end %>
 <% if alert %>
