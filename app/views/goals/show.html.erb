@@ -1,10 +1,10 @@
-<%# <% if policy(Goal).show? %>
-  <%# <%= link_to "Independent Goal", new_goal_path %>
-<%# <% end %>
+
 <div class="container d-flex flex-column">
     <h2 class="my-0"><i id="title-icon" class="fa fa-<%= @goal.icon %>"></i></h2>
 
-    <h5 class="d-flex justify-content-center mt-1 m-0">My goal</h5>
+    <h5 class="d-flex justify-content-center mt-1 m-0"><%= @goal.user.firstname %>'s goal</h5>
+
+<% if policy(@goal).view? %>
 
   <div class="d-flex justify-content-center">
     <h2 class="my-0 mt-3 mb-3"><%= @goal.title %></h2>
@@ -15,9 +15,13 @@
 
   <div class="container d-flex justify-content-center">
     <p class="my-0 mr-3"> <%= @goal.status %> </p>
-    <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
-      <i class="fas fa-edit"></i>
-    </a>
+
+    <% if policy(@goal).edit? %>
+      <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
+        <i class="fas fa-edit"></i>
+      </a>
+    <% end %>
+
   </div>
   <div class="px-3">
     <div class="progress my-2">
@@ -25,20 +29,27 @@
     </div>
 
     <div id="goal-buddies" style="text-align:center;">
-    <% buddies = @goal.get_goal_buddies(current_user)[:goal_buddies] %>
-    <% requested = @goal.get_goal_buddies(current_user)[:requested] %>
+    <% buddies = @goal.get_goal_buddies(@goal.user)[:goal_buddies] %>
+    <% requested = @goal.get_goal_buddies(@goal.user)[:requested] %>
     <% if buddies.empty? && requested.empty? %>
         <p>No one to keep me accountable yet!</p>
         <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
           Add one now!
         </button>
+
     <% else %>
       <% if buddies.length == 1 %>
-        <p class="mb-0">My buddy :
+        <% if @goal.buddies[0] == current_user %>
+        <p class="mb-0">You're <%= @goal.user.firstname %>'s buddy,
+          <%  else %>
+        <p class="mb-0">Buddy on this goal :
+          <% end %>
       <% elsif buddies.length > 1 %>
-        <p class="mb-0">My buddies :
+        <p class="mb-0">Buddies on this goal :
       <% end %>
+
+  <% end %>
 
         <% buddies.each do |buddy| %>
           <%= buddy.firstname %>
@@ -46,7 +57,7 @@
       </p>
 
       <% if requested.length >= 1 %>
-        <p>I've requested:
+        <p>Buddies requested:
         <% requested.each do |req| %>
           <%= req.firstname %>
         <% end %>
@@ -54,20 +65,24 @@
       <% end %>
 
 
-    <% end %>
+  <% if policy(@goal).edit? %>
+
       </div>
-      <% if @user %>
+
         <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
-      <% end %>
+    <% end %>
+
 
      <div class="container p-0">
     <!--Navigation links with a Smooth Scroll effect-->
     <ul class="smooth-scroll list-unstyled list-inline d-flex justify-content-center mb-1">
 
+    <% if policy(@goal).edit? %>
       <li class="list-inline-item">
       <a href="blank" data-toggle="modal" data-target="#edit_buddies" >
           <i class="fas fa-pencil-alt"></i>
       </a>
+    <% end %>
       </li>
       <li class="list-inline-item"><h5><a href="#test1" class="text-decoration-none"><i class="far fa-comments"></i></a></h5></li>
     </ul>
@@ -77,9 +92,11 @@
 <%# ############# %>
 </div>
 
+  <% if policy(@goal).show? %>
   <%# Modal for editing the goal specifically %>
-  <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
 
+  <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
+  <% end %>
 
   <div class="container d-flex flex-column" id="text2"><%= render 'shared/goalcards' %></div>
 
@@ -139,17 +156,25 @@
     </div>
   <% end %>
 
-</div>
+  </div>
+
+<% else %>
+<br><br>
+<p class="d-flex justify-content-center text-center mt-1 m-0"> Oh shoot! You're not <%= @goal.user.firstname %>'s buddy on this goal. Goals can be quite personal, so we'd rather not show you anything else for now.</p>
+
+
+<% end %>
 
 
 <%# LOGIC GATES HERE %>
 <% if @user.nil? %>
 
 
-<!-- Development use only: Button trigger modal -->
-<%# <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
-  Launch static backdrop modal
-</button> %>
+  <!-- Development use only: Button trigger modal -->
+  <%# <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button> %>
+
 
   <!-- Modal -->
   <div class="modal fade notauser" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -193,4 +218,5 @@
   </div>
 
 <% end %>
+
 
