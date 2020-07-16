@@ -6,11 +6,13 @@ Rails.application.routes.draw do
 
   get 'connections/index', as: :connections
   get 'connections/new'
+  get 'users/requests', as: :requests
   get 'connections/create'
   get 'connections/:id', to: 'connections#show', as: :connection
   get 'connections/search'
   get 'connections/buddies'
   get 'connections/destroy'
+
 
   get 'feeds/index'
   devise_for :users

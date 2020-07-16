@@ -10,7 +10,6 @@ class ConnectionsController < ApplicationController
     @fans = @user.buddy_connections
     @buddies = @user.buddies
     @buddyofs = @user.buddyofs
-    @requests = @user.requests
     @goal_connection = GoalConnection.new
   end
 
@@ -43,6 +42,7 @@ class ConnectionsController < ApplicationController
     authorize @chatroom
     authorize @message
   end
+
 
   def destroy
     # you can revoke a connection with a buddy from your buddy list or her profile (no view)

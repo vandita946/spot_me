@@ -2,6 +2,14 @@ class UsersController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [ :show ]
 
+
+    def requests
+      @user = current_user
+      @requests = @user.requests
+      authorize @user
+    end
+
+
     def show
         @user = User.find(params[:id])
         @current_user = current_user
