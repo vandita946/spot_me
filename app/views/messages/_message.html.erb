@@ -1,7 +1,17 @@
-<div class="message-container" id="message-<%= message.id %>">
-  <i class="author">
-    <span><%= message.user.firstname %></span>
-    <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-  </i>
-  <p><%= message.content %></p>
-</div>
+<div class="notification" id="message-<%= message.id %>">
+    <%# INSERT AVATAR HERE %>
+    <% if message.user.avatar %>
+    <%= image_tag message.user.avatar, class: "avatar-large" %>
+    <% else %>
+    <%= cl_image_tag("spotme_logo_phgj7v.svg", class: "avatar-large") %>
+    <% end %>
+    <div class="notification-content">
+      <div class="message-container" >
+        <i class="author">
+          <span><%= message.user.firstname %></span>
+          <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+        </i>
+        <p><%= message.content %></p>
+      </div>
+    </div>
+    </div>
