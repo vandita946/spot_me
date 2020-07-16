@@ -1,34 +1,19 @@
 
-<div class="container d-flex flex-column">
-    <h2 class="my-0"><i id="title-icon" class="fa fa-<%= @goal.icon %>"></i></h2>
+<div class="container d-flex flex-column bg-light py-3">
 
-    <h5 class="d-flex justify-content-center mt-1 m-0"><%= @goal.user.firstname %>'s goal</h5>
 
 <% if policy(@goal).view? %>
-
   <div class="d-flex justify-content-center">
-    <h2 class="my-0 mt-3 mb-3"><%= @goal.title %></h2>
-
+    <h2><i id="title-icon" class="fa fa-<%= @goal.icon %>"></i></h2>
+    <h2 class="ml-3 mb-0"><%= @goal.title %></h2>
   </div>
-  <div class="container mb-1"><h6 class="text-muted" style="text-align: center;"><%= @goal.description %></h6></div>
+    <h5 class="d-flex justify-content-center m-0 username-blue"><%= @goal.user.firstname %>'s goal</h5>
 
 
-  <div class="container d-flex justify-content-center">
-    <p class="my-0 mr-3"> <%= @goal.status %> </p>
+  
+  <div class="container mt-2"><h6 class="mb-1"><u>Description:</u></h6><h6 class="text-muted"><%= @goal.description %></h6></div>
 
-    <% if policy(@goal).edit? %>
-      <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" >
-        <i class="fas fa-edit"></i>
-      </a>
-    <% end %>
-
-  </div>
-  <div class="px-3">
-    <div class="progress my-2">
-      <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=@goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=@goal.progress%>%"></div>
-    </div>
-
-    <div id="goal-buddies" style="text-align:center;">
+    <div class="container" id="goal-buddies">
     <% buddies = @goal.get_goal_buddies(@goal.user)[:goal_buddies] %>
     <% requested = @goal.get_goal_buddies(@goal.user)[:requested] %>
     <% if buddies.empty? && requested.empty? %>
@@ -39,6 +24,7 @@
         </button>
 
     <% else %>
+    <em>
       <% if buddies.length == 1 %>
         <% if @goal.buddies[0] == current_user %>
         <p class="mb-0">You're <%= @goal.user.firstname %>'s buddy,
@@ -48,57 +34,50 @@
       <% elsif buddies.length > 1 %>
         <p class="mb-0">Buddies on this goal :
       <% end %>
-
+      </em>
   <% end %>
 
         <% buddies.each do |buddy| %>
-          <%= buddy.firstname %>
+          <strong><%= buddy.firstname %></strong>
         <% end %>
       </p>
 
       <% if requested.length >= 1 %>
-        <p>Buddies requested:
+        <p><em>Buddies requested:</em>
         <% requested.each do |req| %>
-          <%= req.firstname %>
+          <strong><%= req.firstname %></strong>
         <% end %>
         </p>
       <% end %>
 
+    <div class="d-flex justify-content-around mt-3">
+      <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" ><i class="fas fa-edit"></i></a>
+      <a href="blank" data-toggle="modal" data-target="#edit_buddies" id="edit-icon"><i class="fas fa-user-tag"></i></a>
+      <!--Navigation links with a Smooth Scroll effect-->
+      <a href="#test1" class="text-decoration-none" id="edit-icon"><i class="far fa-comments"></i></a>
+    </div>
 
-  <% if policy(@goal).edit? %>
-
-      </div>
-
-        <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
-    <% end %>
 
 
-     <div class="container p-0">
-    <!--Navigation links with a Smooth Scroll effect-->
-    <ul class="smooth-scroll list-unstyled list-inline d-flex justify-content-center mb-1">
-
-    <% if policy(@goal).edit? %>
-      <li class="list-inline-item">
-      <a href="blank" data-toggle="modal" data-target="#edit_buddies" >
-          <i class="fas fa-pencil-alt"></i>
-      </a>
-    <% end %>
-      </li>
-      <li class="list-inline-item"><h5><a href="#test1" class="text-decoration-none"><i class="far fa-comments"></i></a></h5></li>
-    </ul>
-
+  <div class="px-2 mt-3">
+    <div class="progress mt-2">
+      <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=@goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=@goal.progress%>%"></div>
     </div>
   </div>
-<%# ############# %>
+
+  <div class="container d-flex justify-content-center">
+    <p class="mb-0 mr-3"> <%= @goal.status %> </p>
+  </div>
+
+
+
+
+  </div>
 </div>
 
-  <% if policy(@goal).show? %>
-  <%# Modal for editing the goal specifically %>
 
-  <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
-  <% end %>
-
-  <div class="container d-flex flex-column" id="text2"><%= render 'shared/goalcards' %></div>
+  <h4 class="d-flex justify-content-center mb-2 mt-2">Milestones</h4>
+  <div class="container px-0 d-flex flex-column" id="text2"><%= render 'shared/goalcards' %></div>
 
 
 
@@ -163,6 +142,17 @@
 <p class="d-flex justify-content-center text-center mt-1 m-0"> Oh shoot! You're not <%= @goal.user.firstname %>'s buddy on this goal. Goals can be quite personal, so we'd rather not show you anything else for now.</p>
 
 <% end %>
+
+  <%# start of pundit for icons %>
+  <% if policy(@goal).edit? %>
+    <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+  <% end %>
+  <% if policy(@goal).show? %>
+    <%# Modal for editing the goal specifically %>
+    <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
+  <% end %>
+  <%# end of pundit %>
+
 
 <%# LOGIC GATES HERE %>
 <% if @user.nil? %>
