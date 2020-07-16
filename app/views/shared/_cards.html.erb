@@ -2,24 +2,24 @@
 <div class="cards">
 
     <% @goals.each do |goal| %>
-        <div class="card shadow mt-0">
+        <div class="card shadow-sm mt-0">
 
             <%= link_to goal_path(goal), method: 'GET' do%>
-            <div class="card-body">
-                    <div class="d-flex justify-content-center">
+            <div class="card-body text-dark bg-light">
+                    <div class="d-flex text-dark">
                         <h4 class="my-0"><i class="fa fa-<%= goal.icon %> mb-3"></i></h4>
                         <h4 class="my-0 ml-3"> <%= goal.title %></h4>
                     </div>
-                    <h6 class='card-subtitle mb-2'> <%= goal.description%></h6>
+                    <h6 class='card-subtitle mb-2 d-flex text-dark'> <%= goal.description%></h6>
                     <% if goal.status != "Past" %>
-                        <p class="card-text"><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</p>
+                        <p class="card-text text-dark d-flex"><%= (goal.deadline - Date.today).to_i %> days to go until the deadline!</p>
                     <% else%>
-                        <p class="card-text">Ended <%= (Date.today - goal.deadline).to_i %> day(s) ago</p>
+                        <p class="card-text text-dark d-flex">Ended <%= (Date.today - goal.deadline).to_i %> day(s) ago</p>
                     <% end %>
                     <div class="progress mt-2">
                         <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=goal.progress%>%"></div>
                     </div>
-                    <p class="card-text mt-2"><%= goal.status %></p>
+                    <p class="card-text mt-2 text-dark"><%= goal.status %></p>
             <% end %>
 
                 <% if goal.status == "In Progress" || goal.status == "Not Started" %>
