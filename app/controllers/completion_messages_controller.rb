@@ -3,6 +3,8 @@ class CompletionMessagesController < ApplicationController
     def new
         @milestone = Milestone.find(params[:milestone_id])
         @completion_message = CompletionMessage.new
+        authorize @milestone
+        authorize @completion_message
     end
 
     def create
@@ -15,11 +17,11 @@ class CompletionMessagesController < ApplicationController
             redirect_to request.referrer, notice: "Another step closer! "
         else
             redirect_to request.referrer, notice: "Your milestone couldn't be marked as complete. "
-
-
         end
+        authorize @milestone
+        authorize @completion_message
     end
-    
+
 
     private
 

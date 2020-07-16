@@ -5,7 +5,13 @@ class FeedsController < ApplicationController
     @connections = @user.connections
     @message = Message.new()
 
+    # updates_milestones
+    # updates_goals_creation
+    # updates_new_buddy_goal
+
+    # create sort_everything function
     sort_news
+
   end
 
   private

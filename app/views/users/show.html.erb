@@ -1,8 +1,5 @@
-<h1>Profile page</h1>
-
 <div class="container">
-    <h1><%= @user.firstname %></h1>
-    <h6><%= @user.lastname %></h6>
+    <span><h1><%= image_tag @user.avatar, class: "avatar-large" %>&nbsp&nbsp&nbsp<%= @user.firstname %> <%= @user.lastname %></h1></span>
     <p>Email: <%= @user.email %></p>
     <p>Number of goals: <strong><%= @user.goals.size %></strong></p>
     <%= link_to edit_user_registration_path(@user) do %>
@@ -42,7 +39,7 @@
         <% path = request.original_fullpath() %>
         <% user_id = path.split('/')[-1] %>
         <% user = User.find(user_id) %>
-        
+
         <br><br><br><br><br><br><br><br><br>
         <h6 style="text-align: center;">To connect with <%= user.firstname %>,</h6>
         <h6 style="text-align: center;">please register or sign in!</h6>

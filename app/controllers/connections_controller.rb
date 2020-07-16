@@ -5,6 +5,7 @@ class ConnectionsController < ApplicationController
     # buddyof: you can see who has requested you as a buddy
     # connectionof: you can see who added you as a connection
     @user = current_user
+    @connections = policy_scope(Connection)
     @connections = @user.owner_connections
     @fans = @user.buddy_connections
     @buddies = @user.buddies
@@ -22,8 +23,10 @@ class ConnectionsController < ApplicationController
   def create
     # creates a connection between a user and a buddy, without a goal (no view)
     @connection = Connection.new(connection_params)
+    authorize @connection
     @connection.owner_id = current_user.id
     @chatroom = Chatroom.new(topic: @connection)
+    authorize @chatroom
       if @connection.save && @connection.save
         redirect_to connections_path, notice: "You have added #{buddy.firstname} to your connections"
       else
@@ -36,6 +39,9 @@ class ConnectionsController < ApplicationController
     @connection = Connection.find(params[:id])
     @chatroom = Chatroom.where(topic: @connection)[0]
     @message = Message.new
+    authorize @connection
+    authorize @chatroom
+    authorize @message
   end
 
   def destroy

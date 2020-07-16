@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for [milestone, @completion_message], remote: true do |f| %>
-            <%= f.input :content, input_html: {value: f.object.content || 'I did it!'} %>
+            <%= f.input :content, input_html: {value: f.object.content || 'One more tick on the checklist!'} %>
             <%= f.submit "Submit", class: "btn btn-primary" %>
         <% end %>
 
