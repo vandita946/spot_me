@@ -8,7 +8,7 @@ class GoalsController < ApplicationController
     # @goals = @user.goals.sort_by(&:deadline) // commented out for pundit
 
     @goals.each do |goal|
-      if goal.deadline <= Date.today
+      if goal.deadline < Date.today
         goal.status = "Past"
       end
     end

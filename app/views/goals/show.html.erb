@@ -3,12 +3,16 @@
 
 
 <% if policy(@goal).view? %>
+    <% if @goal.user = current_user %>
+    <h5 class="d-flex justify-content-center mb-0 username-blue">My goal</h5>
+    <% else %>
+    <h5 class="d-flex justify-content-center mb-0 username-blue"><%= @goal.user.firstname %>'s goal</h5>
+    <% end %>
   <div class="d-flex justify-content-center">
     <h2><i id="title-icon" class="fa fa-<%= @goal.icon %>"></i></h2>
     <h2 class="ml-3 mb-0"><%= @goal.title %></h2>
   </div>
-    <h5 class="d-flex justify-content-center m-0 username-blue"><%= @goal.user.firstname %>'s goal</h5>
-    <div class="container mb-1"><h6 class="text-muted text-center"><%= @goal.description %></h6></div>
+    <div class="container mb-2"><h6 class="text-muted text-center mb-0"><%= @goal.description %></h6></div>
 
 
 
@@ -17,8 +21,9 @@
     <% buddies = @goal.get_goal_buddies(@goal.user)[:goal_buddies] %>
     <% requested = @goal.get_goal_buddies(@goal.user)[:requested] %>
     <% if buddies.empty? && requested.empty? %>
-        <p>No one to keep me accountable yet!</p>
+        <p class="text-center">No one to keep me accountable yet!</p>
         <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
+
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
           Add buddies now
         </button>
@@ -27,15 +32,16 @@
         </button>
 
     <% else %>
+    <div class="text-center">
     <em>
       <% if buddies.length == 1 %>
         <% if @goal.buddies[0] == current_user %>
         <p class="mb-0">You're <%= @goal.user.firstname %>'s buddy,
           <%  else %>
-        <p class="mb-0">Buddy on this goal :
+        <p class="mb-0">Buddy:
           <% end %>
       <% elsif buddies.length > 1 %>
-        <p class="mb-0">Buddies on this goal :
+        <p class="mb-0">Buddies:
       <% end %>
       </em>
   <% end %>
@@ -46,13 +52,13 @@
       </p>
 
       <% if requested.length >= 1 %>
-        <p><em>Buddies requested:</em>
+        <p><em>Requested:</em>
         <% requested.each do |req| %>
           <strong><%= req.firstname %></strong>
         <% end %>
         </p>
       <% end %>
-
+</div>
     <div class="d-flex justify-content-around mt-3">
       <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" ><i class="fas fa-edit"></i></a>
       <a href="blank" data-toggle="modal" data-target="#edit_buddies" id="edit-icon"><i class="fas fa-user-tag"></i></a>
