@@ -15,7 +15,7 @@
     <div class="container mb-2"><h6 class="text-muted text-center mb-0"><%= @goal.description %></h6></div>
 
 
-  
+
 
     <div class="container" id="goal-buddies">
     <% buddies = @goal.get_goal_buddies(@goal.user)[:goal_buddies] %>
@@ -23,9 +23,13 @@
     <% if buddies.empty? && requested.empty? %>
         <p class="text-center">No one to keep me accountable yet!</p>
         <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
-        <div class="d-flex justify-content-center mt-2"><button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
-          Add buddies now!
-        </button></div>
+
+        <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
+          Add buddies now
+        </button>
+        <button class="btn btn-light" data-toggle="modal" data-target="#calendar">
+          Add to calendar
+        </button>
 
     <% else %>
     <div class="text-center">
@@ -103,8 +107,8 @@
             <span>Spotme Bot</span>
             <small><%= @chatroom.created_at.strftime("%a %b %e at %l:%M%p") %></small>
           </i>
-          <p class="text-justify"><br>As a member of a Spotme, <br>you'll be able to send messages buddies and connections in the goal to achieve what we've declared. 
-          <br><br>When you download the Spotme desktop and mobile apps, you can receive notifications on all your devices and stay in sync when you’re on the move. 
+          <p class="text-justify"><br>As a member of a Spotme, <br>you'll be able to send messages buddies and connections in the goal to achieve what we've declared.
+          <br><br>When you download the Spotme desktop and mobile apps, you can receive notifications on all your devices and stay in sync when you’re on the move.
           <br><br>Whatever you do on one device is reflected everywhere — Spotme apps keep your place, letting you pick up conversations wherever you left off.
           <br><br>When you join a goalpage, we’ll guide you through the process of setting up your account. We’ll ask you to enter your full name and a password so you can sign in and out with ease.
           <br><br>Send something &nbsp;<i class="fa fa-caret-down pt-1" aria-hidden="true"></i></p>

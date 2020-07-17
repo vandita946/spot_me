@@ -1,16 +1,12 @@
 
 
   <ul class="nav container-fluid nav-pills nav-fill d-flex flex-nowrap px-0">
-
     <li class="nav-item px-0">
       <a href="#connections" data-toggle="tab" role="tab" class="nav-link active">Connections</a>
     </li>
     <li class="nav-item px-0">
       <a href="#buddies" data-toggle="tab" role="tab" class="nav-link">Buddies</a>
     </li>
-<!--     <li class="nav-item px-0">
-      <a href="#requests" data-toggle="tab" role="tab" class="nav-link">Requests</a>
-    </li> -->
     <li class="nav-item px-0">
       <a href="#buddyof" data-toggle="tab" role="tab" class="nav-link">Buddying</a>
     </li>
@@ -21,11 +17,11 @@
 
 </div>
 
-  <div class="tab-content" style="text-align:center">
+  <div class="tab-content d-flex justify-content-center">
     <div role="tab-panel" class="tab-pane active" id="connections">
       <% @connections.each do |connection| %>
         <div class="cards py-3">
-          <div class="row justify-content-center align-items-center">
+          <div class="row justify-content-left align-items-center">
           <%= image_tag connection.buddy.avatar, class: "avatar", id: "connection_avatar" %>
           <p>&nbsp&nbsp<%= connection.buddy.firstname %> <%= connection.buddy.lastname %> </p>
           </div>
@@ -44,6 +40,14 @@
             <div class="row justify-content-center align-items-center">
             <%= image_tag buddy.avatar, class: "avatar", id: "connection_avatar" %>
             <p>&nbsp&nbsp<%= buddy.firstname %> <%= buddy.lastname %> </p>
+            </div>
+            <div class="justify-content-left align-items-center">
+              <% current_user.goals.each do |goal| %>
+                <%= if goal.buddies.include? buddy do %>
+                <p>on: <%= goal.title %></p>
+                  <% end %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         <% end %>
