@@ -34,9 +34,13 @@
   border: none !important;
 }
 
+.navbar-toggler:focus {
+  outline: none !important;
+  }
+
 .navbar-nav {
   background-color: white;
-  border: 2px solid #FFBB55;
+  border: 2px solid #04C4D9;
   }
 
 
