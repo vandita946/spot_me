@@ -143,8 +143,9 @@
                     <div>
                       <h5>New buddy goal</h5>
                       <p>You've started to Spot <%= news.user.firstname %>'s goal "<%= link_to "#{news.title}", goal_path(news) %>". Congrats and good luck!</p>
-                      <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
                       <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
+                      <button class="btn btn-light py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
+
                     </div>
                   </div>
                   <div class="feeds-card-pricing">
