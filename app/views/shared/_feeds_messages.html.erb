@@ -1,5 +1,6 @@
 
 
+
 <!-- iterate on all the news sorted by update date -->
 <% @sorted_news.each do |news| %>
 
@@ -8,44 +9,70 @@
       <% if @user.goal_ids.include?(news.goal_id) %>
             <!-- milestone completed -->
             <% if news.is_completed %>
-              <div class="card shadow-sm p-2">
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
-                  <%= image_tag current_user.avatar, class: "avatar"%>
+              <div class="feeds-card">
+                <div class="feeds-card-infos">
+                    <div>
+                      <h5>Milestone check</h5>
+                      <p>You checked "<%= news.name %>" (<%= link_to "#{news.goal.title}", goal_path(news.goal) %>) as done ! Congrats !</p>
+                    </div>
+                    <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
+                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                 </div>
-                <p>You checked "<%= news.name %>" (<span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span>) as done ! Congrats !</p>
               </div>
-              <% elsif news.deadline == Date.today - 1 %>
-                <!-- WARNING deadline for milestone tomorrow -->
-                <div class="card shadow-sm p-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <p class="time"><%= Date.today.strftime("%a. %-d") %></p>
-                    <%= image_tag current_user.avatar, class: "avatar"%>
+
+
+
+
+            <% elsif news.deadline == Date.today - 1 %>
+              <!-- WARNING deadline for milestone tomorrow -->
+              <div class="feeds-card">
+                <div class="feeds-card-infos">
+                  <div>
+                    <h5>Deadline</h5>
+                    <p>"<%= news.name %>" milestone (<%= link_to "#{news.goal.title}", goal_path(news.goal) %>)'s deadline is TOMORROW ! Hurry up !</p>
                   </div>
-                  <p>"<%= news.name %>" milestone (<span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span>)'s deadline is TOMORROW ! Hurry up !</p>
+                  <h2 class="feeds-card-pricing"><%= Date.today.strftime("%a. %-d") %></h2>
+                  <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                 </div>
+              </div>
+
             <% elsif news.created_at.hour == news.updated_at.hour %>
               <!-- you created a milestone -->
-              <div class="card shadow-sm p-2">
-                <div class="d-flex justify-content-between align-items-center">
-                   <p class="time"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></p>
-                   <%= image_tag current_user.avatar, class: "avatar"%>
+
+              <div class="feeds-card">
+
+                <div class="feeds-card-infos">
+                    <div>
+                      <h5>New Milestone</h5>
+                      <p>"<%= news.name %>" for <%= link_to "#{news.goal.title}", goal_path(news.goal) %> goal.</p>
+                    </div>
+                    <h2 class="feeds-card-pricing"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></h2>
+
+                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                 </div>
 
-                 <p>"<%= news.name %>" milestone created for <span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span> goal.</p>
               </div>
             <% end %>
+
+
+
+
       <!-- or if the goal belongs to a buddy -->
       <% else %>
         <% if news.is_completed %>
-          <div class="card shadow-sm p-2">
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
-              <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
-              <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
-              <%= image_tag news.goal.user.avatar, class: "avatar"%>
+          <div class="feeds-card">
+            <div class="feeds-card-infos">
+              <div>
+                <h5>Milestone completed - <%= news.goal.user.firstname %></h5>
+                <p>"<%= news.name %>" from <%= link_to "#{news.goal.title}", goal_path(news.goal) %> goal. Cheers ! </p>
+                <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment
+                </button>
+                <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
+              </div>
+              <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
+
+              <%= image_tag news.goal.user.avatar, class: "feeds-card-user avatar-bordered"%>
             </div>
-            <p><%= news.goal.user.firstname %> just completed the milestone "<%= news.name %>" from <span><%= link_to "#{news.goal.title}", goal_path(news.goal) %></span> goal. Cheers ! </p>
           </div>
         <% end %>
       <% end %>
@@ -56,47 +83,58 @@
           <% if @user.goal_ids.include?(news.id) %>
               <!-- and you just completed it -->
               <% if news.status == "Completed" %>
-                <div class="card shadow-sm p-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                     <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
-                     <%= image_tag current_user.avatar, class: "avatar"%>
+                <div class="feeds-card">
+                  <div class="feeds-card-infos">
+                    <div>
+                      <h5>Goal achieved !</h5>
+                      <p>You just achieved "<%= link_to "#{news.title}", goal_path(news) %>" goal. Well done ! </p>
+                    </div>
+                    <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
+                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
-                  <p>You just achieved <span>"<%= link_to "#{news.title}", goal_path(news) %>"</span> goal. Well done ! </p>
                 </div>
               <!-- if the goal has just been created -->
               <% elsif news.created_at.hour == news.updated_at.hour %>
-                <div class="card shadow-sm p-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                     <p class="time"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></p>
-                     <%= image_tag current_user.avatar, class: "avatar"%>
+                <div class="feeds-card">
+                  <div class="feeds-card-infos">
+                    <div>
+                      <h5>New goal</h5>
+                      <p>You created "<%= link_to "#{news.title}", goal_path(news) %>"</p>
+                    </div>
+                    <h2 class="feeds-card-pricing"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></h2>
+                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
-                  <p>New goal <span>"<%= link_to "#{news.title}", goal_path(news) %>"</span> created.</p>
                 </div>
               <% end %>
           <% else %>
 
               <!-- your buddy achieved a goal -->
               <% if news.status == "Completed" %>
-                <div class="card shadow-sm p-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <p class="time"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></p>
-                    <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
-                    <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
-                    <%= image_tag news.user.avatar, class: "avatar"%>
+                <div class="feeds-card">
+                  <div class="feeds-card-infos">
+                    <div>
+                      <h5>Goal achieved - <%= news.user.firstname %> </h5>
+                      <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
+                      <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
+                      <p> "<%= link_to "#{news.title}", goal_path(news) %>" Time to celebrate together ! </p>
+                    </div>
+                    <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
+                    <%= image_tag news.user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
-                  <p><%= news.user.firstname %> just achieved "<span>"<%= link_to "#{news.title}", goal_path(news) %>"</span>" goal. Time to celebrate together ! </p>
                 </div>
               <!-- your buddy created a goal -->
               <% elsif news.created_at.hour == news.updated_at.hour %>
-                <div class="card shadow-sm p-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <p class="time"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></p>
-                    <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
-                    <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
-                    <%= image_tag news.user.avatar, class: "avatar"%>
+                <div class="feeds-card">
+                  <div class="feeds-card-infos">
+                    <div>
+                      <h5>New buddy goal</h5>
+                      <p>You've started to Spot <%= news.user.firstname %>'s goal "<%= link_to "#{news.title}", goal_path(news) %>". Congrats and good luck !</p>
+                      <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
+                      <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
+                    </div>
+                    <h2 class="feeds-card-pricing"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></h2>
+                    <%= image_tag news.user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
-                    <p>You've officially started to Spot <%= news.user.firstname %>'s goal called <span>"<%= link_to "#{news.title}", goal_path(news) %>"</span>.
-                    This achievment will be yours too, congrats and good luck !</p>
                 </div>
               <% end %>
 
