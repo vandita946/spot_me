@@ -17,7 +17,7 @@ class GoalConnectionsController < ApplicationController
   def update
     @goal_connection = GoalConnection.find(params[:id])
     if @goal_connection.update(status: params[:goal_connection][:status])
-      redirect_to request.referrer, notice: "You're now #{@goal_connection.connection.owner.firstname}'s buddy! "
+      redirect_to feeds_index_path, notice: "You're now #{@goal_connection.connection.owner.firstname}'s buddy! "
     else
       render :edit, alert: "Your request could not be updated. "
     end
