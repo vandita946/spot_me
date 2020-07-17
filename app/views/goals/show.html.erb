@@ -22,7 +22,6 @@
     <% requested = @goal.get_goal_buddies(@goal.user)[:requested] %>
     <% if buddies.empty? && requested.empty? %>
         <p class="text-center">No one to keep me accountable yet!</p>
-        <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
 
         <button class="btn btn-primary" data-toggle="modal" data-target="#add_buddy" >
           Add buddies now
@@ -156,6 +155,7 @@
   <%# start of pundit for icons %>
   <% if policy(@goal).edit? %>
     <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
+        <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
   <% end %>
   <% if policy(@goal).show? %>
     <%# Modal for editing the goal specifically %>
