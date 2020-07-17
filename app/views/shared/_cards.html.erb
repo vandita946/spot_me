@@ -22,19 +22,19 @@
                     <% else%>
                         <p class="card-text text-dark d-flex">Ended <%= (Date.today - goal.deadline).to_i %> day(s) ago</p>
                     <% end %>
-                    <div class="progress mt-2">
+                    <div><p class="card-text mt-1 text-dark text-left"><%= goal.status %></p></div>
+                    <div class="progress mt-0 mb-3">
                         <div class="progress-bar progress-bar progress-bar-striped" role="progressbar" aria-valuenow=<%=goal.progress%> aria-valuemin="0" aria-valuemax="100" style="width:<%=goal.progress%>%"></div>
                     </div>
-                    <p class="card-text mt-1 text-dark"><%= goal.status %></p>
             <% end %>
 
                 <% if goal.status == "In Progress" || goal.status == "Not Started" %>
                     <% if goal.get_latest %>
                         <div class="card-subtitle mt-2 p-2 border" >
                             <% milestone = goal.get_latest %>
-                            <div class="d-flex justify-content-around text-dark text-left">
+                            <div class="d-flex justify-content-between text-dark text-left">
                                 <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
-                                Upcoming: <%= milestone.name %> <br>by <%= milestone.deadline.strftime("%A, %-d/%-m/%y")%>
+                                <div class="flex-grow-1"><strong>Upcoming: </strong><br><%= milestone.name %> <br>by <%= milestone.deadline.strftime("%A, %-d/%-m/%y")%></div>
                                 <button class="btn text-dark" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>"><i class="far fa-square completion-pink"></i></button>
                             </div>
                         </div>
