@@ -11,13 +11,16 @@
             <% if news.is_completed %>
               <div class="feeds-card">
                 <div class="feeds-card-infos">
-                    <div>
-                      <h5>Milestone check</h5>
-                      <p>You checked "<%= news.name %>" (<%= link_to "#{news.goal.title}", goal_path(news.goal) %>) as done ! Congrats !</p>
-                    </div>
-                    <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
-                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
+                  <div>
+                    <h5>Milestone check</h5>
+                    <p>You checked "<%= news.name %>" (<%= link_to "#{news.goal.title}", goal_path(news.goal) %>) as done ! Congrats !</p>
+                  </div>
                 </div>
+                  <div class="feeds-card-pricing">
+                    <h2><%= news.updated_at.strftime("%a. %-d") %></h2>
+                    <h2 class="pt-1 mb-0"><%= news.updated_at.strftime("%l.%M%P") %></h2>
+                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
+                  </div>
               </div>
 
 
@@ -31,27 +34,29 @@
                     <h5>Deadline</h5>
                     <p>"<%= news.name %>" milestone (<%= link_to "#{news.goal.title}", goal_path(news.goal) %>)'s deadline is TOMORROW ! Hurry up !</p>
                   </div>
-                  <h2 class="feeds-card-pricing"><%= Date.today.strftime("%a. %-d") %></h2>
-                  <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                 </div>
-              </div>
+                  <div class="feeds-card-pricing">
+                    <h2><%= Date.today.strftime("%a. %-d") %></h2>
+                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
+                  </div>
+                </div>
 
             <% elsif news.created_at.hour == news.updated_at.hour %>
               <!-- you created a milestone -->
 
               <div class="feeds-card">
-
                 <div class="feeds-card-infos">
                     <div>
                       <h5>New Milestone</h5>
                       <p>"<%= news.name %>" for <%= link_to "#{news.goal.title}", goal_path(news.goal) %> goal.</p>
                     </div>
-                    <h2 class="feeds-card-pricing"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></h2>
-
-                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
+                  </div>
+                    <div class="feeds-card-pricing">
+                      <h2><%= news.created_at.strftime("%a. %-d") %></h2>
+                      <h2 class="pt-1 mb-0"><%= news.created_at.strftime("%l.%M%P") %></h2>
+                      <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
+                    </div>
                 </div>
-
-              </div>
             <% end %>
 
 
@@ -62,15 +67,15 @@
         <% if news.is_completed %>
           <div class="feeds-card">
             <div class="feeds-card-infos">
-              <div>
-                <h5>Milestone completed - <%= news.goal.user.firstname %></h5>
-                <p>"<%= news.name %>" from <%= link_to "#{news.goal.title}", goal_path(news.goal) %> goal. Cheers ! </p>
-                <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment
-                </button>
-                <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
-              </div>
-              <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
-
+              <h5>Milestone completed - <%= news.goal.user.firstname %></h5>
+              <p>"<%= news.name %>" from <%= link_to "#{news.goal.title}", goal_path(news.goal) %> goal. Cheers ! </p>
+              <button class="btn btn-light py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment
+              </button>
+              <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
+            </div>
+            <div class="feeds-card-pricing">
+              <h2><%= news.updated_at.strftime("%a. %-d") %></h2>
+              <h2 class="pt-1 mb-0"><%= news.updated_at.strftime("%l.%M%P") %></h2>
               <%= image_tag news.goal.user.avatar, class: "feeds-card-user avatar-bordered"%>
             </div>
           </div>
@@ -86,12 +91,15 @@
                 <div class="feeds-card">
                   <div class="feeds-card-infos">
                     <div>
-                      <h5>Goal achieved !</h5>
+                      <h5>Goal achieved!</h5>
                       <p>You just achieved "<%= link_to "#{news.title}", goal_path(news) %>" goal. Well done ! </p>
                     </div>
-                    <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
-                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
+                    <div class="feeds-card-pricing">
+                      <h2><%= news.updated_at.strftime("%a. %-d") %></h2>
+                      <h2 class="pt-1 mb-0"><%= news.updated_at.strftime("%l.%M%P") %></h2>
+                      <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
+                    </div>
                 </div>
               <!-- if the goal has just been created -->
               <% elsif news.created_at.hour == news.updated_at.hour %>
@@ -101,9 +109,12 @@
                       <h5>New goal</h5>
                       <p>You created "<%= link_to "#{news.title}", goal_path(news) %>"</p>
                     </div>
-                    <h2 class="feeds-card-pricing"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></h2>
-                    <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
+                    <div class="feeds-card-pricing">
+                      <h2><%= news.created_at.strftime("%a. %-d") %></h2>
+                      <h2 class="pt-1 mb-0"><%= news.created_at.strftime("%l.%M%P") %></h2>
+                      <%= image_tag current_user.avatar, class: "feeds-card-user avatar-bordered"%>
+                    </div>
                 </div>
               <% end %>
           <% else %>
@@ -118,7 +129,10 @@
                       <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
                       <p> "<%= link_to "#{news.title}", goal_path(news) %>" Time to celebrate together ! </p>
                     </div>
-                    <h2 class="feeds-card-pricing"><%= news.updated_at.strftime("%l.%M%P %a. %-d") %></h2>
+                  </div>
+                  <div class="feeds-card-pricing">
+                    <h2><%= news.updated_at.strftime("%a. %-d") %></h2>
+                    <h2 class="pt-1 mb-0"><%= news.updated_at.strftime("%l.%M%P") %></h2>
                     <%= image_tag news.user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
                 </div>
@@ -132,7 +146,10 @@
                       <button class="btn py-1" id="message" data-toggle="modal" data-target="#encouragement-<%=news.id%>" >Comment</button>
                       <%= render partial: 'shared/encouragement_message', locals: { news: news, messages: @message } %>
                     </div>
-                    <h2 class="feeds-card-pricing"><%= news.created_at.strftime("%l.%M%P %a. %-d") %></h2>
+                  </div>
+                  <div class="feeds-card-pricing">
+                    <h2><%= news.created_at.strftime("%a. %-d") %></h2>
+                    <h2 class="pt-1 mb-0"><%= news.created_at.strftime("%l.%M%P") %></h2>
                     <%= image_tag news.user.avatar, class: "feeds-card-user avatar-bordered"%>
                   </div>
                 </div>
