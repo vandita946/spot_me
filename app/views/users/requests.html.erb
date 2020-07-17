@@ -1,6 +1,17 @@
 <div class="cards p-3">
   <div class="text-center">
-    <h1 style="text-align:center;">Your requests:</h1>
+    <h1 style="text-align:center;">Your Requests</h1>
+    <% if @requests.empty? %>
+      <div class="card shadow mb-0">
+        <div class="card-body">
+
+            <div class="container d-flex align-items-center justify-content-center px-0 text-dark"><strong>No pending requests!</strong></div>
+
+        </div>
+      </div>
+      
+    <% end %>
+      
    <% @requests.each do |request| %>
       <p>Help <%= request.goal.owner.firstname %> to reach their goal to <%= request.goal.title %></p>
          <div class="row justify-content-around pt-2">
