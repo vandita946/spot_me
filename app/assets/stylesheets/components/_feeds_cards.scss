@@ -1,8 +1,12 @@
 
 
 .feeds-card {
+  display: flex;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  justify-content: space-between;
+  align-items: center;
+
 }
 
 .feeds-card > img {
@@ -24,19 +28,22 @@
 }
 
 
-.feeds-card .feeds-card-infos {
+.feeds-card {
   padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   position: relative;
 }
 
-.feeds-card-infos .feeds-card-user {
-  position: absolute;
-  right: 16px;
-  top: -10px;
-  width: 40px;
+// .feeds-card-infos .feeds-card-user {
+//   position: absolute;
+//   right: 16px;
+//   top: -10px;
+//   width: 40px;
+// }
+
+.feeds-card-pricing {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 }
 
 
