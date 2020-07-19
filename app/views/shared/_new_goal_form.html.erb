@@ -1,0 +1,34 @@
+
+<div class="container">
+<%= simple_form_for @goal do |f| %>
+  <%= f.input :title, label: 'Name the goal, make it big!', error: 'Name is mandatory, please specify one' %>
+  <%= f.input :description, label: 'Describe what you want to achieve', hint: '250 char. max' %>
+
+<%# <fieldset >
+  <input type="radio" name="goal[icon]" value="heart" ><label><i class="fa fa-heart"></i></label>
+  <input type="radio" name="goal[icon]" value="suitcase" ><label><i class="fa fa-suitcase"></i></label>
+</fieldset> %>
+<div class="icons">
+<label for="goal_icon">Pick an icon!</label>
+  <fieldset>
+    <input type="radio" class="radio_item" id="heart" name="goal[icon]" value="heart" ><label class="label_item" for="heart"><i class="fa fa-heart"></i></label>
+    <input type="radio" class="radio_item" id="trophy" name="goal[icon]" value="trophy" ><label class="label_item" for="trophy"><i class="fas fa-trophy"></i></label>
+    <input type="radio" class="radio_item" id="star" name="goal[icon]" value="star" ><label class="label_item" for="star"><i class="fas fa-star"></i></label>
+    <input type="radio" class="radio_item" id="suitcase" name="goal[icon]" value="suitcase" ><label class="label_item" for="suitcase"><i class="fas fa-suitcase"></i></label>
+    <input type="radio" class="radio_item" id="book" name="goal[icon]" value="book" ><label class="label_item" for="book"><i class="fas fa-book"></i></label>
+    <input type="radio" class="radio_item" id="laptop" name="goal[icon]" value="laptop"><label class="label_item" for="laptop"><i class="fas fa-laptop-code"></i></label>
+  </fieldset>
+</div>
+  <%= f.input :start_date, as: :date, input_html: { value: Date.today }, html5: true %>
+  <%= f.input :deadline, as: :date, input_html: { value: Date.today + 60 }, html5: true %>
+
+  <%= f.hidden_field :progress, value: 0.0 %>
+  <!-- get the ids & info of existing buddy connections -->
+  <!-- data of our buddy : current_user.connections.first.id / name -->
+  <!-- current_user.connections.first is a user / name -->
+  <button id="create-goal" class="btn btn-primary" type="submit">
+    Let's add some milestones!
+  </button>
+      <%# <%= f.button :submit, "Let's add some milestones!", id: "create-goal", class: "btn btn-primary" %>
+    <% end %>
+</div>

@@ -1,0 +1,60 @@
+.star-rating {
+  font-family: 'Font Awesome 5 Free';
+  margin: 5 auto;
+
+  > fieldset {
+    border: none;
+    display: inline-block;
+
+    &:not(:checked) {
+      > input {
+        position: absolute;
+        visibility: hidden;
+        clip: rect(0,0,0,0);
+        
+      }
+
+      > label {
+        float: right;
+        // width: 1em;
+        padding: 0 .1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 150%;
+        color: $orange;
+
+        &:before {
+          content: '\f005  ';
+          font-weight: 200;
+
+        }
+
+          &:hover,
+          &:hover ~ label {
+            color: $orange;
+            // text-shadow: 0 0 3px orange;
+            &:before {
+              content: '\f005  ';
+                font-weight: 900;
+
+            }
+          }
+      }
+    }
+
+    > input:checked {
+      & ~ label {
+        &:before {
+          content: '\f005  ';
+          font-weight: 900;
+        }
+      }
+    }
+
+    > label:active {
+      position: relative;
+      top: 2px;
+    }
+  }
+}

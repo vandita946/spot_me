@@ -1,0 +1,46 @@
+
+
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-xs-12 col-sm-6">
+      <div class="form-login">
+        <h2>Sign up</h2>
+
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+
+           <%= image_tag "default_profile.jpg", class: "avatar-large" %>
+           <%= f.file_field :avatar %>
+
+
+            <%= f.input :email,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" }%>
+            <%= f.input :password,
+                        required: true,
+                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                        input_html: { autocomplete: "new-password" } %>
+            <%= f.input :password_confirmation,
+                        required: true,
+                        input_html: { autocomplete: "new-password" } %>
+            <%# used to import params for connections later %>
+            <% if params[:goal] %>
+            <%= f.input :goal, as: :hidden, input_html: { value: params[:goal] } %>
+            <% elsif params[:contact] %>
+            <%= f.input :contact, as: :hidden, input_html: { value: params[:contact] } %>
+            <% end %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up", class:"btn btn-primary" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

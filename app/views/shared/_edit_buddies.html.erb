@@ -1,0 +1,39 @@
+<div id="edit_buddies_form">
+<div class="modal fade" id="edit_buddies" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit buddies</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <% @goal.goal_connections.each do |goal_connection| %>
+        <%= goal_connection.connection.buddy.firstname %>
+        <%= link_to "Remove", {:controller => :goal_connections, :action => 'destroy', :id => goal_connection.id }, :method => :delete, data: { confirm: "Are you sure?" }  %>
+
+            
+        <% end %>
+        <br>
+        <br>
+                <%= simple_form_for @goal_connection do |f| %>
+            <%= f.input :connection, label_method: ->(obj){ obj.buddy.firstname }, collection: current_user.owner_connections, label: "Add a buddy from your connections" %>
+            <%= f.input :goal, as: :hidden, input_html: { value: goal.id } %>
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+        <% end %>
+        <br>
+        <!-- Target -->
+        <textarea id="bar" style="display:none;"><%= request.original_url() %></textarea>
+        <!-- Trigger -->
+        <p>Or if you're not connected to your buddy yet:</p>
+        <button class="btn btn-primary" id="clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#bar">
+            Copy invite link
+        </button>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

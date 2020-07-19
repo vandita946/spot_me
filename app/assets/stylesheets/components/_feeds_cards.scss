@@ -1,0 +1,60 @@
+
+
+.feeds-card {
+  display: flex;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.feeds-card > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.feeds-card h2 {
+  font-size: 10px;
+  font-weight: light;
+  // margin: ;
+}
+
+.feeds-card p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+}
+
+
+.feeds-card {
+  padding: 16px;
+  position: relative;
+}
+
+// .feeds-card-infos .feeds-card-user {
+//   position: absolute;
+//   right: 16px;
+//   top: -10px;
+//   width: 40px;
+// }
+
+.feeds-card-pricing {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+
+  // .feeds-card > h5 {
+  //   font-size: 0.6em;
+  // }
+
+  // .feeds-card > p {
+  //   font-size: 0.9em;
+  //   opacity: .7;
+  // }
+  // .card:hover {
+  //   opacity: 0.90;
+  // }

@@ -1,0 +1,45 @@
+
+label {
+cursor: pointer;
+}
+
+#new_goal_form {
+  display: none;
+}
+
+#blog_template{
+  display: none;
+}
+
+#dating_template{
+    display: none;
+}
+
+#vacation_template{
+display: none;
+}
+
+#marathon_template{
+display: none;
+}
+
+.template-buttons{
+  a{
+    color: $white;
+  }
+  button {
+    margin: 2px;
+  }
+  display: grid;
+  margin-bottom: 5px;
+}
+
+  
+
+// #milestones{
+//   display:none;
+// }
+
+// #goal_form{
+//   display: block;
+// }

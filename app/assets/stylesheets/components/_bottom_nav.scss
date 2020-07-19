@@ -1,0 +1,16 @@
+.bottom_navbar_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 65px;
+  background-color: white;
+  i {
+    color: $white;
+    font-size: 40px;
+  }
+}
+
+.nav-pink {
+  color: $pink;
+}

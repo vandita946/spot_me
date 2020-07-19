@@ -1,0 +1,66 @@
+<div class="container">
+    <span><h1><%= image_tag @user.avatar, class: "avatar-large" %>&nbsp&nbsp&nbsp<%= @user.firstname %> <%= @user.lastname %></h1></span>
+    <p>Email: <%= @user.email %></p>
+    <p>Number of goals: <strong><%= @user.goals.size %></strong></p>
+    <%= link_to edit_user_registration_path(@user) do %>
+        <button type="button" class="btn btn-primary">Edit</button>
+    <% end %>
+    <% @user.goals.each do |goal| %>
+        <div class="container">
+            <%= link_to goal_path(goal) do %>
+                <%= goal.title %>
+                <%= goal.description %>
+                <%= goal.status %>
+                <%= goal.progress %>
+            <% end %>
+        </div>
+    <% end %>
+</div>
+
+<%# LOGIC GATES HERE %>
+<% if @current_user.nil? %>
+
+<!-- Development use only: Button trigger modal -->
+<%# <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> %>
+
+  <!-- Modal -->
+  <div class="modal fade notauser" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <h5 class="modal-title" id="staticBackdropLabel">Welcome to SpotMe!</h5>
+          <%# <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> %>
+        </div>
+        <div class="modal-body">
+        <% path = request.original_fullpath() %>
+        <% user_id = path.split('/')[-1] %>
+        <% user = User.find(user_id) %>
+
+        <br><br><br><br><br><br><br><br><br>
+        <h6 style="text-align: center;">To connect with <%= user.firstname %>,</h6>
+        <h6 style="text-align: center;">please register or sign in!</h6>
+        <br><br><br><br><br><br><br><br><br>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <%= link_to :back do %>
+            <button type="button" class="btn btn-link">Go back</button>
+          <% end %>
+
+          <%= link_to new_user_registration_path(contact: @user) do %>
+            <button type="button" class="btn btn-primary">Register</button>
+          <% end %>
+
+          <%= link_to new_user_session_path do %>
+            <button type="button" class="btn btn-secondary mx-3">Sign In</button>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

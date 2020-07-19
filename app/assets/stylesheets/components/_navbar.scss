@@ -1,0 +1,62 @@
+ .navbar_container {
+  padding-top: 0px;
+  margin-top: 0px;
+  width: 100vw;
+  height: 80px;
+  background-color: white;
+}
+
+.navbar-brand {
+  position: absolute;
+  z-index: 4;
+  right: 0;
+  top: 0;
+}
+
+.navbar-toggler {
+  position: absolute;
+  top: 15px;
+  z-index: 5;
+}
+
+.navbar-collapse {
+  position: absolute;
+  top: 65px;
+  left: 15px;
+  z-index: 6;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.navbar-light .navbar-toggler {
+  border: none !important;
+}
+
+.navbar-nav {
+  background-color: white;
+  border: 2px solid #FFBB55;
+  }
+
+
+.nav-item {
+  padding: 0.25rem 0.75rem;
+}
+
+.navbar-nav :hover {
+  background-color: #ad6f18 !important;
+  color: white;
+}
+
+#notification-badge{
+  background-color: #04C4D9;
+  color: #FEFEFD;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 0.4em 0.7em;
+  vertical-align: top;
+  margin-left: -1.5em;
+
+  margin-top: -0.5em;
+}

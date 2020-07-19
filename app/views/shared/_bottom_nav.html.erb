@@ -1,0 +1,34 @@
+<div class="bottom_navbar_container fixed-bottom border-top">
+  <% if user_signed_in? %>
+    <div class="navbar w-100 p-0">
+      <div class="nav-item d-flex flex-grow-1 justify-content-center p-0">
+        <%= link_to feeds_index_path, class: "nav-pink" do %>  
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-house nav-pink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+            </svg>
+        <% end %>
+      </div>
+      <div class="nav-item d-flex flex-grow-1 justify-content-center p-0" >
+        <%= link_to new_goal_path, class: "nav-pink" do %>
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus-circle nav-pink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+          <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          </svg>
+        <% end %>
+      </div>
+      <div class="nav-item d-flex flex-grow-1 justify-content-center p-0" >
+        <%= link_to goals_path, class: "nav-pink" do %>
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2-square nav-pink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+          <path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 0 0 3 14.5h10a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v5a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 0 0-1H3A1.5 1.5 0 0 0 1.5 3v10z"/>
+          </svg>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+

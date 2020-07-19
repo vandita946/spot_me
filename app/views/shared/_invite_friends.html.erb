@@ -1,0 +1,24 @@
+<div id="invite_friends_form">
+<div class="modal fade" id="invite-friends" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="text-align: center;" id="exampleModalLabel">Want to share the magic that is SpotMe with your friends?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align:center;">
+        <!-- Target -->
+        <textarea id="invite_link" style="display:none;">spotmeco.herokuapp.com/<%= ("users/" + current_user.id.to_s) if !current_user.nil? %></textarea>
+        <!-- Trigger -->
+        <button class="btn btn-primary" id="copy_link" data-clipboard-action="copy" data-clipboard-target="#invite_link">
+            Copy invite link
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+

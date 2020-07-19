@@ -1,0 +1,84 @@
+
+
+  <ul class="nav container-fluid nav-pills nav-fill d-flex flex-nowrap px-0">
+
+    <li class="nav-item px-0">
+      <a href="#connections" data-toggle="tab" role="tab" class="nav-link active">Connections</a>
+    </li>
+    <li class="nav-item px-0">
+      <a href="#buddies" data-toggle="tab" role="tab" class="nav-link">Buddies</a>
+    </li>
+<!--     <li class="nav-item px-0">
+      <a href="#requests" data-toggle="tab" role="tab" class="nav-link">Requests</a>
+    </li> -->
+    <li class="nav-item px-0">
+      <a href="#buddyof" data-toggle="tab" role="tab" class="nav-link">Buddying</a>
+    </li>
+    <li class="nav-item px-0">
+      <a href="#fans" data-toggle="tab" role="tab" class="nav-link">Fans</a>
+    </li>
+  </ul>
+
+</div>
+
+  <div class="tab-content" style="text-align:center">
+    <div role="tab-panel" class="tab-pane active" id="connections">
+      <% @connections.each do |connection| %>
+        <div class="cards py-3">
+          <div class="row justify-content-center align-items-center">
+          <%= image_tag connection.buddy.avatar, class: "avatar", id: "connection_avatar" %>
+          <p>&nbsp&nbsp<%= connection.buddy.firstname %> <%= connection.buddy.lastname %> </p>
+          </div>
+          <%= simple_form_for(@goal_connection, url: goal_connections_path) do |f| %>
+          <%= f.input :goal, collection: current_user.goals %>
+          <%= f.input :connection, as: :hidden, input_html: { value: connection.id} %>
+          <%= f.submit "Add as a buddy", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div role="tab-panel" class="tab-pane" id="buddies">
+       <% @buddies.each do |buddy| %>
+         <div class="cards py-3">
+            <div class="row justify-content-center align-items-center">
+            <%= image_tag buddy.avatar, class: "avatar", id: "connection_avatar" %>
+            <p>&nbsp&nbsp<%= buddy.firstname %> <%= buddy.lastname %> </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    <div role="tab-panel" class="tab-pane" id="buddyof">
+        <% @buddyofs.each do |buddy| %>
+          <div class="cards py-3">
+            <div class="row justify-content-center align-items-center">
+            <%= image_tag buddy.avatar, class: "avatar", id: "connection_avatar" %>
+            <p>&nbsp&nbsp<%= buddy.firstname %> <%= buddy.lastname %></p>
+            </div>
+            <div class="justify-content-left align-items-center">
+              <p>Goals: </p>
+              <% buddy.goals.each do |goal| %>
+              <p><%= goal.title %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    <div role="tab-panel" class="tab-pane" id="fans">
+       <div class="cards">
+        <% @fans.each do |fan| %>
+        <div class="cards py-3">
+            <div class="row justify-content-center align-items-center">
+            <%= image_tag fan.owner.avatar, class: "avatar", id: "connection_avatar" %>
+            <p>&nbsp&nbsp<%= fan.owner.firstname %> <%= fan.owner.lastname %></p>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+

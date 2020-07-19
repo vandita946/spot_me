@@ -1,0 +1,88 @@
+
+<% if @milestones.empty? %>
+    <div class="card shadow mb-0">
+        <div class="card-body">
+
+            <div class="container d-flex align-items-center justify-content-center px-0 text-dark"><strong>You have no milestones yet, time to add some!</strong></div>
+
+        </div>
+    </div>
+
+
+<% else %>
+
+    <div class="cards rounded">
+
+            <% @milestones.each do |milestone| %>
+                <div class="card shadow-sm my-0 rounded">
+                <div class="card-body bg-light text-dark rounded">
+
+                    <div class="container d-flex align-items-center px-0">
+                        <div>
+                        <% if milestone.is_completed %>
+                            <%= form_for milestone, remote: true do |f| %>
+                                <%= f.hidden_field :is_completed, value: false %>
+
+
+                                <button class="btn" type="submit">
+                                    <i class="far fa-check-square"></i>
+                                </button>
+
+                            <% end %>
+                        <% else %>
+                        <%# completion modal %>
+                          <% if policy(@goal).edit? %>
+                            <button class="btn" id="completion" data-toggle="modal" data-target="#completion-<%=milestone.id%>">
+                                <i class="far fa-square"></i>
+                            </button>
+                            <%= render partial: 'shared/completion_message', locals: { milestone: milestone, completion_message: @completion_message } %>
+                          <% end %>
+                        <% end %>
+                            <% if policy(@goal).edit? %>
+                                <a id="edit" class="font-size-updates" href="blank" data-toggle="modal" data-target="#edit-<%=milestone.id%>">
+                                    <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil fa-edit" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                                    <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                                    </svg>
+                                </a>
+                                <%= render partial: "shared/milestones_edit_form", locals: {milestone: milestone} %>
+                            <% end %>
+                        </div>
+                        <div class="flex-grow-1 justify-content-center">
+                                <h4 class="mb-0"><%= milestone.name %></h4>
+
+                                <div class="stars">
+                                    <% milestone.weightage.times do %>
+                                        <i class="fas fa-star icon-yellow"></i>
+                                    <% end %>
+                                    <% (5 - milestone.weightage).times do %>
+                                    <i class="far fa-star icon-yellow"></i>
+                                    <% end %>
+                                </div>
+                            <p class='card-subtitle mt-1'> <%= milestone.deadline.strftime("%A, %-d/%-m/%y") %></p>
+                            <%# edit modal %>
+
+                        </div>
+                    </div>
+                        <% if milestone.is_completed %>
+                        <h6 class="mb-0 mt-1 border" id="completion-bubble"><%= milestone.completion_message.content %></h6>
+                        <% end %>
+                </div>
+                </div>
+
+            <% end %>
+
+    </div>
+<% end %>
+
+    <% if policy(@goal).edit? %>
+
+      <div class="container d-flex justify-content-center mt-3">
+        <a id="milestone-add" href="blank" data-toggle="modal" data-target="#new-milestone" >
+          <i id="add-milestone" class="fas fa-plus justify-content-center"></i>
+        </a>
+      </div>
+
+    <%# Modal for a new milestone: + sign %>
+    <%= render partial: "shared/new_milestone", locals: {goal: @goal, milestone: Milestone.new} %>
+  <% end %>

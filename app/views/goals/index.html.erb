@@ -1,0 +1,27 @@
+
+<div class="container d-flex flex-column px-0">
+  <div class="d-flex justify-content-center"><h3 class="mt-0"> Goals </h3></div>
+
+  <% if @goals.empty? %>
+    <div class="container" style="text-align: center; margin: 100px 0px 100px 0px;">
+      <p>No goals yet!</p>
+      <%= link_to "Let's get goaling!", new_goal_path, class: "btn btn-primary mb-5" %>
+    </div>
+
+  <% else %>
+
+    <%= render 'shared/cards' %>
+
+  <% end %>
+
+
+
+
+  <!-- if no buddy => no buddy yet otherwise print buddy's name -->
+
+  <div class="container d-flex justify-content-center px-5">
+    <%= link_to "Add another goal", new_goal_path, class: "text-white font-weight-bold btn btn-gradient btn-success btn-block my-5" %>
+  </div>
+
+
+</div>

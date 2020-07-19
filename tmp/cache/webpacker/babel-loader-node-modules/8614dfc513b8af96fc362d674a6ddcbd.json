@@ -1,0 +1,1 @@
+{"ast":null,"code":"console.log('Hello from My JS');","map":{"version":3,"sources":["/Users/clairemarchyllie/code/vandita946/app/javascript/components/form.js"],"names":["console","log"],"mappings":"AAAEA,OAAO,CAACC,GAAR,CAAY,kBAAZ","sourcesContent":["  console.log('Hello from My JS');\n"]},"metadata":{},"sourceType":"module"}
