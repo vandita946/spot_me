@@ -59,8 +59,13 @@
       <% end %>
 </div>
     <div class="d-flex justify-content-around mt-3">
-      <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" ><i class="fas fa-edit"></i></a>
-      <a href="blank" data-toggle="modal" data-target="#edit_buddies" id="edit-icon"><i class="fas fa-user-friends"></i></a>
+      
+      <% if policy(@goal).edit? %>
+        <a id="edit-icon" href="blank" data-toggle="modal" data-target="#goal-edit" ><i class="fas fa-edit"></i></a> 
+        <a href="blank" data-toggle="modal" data-target="#edit_buddies" id="edit-icon"><i class="fas fa-user-friends"></i></a>
+      <% end %>
+      
+      
       <!--Navigation links with a Smooth Scroll effect-->
       <a href="#test1" class="text-decoration-none" id="edit-icon"><i class="far fa-comments"></i></a>
     </div>
@@ -157,7 +162,7 @@
     <%= render partial: "shared/edit_buddies", locals: {goal: @goal, goal_connection: @goal_connection} %>
         <%= render partial: "shared/add_buddy", locals: {goal: @goal, goal_connection: @goal_connection} %>
   <% end %>
-  <% if policy(@goal).show? %>
+  <% if policy(@goal).update? %>
     <%# Modal for editing the goal specifically %>
     <%= render partial: "shared/goal_edit", locals: {goal: @goal} %>
   <% end %>
